@@ -15,6 +15,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -22,6 +23,7 @@ body {
   background: var(--naf-black);
   color: #fff;
   line-height: 1.6;
+  overflow-y: scroll;
 }
 
 a {
@@ -50,10 +52,12 @@ img {
   justify-content: space-between;
   flex-wrap: nowrap;
   width: 100%;
+  max-width: 1400px;
   height: var(--header-height);
   min-height: var(--header-height);
   max-height: var(--header-height);
-  padding: 0 clamp(1rem, 3vw, 4rem);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 2vw, 2.5rem);
   gap: 0.75rem;
 }
 
@@ -67,7 +71,7 @@ img {
 }
 
 .logo img {
-  height: 34px;
+  height: 28px;
   width: auto;
   flex-shrink: 0;
 }
@@ -92,18 +96,21 @@ img {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: clamp(0.5rem, 1.8vw, 2.75rem);
+  gap: 2rem;
   list-style: none;
 }
 
 .nav__list a {
+  position: relative;
+  display: inline-block;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(0.625rem, 0.95vw, 0.875rem);
+  font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: 0.03em;
   white-space: nowrap;
   color: #fff;
   opacity: 0.9;
+  padding-bottom: 4px;
   transition: color 0.2s, opacity 0.2s;
 }
 
@@ -111,6 +118,16 @@ img {
 .nav__list a.active {
   opacity: 1;
   color: var(--naf-yellow);
+}
+
+.nav__list a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: #ff8a00;
 }
 
 .menu-toggle {
@@ -143,7 +160,16 @@ img {
   inset: 0;
 }
 
-.hero__video iframe {
+.hero__poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: var(--naf-black);
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+.hero__poster img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -152,7 +178,31 @@ img {
   min-height: 100vh;
   min-width: 177.78vh;
   transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.hero.is-video-playing .hero__poster {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hero__player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100vh;
+  min-width: 177.78vh;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.hero.is-video-playing .hero__player {
+  opacity: 1;
 }
 
 .hero__overlay {
@@ -497,6 +547,1104 @@ img {
   color: var(--text-muted);
 }
 
+/* About Page */
+.about-page .page-main {
+  padding-bottom: 0;
+}
+
+.about-page .page-bar {
+  padding: clamp(1rem, 2vw, 1.35rem) clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.about-page .page-bar__inner {
+  max-width: min(1200px, 96vw);
+}
+
+.about-label {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--naf-yellow);
+  margin-bottom: 0.75rem;
+}
+
+.about-hero {
+  background: #111;
+  padding: clamp(2rem, 4vw, 3rem) clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.about-hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3rem);
+  align-items: stretch;
+  max-width: min(1200px, 96vw);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 3vw, 2rem) 0;
+}
+
+.about-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  min-height: 100%;
+}
+
+.about-intro__title {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.about-intro__text {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.about-intro__links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  width: 100%;
+  margin-top: auto;
+}
+
+.about-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.65rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.about-link-btn:hover {
+  border-color: var(--naf-yellow);
+  background: rgba(245, 224, 0, 0.06);
+}
+
+.about-link-btn__icon {
+  display: flex;
+  color: var(--naf-yellow);
+}
+
+.about-link-btn__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.about-team {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  padding-left: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.about-team .about-label {
+  margin-bottom: 1rem;
+}
+
+.about-member {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+  padding: 1.1rem 0;
+}
+
+.about-member:first-of-type {
+  padding-top: 0;
+}
+
+.about-member + .about-member {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-member__photo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #222;
+}
+
+.about-member__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.about-member__role {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--naf-yellow);
+  margin-bottom: 0.2rem;
+}
+
+.about-member__name {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 0.15rem;
+}
+
+.about-member__title {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 0.5rem;
+}
+
+.about-member__bio {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.about-values {
+  background: #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-values__inner {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: min(1200px, 96vw);
+  margin: 0 auto;
+}
+
+.about-value {
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-value:last-child {
+  border-right: none;
+}
+
+.about-value__icon {
+  display: inline-flex;
+  color: var(--naf-yellow);
+  margin-bottom: 0.65rem;
+}
+
+.about-value__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.about-value__title {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+
+.about-value__text {
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.about-details {
+  background: #e8e8e8;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.about-details__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 4vw, 2.5rem);
+  max-width: min(1200px, 96vw);
+  margin: 0 auto;
+}
+
+.about-section-title {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--naf-yellow);
+  display: inline-block;
+}
+
+.about-overview__text {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.about-services {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem 1.5rem;
+  list-style: none;
+  margin-top: 1.25rem;
+}
+
+.about-services li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.85rem;
+  color: #222;
+  line-height: 1.5;
+}
+
+.about-services li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--naf-yellow);
+  font-weight: 700;
+}
+
+.about-award-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.about-award-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.about-award-card__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--naf-yellow);
+}
+
+.about-award-card__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.about-award-card__label {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--naf-yellow);
+  margin-bottom: 0.35rem;
+}
+
+.about-award-card__festival {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 0.2rem;
+}
+
+.about-award-card__location {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0;
+}
+
+.about-award-card__list {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.about-award-card__list li {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #333;
+  margin-bottom: 0.35rem;
+}
+
+.about-award-card__list strong {
+  font-weight: 500;
+  color: #111;
+}
+
+.about-award-card__note {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: #666;
+  font-style: italic;
+}
+
+.about-quote {
+  background: var(--naf-black);
+  padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 2rem);
+  text-align: center;
+}
+
+.about-quote__text {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.about-bottom {
+  background: var(--naf-black);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.about-bottom__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: min(1200px, 96vw);
+  margin: 0 auto;
+}
+
+.about-bottom__quote {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(0.78rem, 1.4vw, 0.92rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.about-bottom__copy {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.about-quote__mark {
+  color: var(--naf-yellow);
+  font-size: 1.4em;
+  line-height: 0;
+  vertical-align: -0.15em;
+}
+
+/* Film Page */
+.film-page .page-main {
+  padding-bottom: 0;
+}
+
+.film-page .page-bar {
+  padding: clamp(1rem, 2vw, 1.35rem) clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.film-page .page-bar__inner {
+  max-width: min(1720px, 98vw);
+}
+
+.film-showcase {
+  background: #1a1a1a;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.film-showcase__inner {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: stretch;
+  max-width: min(1100px, 96vw);
+  margin: 0 auto;
+}
+
+.film-poster {
+  margin: 0;
+  height: 100%;
+  min-height: 0;
+}
+
+.film-poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.film-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+}
+
+.film-info__title {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  color: var(--naf-yellow);
+  margin-bottom: 0.5rem;
+}
+
+.film-info__meta,
+.film-info__credit {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 0.35rem;
+}
+
+.film-info__credit {
+  margin-bottom: 1.25rem;
+}
+
+.film-awards {
+  list-style: none;
+  margin-bottom: 1.25rem;
+}
+
+.film-awards li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 0.5rem;
+}
+
+.film-awards li strong {
+  color: var(--naf-yellow);
+  font-weight: 500;
+}
+
+.film-awards__icon {
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.film-info__synopsis {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.film-info__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: auto;
+}
+
+.film-info__links .about-link-btn {
+  width: auto;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.75rem;
+}
+
+.film-statement {
+  background: var(--naf-black);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.film-statement__inner {
+  max-width: min(1100px, 96vw);
+  margin: 0 auto;
+}
+
+.film-statement__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 500;
+  color: #4dd0e1;
+  margin-bottom: 1.25rem;
+}
+
+.film-statement__icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.film-statement__body p {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 1rem;
+}
+
+.film-statement__body p:last-child {
+  margin-bottom: 0;
+}
+
+.film-statement__body em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.film-gallery {
+  background: #111;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(0.5rem, 1.25vw, 1.25rem) 0;
+}
+
+.film-gallery__inner {
+  max-width: min(1100px, 96vw);
+  margin: 0 auto;
+}
+
+.film-carousel {
+  position: relative;
+}
+
+.film-carousel__viewport {
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  background: #000;
+}
+
+.film-carousel__track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.45s ease;
+}
+
+.film-carousel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  margin: 0;
+  min-width: 100%;
+  height: 100%;
+}
+
+.film-carousel__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.film-carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.film-carousel__btn:hover {
+  background: rgba(0, 0, 0, 0.55);
+  border-color: #fff;
+}
+
+.film-carousel__btn--prev {
+  left: 0.75rem;
+}
+
+.film-carousel__btn--next {
+  right: 0.75rem;
+}
+
+.film-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.film-carousel__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.film-carousel__dot.is-active {
+  background: #fff;
+  transform: scale(1.15);
+}
+
+.film-expand {
+  background: #111;
+  padding: clamp(0.5rem, 1.5vw, 1rem) clamp(0.5rem, 1.25vw, 1.25rem) clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.film-expand__inner {
+  max-width: min(1100px, 96vw);
+  margin: 0 auto;
+}
+
+.film-expand__item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.film-expand__item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.film-expand__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0.15rem;
+  cursor: pointer;
+  list-style: none;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(0.92rem, 1.6vw, 1.05rem);
+  letter-spacing: 0.04em;
+  color: #4dd0e1;
+  transition: color 0.2s;
+}
+
+.film-expand__summary::-webkit-details-marker {
+  display: none;
+}
+
+.film-expand__summary::marker {
+  content: "";
+}
+
+.film-expand__summary:hover {
+  color: var(--naf-yellow);
+}
+
+.film-expand__chevron {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+.film-expand__item[open] .film-expand__chevron {
+  transform: rotate(225deg);
+  margin-top: 0.25rem;
+}
+
+.film-expand__body {
+  padding: 0 0.15rem 1.25rem;
+}
+
+.film-expand__body p {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 0.85rem;
+}
+
+.film-expand__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Awards Page */
+.awards-page .page-main {
+  padding-bottom: 0;
+}
+
+.awards-page .page-bar {
+  padding: clamp(1rem, 2vw, 1.35rem) clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.awards-page .page-bar__inner {
+  max-width: min(1720px, 98vw);
+}
+
+.awards-hero {
+  background: var(--naf-black);
+  padding: 0;
+}
+
+.awards-hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 0;
+  align-items: stretch;
+  max-width: min(1400px, 100%);
+  margin: 0 auto;
+}
+
+.awards-hero__visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--naf-black);
+  min-height: 100%;
+}
+
+.awards-hero__visual img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.awards-hero__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.awards-hero__label {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--naf-yellow);
+  margin-bottom: 0.75rem;
+}
+
+.awards-hero__title {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+.awards-hero__meta {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.awards-hero__text {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 1.5rem;
+  max-width: 34rem;
+}
+
+.awards-hero__badges {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-start;
+}
+
+.awards-hero__badges li {
+  flex: 1 1 200px;
+  max-width: 280px;
+}
+
+.awards-hero__badges img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.awards-list-section {
+  background: #ececec;
+  padding: clamp(2rem, 4vw, 3rem) clamp(0.5rem, 1.25vw, 1.25rem) clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.awards-list-section__inner {
+  max-width: min(1100px, 96vw);
+  margin: 0 auto;
+}
+
+.awards-list-section__title {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #222;
+  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.awards-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.25rem);
+}
+
+.awards-list__item {
+  margin: 0;
+}
+
+.awards-list__item--error p {
+  padding: 1rem;
+  color: #666;
+  text-align: center;
+}
+
+.award-item {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  align-items: start;
+}
+
+.award-item__year span {
+  display: inline-block;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  color: #111;
+  line-height: 1.1;
+  border-bottom: 3px solid #ff8a00;
+  padding-bottom: 0.2rem;
+}
+
+.award-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: clamp(1rem, 2vw, 1.25rem);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.award-card__badge {
+  width: 72px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.award-card__badge--placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(145deg, #f7f7f7, #ececec);
+}
+
+.award-card__body {
+  min-width: 0;
+}
+
+.award-card__festival {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 0.25rem;
+}
+
+.award-card__category {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #ff8a00;
+  margin-bottom: 0.5rem;
+}
+
+.award-card__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: #555;
+  margin-bottom: 0.2rem;
+}
+
+.award-card__meta-icon {
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.award-card__summary {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #444;
+  margin-top: 0.65rem;
+}
+
+.award-card__thumb {
+  flex-shrink: 0;
+  min-width: 160px;
+  max-width: 220px;
+  padding: 0.75rem;
+  background: #eef3f8;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+}
+
+.award-card__thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.award-card__thumb--text {
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #333;
+}
+
+.award-card__thumb-title {
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.award-card--upcoming {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.award-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.award-card__btn {
+  display: inline-block;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid #ff8a00;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.award-card__btn:hover {
+  background: #ff8a00;
+  color: #fff;
+}
+
+.awards-list-section__note {
+  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  text-align: center;
+  font-size: 0.78rem;
+  color: #777;
+}
+
+.awards-spotlight {
+  background: var(--naf-black);
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.awards-spotlight__inner {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 1.2fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: center;
+  max-width: min(1400px, 98vw);
+  margin: 0 auto;
+}
+
+.awards-spotlight__logo img {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+}
+
+.awards-spotlight__text {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 1rem;
+}
+
+.awards-spotlight__text:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.awards-spotlight__btn {
+  display: inline-block;
+  padding: 0.65rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.awards-spotlight__btn:hover {
+  border-color: var(--naf-yellow);
+  background: rgba(245, 224, 0, 0.06);
+}
+
 /* Contact Page */
 .contact-page .page-main {
   padding-bottom: 0;
@@ -604,15 +1752,13 @@ a.contact-cell:hover {
   height: 36px;
   margin-bottom: 0.65rem;
   object-fit: contain;
+  background: transparent;
+  border: none;
+  pointer-events: none;
 }
 
-.contact-icon--clock {
-  color: var(--naf-yellow);
-}
-
-.contact-icon--clock svg {
-  width: 32px;
-  height: 32px;
+a.contact-cell:hover .contact-icon {
+  opacity: 1;
 }
 
 .contact-cell__label {
@@ -770,6 +1916,122 @@ a.contact-cell:hover {
   .contact-info--frame {
     border-left: none;
     border-right: none;
+  }
+
+  .about-intro__links {
+    grid-template-columns: 1fr;
+  }
+
+  .about-bottom__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .about-bottom__copy {
+    white-space: normal;
+  }
+
+  .about-hero__inner,
+  .about-details__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .about-team {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .about-member {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .about-member__photo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .about-values__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-value:nth-child(2) {
+    border-right: none;
+  }
+
+  .about-value:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .about-value:nth-child(n+3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .about-services {
+    grid-template-columns: 1fr;
+  }
+
+  .film-showcase__inner {
+    grid-template-columns: 1fr;
+    max-width: min(640px, 96vw);
+  }
+
+  .film-poster {
+    max-width: 320px;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .film-poster img {
+    height: auto;
+    object-fit: contain;
+  }
+
+  .awards-spotlight__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .awards-spotlight__logo img {
+    margin: 0 auto;
+  }
+
+  .awards-hero__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .awards-hero__visual {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
+  .awards-hero__badges li {
+    max-width: 240px;
+  }
+
+  .award-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .award-card {
+    grid-template-columns: 1fr;
+  }
+
+  .award-card--upcoming {
+    grid-template-columns: 1fr;
+  }
+
+  .award-card__thumb {
+    max-width: none;
+    min-width: 0;
+  }
+
+  .award-card__btn {
+    justify-self: start;
   }
 
   .footer--contact .footer__inner {

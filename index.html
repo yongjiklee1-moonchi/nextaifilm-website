@@ -4,15 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NAF</title>
-  <link rel="preconnect" href="https://player.vimeo.com" crossorigin />
-  <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin />
-  <link rel="preconnect" href="https://f.vimeocdn.com" crossorigin />
-  <link rel="dns-prefetch" href="https://player.vimeo.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/TrailerFinal_image.jpg" />
   <link rel="stylesheet" href="css/style.css" />
-  <script src="https://player.vimeo.com/api/player.js" defer></script>
 </head>
 <body>
 
@@ -44,16 +40,22 @@
   <main>
     <section class="hero" id="home">
       <div class="hero__video">
-        <iframe
-          id="vimeo-player"
-          src="https://player.vimeo.com/video/1207096704?background=1&autoplay=1&muted=1&playsinline=1&title=0&byline=0&portrait=0&autopause=0"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-          loading="eager"
-          fetchpriority="high"
-          title="Hero Video"
-        ></iframe>
+        <div class="hero__poster" aria-hidden="true">
+          <img src="assets/TrailerFinal_image.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
+        </div>
+        <video
+          id="hero-player"
+          class="hero__player"
+          muted
+          autoplay
+          playsinline
+          loop
+          preload="auto"
+          poster="assets/TrailerFinal_image.jpg"
+          aria-label="Sunflowers trailer"
+        >
+          <source src="assets/TrailerFinal_video.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <div class="hero__overlay"></div>

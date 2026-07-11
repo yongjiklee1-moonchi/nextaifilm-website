@@ -31,17 +31,7 @@ document.querySelectorAll(".nav__list a").forEach((link) => {
   }
 });
 
-if (!document.getElementById("vimeo-player")) {
-  ["https://player.vimeo.com", "https://i.vimeocdn.com", "https://f.vimeocdn.com"].forEach((href) => {
-    if (!document.querySelector(`link[rel="preconnect"][href="${href}"]`)) {
-      const link = document.createElement("link");
-      link.rel = "preconnect";
-      link.href = href;
-      link.crossOrigin = "anonymous";
-      document.head.appendChild(link);
-    }
-  });
-
+if (!document.getElementById("hero-player")) {
   const logo = document.querySelector(".logo");
   const prefetchHome = () => {
     if (!document.querySelector('link[rel="prefetch"][href="index.html"]')) {

@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="subpage-body">
+<body class="subpage-body awards-page">
 
   <header class="header">
     <div class="header__inner">
@@ -36,16 +36,80 @@
     </div>
   </header>
 
-  <main class="page-main">
+  <main class="page-main awards-main">
     <div class="page-bar">
       <div class="page-bar__inner">
         <h1 class="page-bar__title">Awards</h1>
-        <p class="page-bar__subtitle"></p>
+        <p class="page-bar__subtitle">International Recognition &amp; Festival Awards</p>
       </div>
     </div>
 
-    <section class="page-content">
-      <div class="page-content__inner page-content__inner--empty"></div>
+    <section class="awards-hero" aria-label="Featured project Sunflowers">
+      <div class="awards-hero__inner">
+        <div class="awards-hero__visual">
+          <img
+            src="assets/awards/awards-hero-visual.png"
+            alt="Sunflowers — cinematic still"
+          />
+        </div>
+        <div class="awards-hero__info">
+          <p class="awards-hero__label">Featured Project</p>
+          <h2 class="awards-hero__title">Sunflowers</h2>
+          <p class="awards-hero__meta">AI Short Film · 2025 · 7&rsquo;38&rdquo;</p>
+          <p class="awards-hero__text">
+            In a future where artificial intelligence governs the world, a girl&rsquo;s simple question about sunflowers challenges the boundaries of memory, history, and human dignity.
+          </p>
+          <ul class="awards-hero__badges">
+            <li>
+              <img
+                src="assets/awards/awards-badge-winner.png"
+                alt="Best AI Winner — 17th New Media Film Festival, Los Angeles, USA (2026)"
+              />
+            </li>
+            <li>
+              <img
+                src="assets/awards/awards-badge-nominee.png"
+                alt="Best AI Film Nominee — Cannes World Film Festival, France (2025)"
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="awards-list-section">
+      <div class="awards-list-section__inner">
+        <h2 class="awards-list-section__title">Awards &amp; Nominee</h2>
+
+        <ul class="awards-list" id="awards-list" aria-live="polite"></ul>
+
+        <p class="awards-list-section__note" id="awards-list-note">* Information is updated as of June 2026.</p>
+      </div>
+    </section>
+
+    <section class="awards-spotlight">
+      <div class="awards-spotlight__inner">
+        <div class="awards-spotlight__logo">
+          <img
+            src="assets/awards/newmedia-festival-logo.png"
+            alt="17th New Media Film Festival — Celebrating Innovation in Storytelling"
+          />
+        </div>
+        <div class="awards-spotlight__content">
+          <p class="awards-spotlight__text">
+            The New Media Film Festival® celebrates innovation in storytelling across film, art, and emerging media. Since its founding, the festival has championed creators who push the boundaries of technology and narrative — from virtual production and AI-driven cinema to immersive and interactive experiences.
+          </p>
+          <p class="awards-spotlight__text">
+            Recognized as a global platform for next-generation filmmakers, the festival brings together artists, technologists, and audiences in Los Angeles to explore how new tools can expand the language of cinema while honoring the craft of traditional filmmaking.
+          </p>
+          <a
+            class="awards-spotlight__btn"
+            href="https://www.newmediafilmfestival.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >About the Festival &gt;</a>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -54,5 +118,6 @@
   </footer>
 
   <script src="js/nav.js"></script>
+  <script src="js/awards.js" defer></script>
 </body>
 </html>
