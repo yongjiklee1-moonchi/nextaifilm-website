@@ -166,7 +166,7 @@ img {
   z-index: 1;
   overflow: hidden;
   background: var(--naf-black);
-  transition: opacity 0.7s ease, visibility 0.7s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .hero__poster img {
@@ -195,10 +195,11 @@ img {
   min-height: 100vh;
   min-width: 177.78vh;
   transform: translate(-50%, -50%);
+  border: 0;
   object-fit: cover;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.7s ease;
+  transition: opacity 0.25s ease;
 }
 
 .hero.is-video-playing .hero__player {
