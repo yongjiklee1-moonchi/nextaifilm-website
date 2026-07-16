@@ -22,19 +22,29 @@ function initHeroVideo() {
   const hero = document.querySelector(".hero");
   const soundToggle = document.querySelector(".sound-toggle");
   const pauseToggle = document.querySelector(".pause-toggle");
-  const player = document.getElementById("hero-player");
+  const iframe = document.getElementById("hero-player");
 
-  if (!hero || !soundToggle || !pauseToggle || !player) {
+  if (!hero || !soundToggle || !pauseToggle || !iframe) {
     return false;
   }
 
-  if (player.dataset.bound === "true") {
+  if (typeof window.Vimeo === "undefined" || !window.Vimeo.Player) {
+    return false;
+  }
+
+  if (iframe.dataset.bound === "true") {
     return true;
   }
 
-  player.dataset.bound = "true";
+  iframe.dataset.bound = "true";
 
+  // Hide Vimeo's black intro frames behind the poster.
+  const POSTER_HOLD_SECONDS = 2;
+
+  const player = new window.Vimeo.Player(iframe);
   let posterRevealed = false;
+  let isMuted = true;
+  let isPaused = true;
 
   const showVideo = () => {
     if (posterRevealed) {
@@ -46,84 +56,106 @@ function initHeroVideo() {
   };
 
   const tryPlay = () => {
-    player.muted = true;
-    player.defaultMuted = true;
-    player.setAttribute("muted", "");
-
-    const playPromise = player.play();
-    if (playPromise && typeof playPromise.then === "function") {
-      playPromise
-        .then(() => {
-          showVideo();
-        })
-        .catch((error) => {
-          console.warn("Hero video autoplay blocked or failed:", error);
-          updatePauseToggle(pauseToggle, true);
-        });
-    }
+    player.setMuted(true).catch(() => {});
+    player
+      .play()
+      .then(() => {
+        isPaused = false;
+        updatePauseToggle(pauseToggle, false);
+      })
+      .catch((error) => {
+        console.warn("Hero video autoplay blocked or failed:", error);
+        isPaused = true;
+        updatePauseToggle(pauseToggle, true);
+      });
   };
 
-  player.muted = true;
-  player.defaultMuted = true;
-  player.playsInline = true;
-  player.loop = true;
   updateSoundToggle(soundToggle, true);
   updatePauseToggle(pauseToggle, true);
 
-  player.addEventListener("playing", () => {
-    showVideo();
+  player.on("play", () => {
+    isPaused = false;
     updatePauseToggle(pauseToggle, false);
   });
 
-  player.addEventListener("timeupdate", () => {
-    if (player.currentTime > 0.05) {
+  player.on("playing", () => {
+    isPaused = false;
+    updatePauseToggle(pauseToggle, false);
+  });
+
+  player.on("pause", () => {
+    isPaused = true;
+    updatePauseToggle(pauseToggle, true);
+  });
+
+  player.on("ended", () => {
+    isPaused = true;
+    updatePauseToggle(pauseToggle, true);
+  });
+
+  player.on("timeupdate", (data) => {
+    if (data && data.seconds >= POSTER_HOLD_SECONDS) {
       showVideo();
     }
   });
 
-  player.addEventListener("canplay", tryPlay, { once: true });
-  player.addEventListener("loadeddata", tryPlay, { once: true });
+  player.on("volumechange", (data) => {
+    if (typeof data.muted === "boolean") {
+      isMuted = data.muted;
+      updateSoundToggle(soundToggle, isMuted);
+    }
+  });
 
-  if (player.readyState >= 2) {
+  player.ready().then(() => {
+    player.setVolume(0).catch(() => {});
+    player.setMuted(true).catch(() => {});
     tryPlay();
-  } else {
-    player.load();
-  }
+  });
 
   soundToggle.addEventListener("click", () => {
-    player.muted = !player.muted;
-    if (!player.muted) {
-      player.volume = 1;
-      tryPlay();
-    }
-    updateSoundToggle(soundToggle, player.muted);
+    const nextMuted = !isMuted;
+    player
+      .setMuted(nextMuted)
+      .then(() => {
+        isMuted = nextMuted;
+        if (!nextMuted) {
+          return player.setVolume(1);
+        }
+        return undefined;
+      })
+      .then(() => {
+        updateSoundToggle(soundToggle, isMuted);
+        if (!isMuted && isPaused) {
+          tryPlay();
+        }
+      })
+      .catch((error) => {
+        console.warn("Hero video mute toggle failed:", error);
+      });
   });
 
   pauseToggle.addEventListener("click", () => {
-    if (player.paused) {
-      tryPlay();
+    if (isPaused) {
+      player
+        .play()
+        .then(() => {
+          isPaused = false;
+          updatePauseToggle(pauseToggle, false);
+        })
+        .catch((error) => {
+          console.warn("Hero video play failed:", error);
+        });
     } else {
-      player.pause();
-      updatePauseToggle(pauseToggle, true);
+      player
+        .pause()
+        .then(() => {
+          isPaused = true;
+          updatePauseToggle(pauseToggle, true);
+        })
+        .catch((error) => {
+          console.warn("Hero video pause failed:", error);
+        });
     }
-  });
-
-  player.addEventListener("pause", () => {
-    if (!player.ended) {
-      updatePauseToggle(pauseToggle, true);
-    }
-  });
-
-  player.addEventListener("play", () => {
-    updatePauseToggle(pauseToggle, false);
-  });
-
-  player.addEventListener("ended", () => {
-    updatePauseToggle(pauseToggle, true);
-  });
-
-  player.addEventListener("error", () => {
-    console.error("Hero video error:", player.error);
   });
 
   return true;
