@@ -109,9 +109,9 @@
             "lang.label": "Language"
           },
           ko: {
-            "nav.commercial": "커머셜",
-            "nav.film": "필름",
-            "nav.awards": "어워드",
+            "nav.commercial": "광고",
+            "nav.film": "영화",
+            "nav.awards": "수상",
             "nav.about": "소개",
             "nav.contact": "문의",
             "nav.open": "메뉴 열기",
