@@ -3,12 +3,13 @@
 
   var STORAGE_KEY = "naf-lang";
   var DEFAULT_LANG = "en";
+  var storage = window.sessionStorage;
   var translations = null;
   var currentLang = DEFAULT_LANG;
 
   function getSavedLang() {
     try {
-      var saved = localStorage.getItem(STORAGE_KEY);
+      var saved = storage.getItem(STORAGE_KEY);
       if (saved === "en" || saved === "ko") {
         return saved;
       }
@@ -18,7 +19,7 @@
 
   function saveLang(lang) {
     try {
-      localStorage.setItem(STORAGE_KEY, lang);
+      storage.setItem(STORAGE_KEY, lang);
     } catch (e) {}
   }
 
@@ -101,7 +102,7 @@
           en: {
             "nav.commercial": "Commercial",
             "nav.film": "Film",
-            "nav.awards": "Recognition",
+            "nav.awards": "Awards",
             "nav.about": "About",
             "nav.contact": "Contact",
             "nav.open": "Open menu",
