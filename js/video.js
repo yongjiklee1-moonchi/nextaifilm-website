@@ -38,12 +38,12 @@ function initHeroVideo() {
 
   iframe.dataset.bound = "true";
 
-  const POSTER_HOLD_SECONDS = 0.12;
   const player = new window.Vimeo.Player(iframe);
   let posterRevealed = false;
   let isMuted = true;
   let isPaused = true;
 
+  // Keep poster up until real frames are moving (hides Vimeo spinner).
   const showVideo = () => {
     if (posterRevealed) {
       return;
@@ -78,7 +78,27 @@ function initHeroVideo() {
   player.on("playing", () => {
     isPaused = false;
     updatePauseToggle(pauseToggle, false);
-    showVideo();
+    player.getCurrentTime().then((t) => {
+      if (t > 0.01) {
+        showVideo();
+      }
+    }).catch(() => {
+      showVideo();
+    });
+  });
+
+  player.on("timeupdate", (data) => {
+    if (data && data.seconds > 0.01) {
+      showVideo();
+    }
+  });
+
+  player.on("bufferend", () => {
+    player.getPaused().then((paused) => {
+      if (!paused) {
+        showVideo();
+      }
+    }).catch(() => {});
   });
 
   player.on("pause", () => {
@@ -89,12 +109,6 @@ function initHeroVideo() {
   player.on("ended", () => {
     isPaused = true;
     updatePauseToggle(pauseToggle, true);
-  });
-
-  player.on("timeupdate", (data) => {
-    if (data && data.seconds >= POSTER_HOLD_SECONDS) {
-      showVideo();
-    }
   });
 
   player.on("volumechange", (data) => {
