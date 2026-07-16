@@ -38,8 +38,8 @@ function initHeroVideo() {
 
   iframe.dataset.bound = "true";
 
-  // Hide Vimeo's black intro frames behind the poster.
-  const POSTER_HOLD_SECONDS = 2;
+  // Tiny hold only — prefer fastest visible start over hiding black frames.
+  const POSTER_HOLD_SECONDS = 0.12;
 
   const player = new window.Vimeo.Player(iframe);
   let posterRevealed = false;
@@ -63,8 +63,7 @@ function initHeroVideo() {
         isPaused = false;
         updatePauseToggle(pauseToggle, false);
       })
-      .catch((error) => {
-        console.warn("Hero video autoplay blocked or failed:", error);
+      .catch(() => {
         isPaused = true;
         updatePauseToggle(pauseToggle, true);
       });
@@ -81,6 +80,7 @@ function initHeroVideo() {
   player.on("playing", () => {
     isPaused = false;
     updatePauseToggle(pauseToggle, false);
+    showVideo();
   });
 
   player.on("pause", () => {
@@ -106,11 +106,13 @@ function initHeroVideo() {
     }
   });
 
+  // Kick playback as soon as the API is ready; iframe already has autoplay=1.
   player.ready().then(() => {
-    player.setVolume(0).catch(() => {});
-    player.setMuted(true).catch(() => {});
     tryPlay();
   });
+
+  // Also try immediately — ready() may already be resolved.
+  tryPlay();
 
   soundToggle.addEventListener("click", () => {
     const nextMuted = !isMuted;
@@ -129,9 +131,7 @@ function initHeroVideo() {
           tryPlay();
         }
       })
-      .catch((error) => {
-        console.warn("Hero video mute toggle failed:", error);
-      });
+      .catch(() => {});
   });
 
   pauseToggle.addEventListener("click", () => {
@@ -142,9 +142,7 @@ function initHeroVideo() {
           isPaused = false;
           updatePauseToggle(pauseToggle, false);
         })
-        .catch((error) => {
-          console.warn("Hero video play failed:", error);
-        });
+        .catch(() => {});
     } else {
       player
         .pause()
@@ -152,9 +150,7 @@ function initHeroVideo() {
           isPaused = true;
           updatePauseToggle(pauseToggle, true);
         })
-        .catch((error) => {
-          console.warn("Hero video pause failed:", error);
-        });
+        .catch(() => {});
     }
   });
 
@@ -167,10 +163,10 @@ function bootHeroVideo() {
   let attempts = 0;
   const timer = window.setInterval(() => {
     attempts += 1;
-    if (initHeroVideo() || attempts >= 40) {
+    if (initHeroVideo() || attempts >= 80) {
       window.clearInterval(timer);
     }
-  }, 50);
+  }, 25);
 }
 
 if (document.readyState === "loading") {
