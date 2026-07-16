@@ -158,27 +158,35 @@ img {
 .hero__video {
   position: absolute;
   inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--naf-black);
 }
 
 .hero__poster {
   position: absolute;
   inset: 0;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   background: var(--naf-black);
   transition: opacity 0.25s ease, visibility 0.25s ease;
+  pointer-events: none;
 }
 
 .hero__poster img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 56.25vw;
-  min-height: 100vh;
-  min-width: 177.78vh;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
+  position: relative;
+  top: auto;
+  left: auto;
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  min-height: 0;
+  min-width: 0;
+  transform: none;
+  object-fit: contain;
 }
 
 .hero.is-video-playing .hero__poster {
@@ -187,16 +195,16 @@ img {
 }
 
 .hero__player {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 56.25vw;
-  min-height: 100vh;
-  min-width: 177.78vh;
-  transform: translate(-50%, -50%);
+  position: relative;
+  top: auto;
+  left: auto;
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  min-height: 0;
+  min-width: 0;
+  transform: none;
   border: 0;
-  object-fit: cover;
+  object-fit: contain;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.25s ease;
@@ -242,13 +250,13 @@ img {
   font-size: 1rem;
   font-weight: 400;
   color: #fff;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.75);
   white-space: nowrap;
 }
 
 .btn--hero:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.65);
   border-color: #fff;
 }
 
