@@ -52,11 +52,10 @@ img {
   justify-content: space-between;
   flex-wrap: nowrap;
   width: 100%;
-  max-width: 1400px;
   height: var(--header-height);
   min-height: var(--header-height);
   max-height: var(--header-height);
-  margin: 0 auto;
+  margin: 0;
   padding: 0 clamp(1rem, 2vw, 2.5rem);
   gap: 0.75rem;
 }
