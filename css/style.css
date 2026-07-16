@@ -167,11 +167,16 @@ img {
 
 html[lang="ko"] .nav__list a {
   font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
-  letter-spacing: 0;
+  letter-spacing: 0.06em;
+}
+
+html[lang="ko"] .logo__text {
+  font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+  letter-spacing: 0.03em;
 }
 
 .nav__list li:nth-child(1) a {
-  min-width: 5.75rem;
+  min-width: 6.25rem;
 }
 
 .nav__list li:nth-child(2) a {
@@ -179,7 +184,7 @@ html[lang="ko"] .nav__list a {
 }
 
 .nav__list li:nth-child(3) a {
-  min-width: 3.5rem;
+  min-width: 5.5rem;
 }
 
 .nav__list li:nth-child(4) a {
