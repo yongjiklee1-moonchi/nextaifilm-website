@@ -172,6 +172,7 @@ html[lang="ko"] .nav__list a {
 
 html[lang="ko"] .logo__text {
   font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+  font-size: 0.8em;
   letter-spacing: 0.03em;
 }
 
