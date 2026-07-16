@@ -1,22 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NAF</title>
-  <link rel="icon" href="assets/logo.png" type="image/png" />
-  <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="preconnect" href="https://player.vimeo.com" crossorigin />
-  <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin />
-  <link rel="preconnect" href="https://f.vimeocdn.com" crossorigin />
-  <link rel="dns-prefetch" href="https://vod-adaptive-ak.vimeocdn.com" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/TrailerFinal_image.jpg" />
+  <link rel="preload" as="video" href="assets/hero-720.mp4" type="video/mp4" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/protect.css" />
-  <script src="https://player.vimeo.com/api/player.js" defer></script>
 </head>
 <body>
 
@@ -50,16 +46,19 @@
         <div class="hero__poster" aria-hidden="true">
           <img src="assets/TrailerFinal_image.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
         </div>
-        <iframe
+        <video
           id="hero-player"
           class="hero__player"
-          src="https://player.vimeo.com/video/1209671247?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0"
-          title="Trailer of Sunflowers"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          frameborder="0"
-        ></iframe>
+          muted
+          autoplay
+          playsinline
+          loop
+          preload="auto"
+          poster="assets/TrailerFinal_image.jpg"
+          aria-label="Sunflowers trailer"
+        >
+          <source src="assets/hero-720.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <div class="hero__overlay"></div>
