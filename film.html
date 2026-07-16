@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260716b" />
-  <link rel="stylesheet" href="css/protect.css?v=20260716b" />
+  <link rel="stylesheet" href="css/style.css?v=20260717c" />
+  <link rel="stylesheet" href="css/protect.css?v=20260717c" />
 </head>
 <body class="subpage-body film-page">
 
@@ -21,21 +21,29 @@
         <span class="logo__text">Next AI Film Studio</span>
       </a>
 
-      <button class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="header__end">
+        <nav class="nav">
+          <ul class="nav__list">
+            <li><a href="commercial.html" data-i18n="nav.commercial">Commercial</a></li>
+            <li><a href="film.html" data-i18n="nav.film">Film</a></li>
+            <li><a href="awards.html" data-i18n="nav.awards">Awards</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </nav>
 
-      <nav class="nav">
-        <ul class="nav__list">
-          <li><a href="commercial.html">Commercial</a></li>
-          <li><a href="film.html">Film</a></li>
-          <li><a href="awards.html">Awards</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+          <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false">한</button>
+        </div>
+
+        <button class="menu-toggle" data-i18n-aria="nav.open" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -219,6 +227,7 @@
   </footer>
 
   <script src="js/nav.js"></script>
+  <script src="js/i18n.js" defer></script>
   <script src="js/film.js" defer></script>
   <script src="js/protect.js" defer></script>
 </body>
