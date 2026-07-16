@@ -89,7 +89,51 @@ img {
 
 .nav {
   flex-shrink: 0;
+}
+
+.header__end {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
   margin-left: auto;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.lang-switch__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 0.2rem 0.1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.lang-switch__btn:hover {
+  color: #fff;
+}
+
+.lang-switch__btn.is-active {
+  color: var(--naf-yellow);
+}
+
+.lang-switch__sep {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.7rem;
+  line-height: 1;
+  user-select: none;
 }
 
 .nav__list {
@@ -2068,7 +2112,10 @@ a.contact-cell:hover .contact-icon {
   .menu-toggle {
     display: flex;
     flex-shrink: 0;
-    margin-left: auto;
+  }
+
+  .header__end {
+    gap: 0.75rem;
   }
 
   .nav {
