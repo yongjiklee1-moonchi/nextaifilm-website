@@ -101,22 +101,24 @@
           en: {
             "nav.commercial": "Commercial",
             "nav.film": "Film",
-            "nav.awards": "Awards",
+            "nav.awards": "Recognition",
             "nav.about": "About",
             "nav.contact": "Contact",
             "nav.open": "Open menu",
             "nav.close": "Close menu",
-            "lang.label": "Language"
+            "lang.label": "Language",
+            "logo.text": "Next AI Film Studio"
           },
           ko: {
-            "nav.commercial": "광고",
+            "nav.commercial": "광고제작",
             "nav.film": "영화",
-            "nav.awards": "수상",
+            "nav.awards": "수상&성과",
             "nav.about": "소개",
             "nav.contact": "문의",
             "nav.open": "메뉴 열기",
             "nav.close": "메뉴 닫기",
-            "lang.label": "언어"
+            "lang.label": "언어",
+            "logo.text": "넥스트 에이아이 필름 스튜디오"
           }
         });
       });
