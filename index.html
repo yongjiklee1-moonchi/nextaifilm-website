@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/TrailerFinal_image.jpg" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/protect.css" />
 </head>
 <body>
 
@@ -27,7 +28,6 @@
 
       <nav class="nav">
         <ul class="nav__list">
-          <li><a href="commercial.html">Commercial</a></li>
           <li><a href="film.html">Film</a></li>
           <li><a href="awards.html">Awards</a></li>
           <li><a href="about.html">About</a></li>
@@ -43,19 +43,15 @@
         <div class="hero__poster" aria-hidden="true">
           <img src="assets/TrailerFinal_image.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
         </div>
-        <video
+        <iframe
           id="hero-player"
           class="hero__player"
-          muted
-          autoplay
-          playsinline
-          loop
-          preload="auto"
-          poster="assets/TrailerFinal_image.jpg"
-          aria-label="Sunflowers trailer"
-        >
-          <source src="assets/TrailerFinal_video.mp4" type="video/mp4" />
-        </video>
+          src="https://player.vimeo.com/video/1209671247?h=99c34b4a58&autoplay=1&muted=1&loop=1&controls=0&autopause=0&title=0&byline=0&portrait=0&dnt=1"
+          title="Sunflowers trailer"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          frameborder="0"
+        ></iframe>
       </div>
 
       <div class="hero__overlay"></div>
@@ -91,10 +87,6 @@
     </section>
 
     <section class="menu-highlights">
-      <a href="commercial.html" class="menu-highlights__item">
-        <h3>Commercial</h3>
-        <p>AI-powered commercials for brands, products, and digital campaigns.</p>
-      </a>
       <a href="film.html" class="menu-highlights__item">
         <h3>Film</h3>
         <p>Original short films and cinematic storytelling driven by creative vision.</p>
@@ -126,7 +118,9 @@
     <p class="footer__text">&copy; 2026 Next AI Film. All Rights Reserved.</p>
   </footer>
 
+  <script src="https://player.vimeo.com/api/player.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/video.js" defer></script>
+  <script src="js/protect.js" defer></script>
 </body>
 </html>
