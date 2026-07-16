@@ -1,12 +1,19 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 
+function menuLabel(isOpen) {
+  if (window.NAF_I18N && typeof window.NAF_I18N.t === "function") {
+    return window.NAF_I18N.t(isOpen ? "nav.close" : "nav.open");
+  }
+  return isOpen ? "메뉴 닫기" : "메뉴 열기";
+}
+
 if (menuToggle && nav) {
   menuToggle.addEventListener("click", () => {
     const isOpen = nav.classList.toggle("open");
     menuToggle.classList.toggle("open");
     menuToggle.setAttribute("aria-expanded", isOpen);
-    menuToggle.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
+    menuToggle.setAttribute("aria-label", menuLabel(isOpen));
   });
 
   document.querySelectorAll(".nav__list a").forEach((link) => {
@@ -14,7 +21,7 @@ if (menuToggle && nav) {
       nav.classList.remove("open");
       menuToggle.classList.remove("open");
       menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "메뉴 열기");
+      menuToggle.setAttribute("aria-label", menuLabel(false));
     });
   });
 }
