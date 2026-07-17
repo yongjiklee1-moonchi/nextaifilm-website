@@ -1535,9 +1535,14 @@ html[lang="ko"] .logo__text {
 
 .award-item {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: clamp(0.75rem, 2vw, 1.25rem);
   align-items: start;
+}
+
+.award-item__year {
+  min-width: 4.5rem;
+  padding-right: 0.15rem;
 }
 
 .award-item__year span {
@@ -1549,6 +1554,12 @@ html[lang="ko"] .logo__text {
   line-height: 1.1;
   border-bottom: 3px solid #ff8a00;
   padding-bottom: 0.2rem;
+  white-space: nowrap;
+}
+
+.award-item--upcoming .award-item__year span {
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  letter-spacing: 0.04em;
 }
 
 .award-card {
