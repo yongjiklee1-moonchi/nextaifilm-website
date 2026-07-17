@@ -1025,7 +1025,7 @@ html[lang="ko"] .logo__text {
 .about-bottom__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem;
   max-width: min(1200px, 96vw);
   margin: 0 auto;
@@ -1038,17 +1038,8 @@ html[lang="ko"] .logo__text {
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.82);
   margin: 0;
-  flex: 1;
-  min-width: 0;
-}
-
-.about-bottom__copy {
-  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
-  white-space: nowrap;
-  margin: 0;
-  flex-shrink: 0;
+  text-align: center;
+  max-width: 42rem;
 }
 
 .about-quote__mark {
@@ -2041,12 +2032,8 @@ a.contact-cell:hover .contact-icon {
 
   .about-bottom__inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.5rem;
-  }
-
-  .about-bottom__copy {
-    white-space: normal;
   }
 
   .about-hero__inner,
