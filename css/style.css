@@ -1589,6 +1589,23 @@ html[lang="ko"] .logo__text {
   align-items: center;
   justify-content: center;
   padding: 0;
+  color: #ff8a00;
+  background: #f7f4ef;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.award-card__badge--trophy {
+  color: #d4a017;
+  background: #fff8e8;
+}
+
+.award-card__badge--film {
+  color: #555;
+  background: #f3f3f3;
+}
+
+.award-card__badge--camera {
+  color: #444;
   background: #f3f3f3;
 }
 
