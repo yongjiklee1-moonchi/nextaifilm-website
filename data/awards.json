@@ -13,7 +13,7 @@
       "country": "South Korea",
       "premiere": "World",
       "director": "YongJik Lee",
-      "badge": "",
+      "badge": "assets/awards/awards-badge-winner.png",
       "thumb": ""
     },
     {
@@ -24,12 +24,12 @@
       "location": "Cannes, France",
       "date": "May 2025",
       "summary": "Sunflowers was nominated for Best AI Film at the Cannes World Film Festival.",
-      "badge": "",
+      "badge": "assets/awards/awards-badge-nominee.png",
       "thumb": ""
     },
     {
       "type": "upcoming",
-      "year": "UPCOMING",
+      "year": "Upcoming",
       "title": "More Festivals & Screenings",
       "summary": "We are continuing our journey and will update upcoming selections.",
       "buttonLabel": "View All Updates",
