@@ -1562,18 +1562,14 @@ html[lang="ko"] .logo__text {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+.award-card--no-badge {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
 .award-card__badge {
   width: 72px;
   height: auto;
   flex-shrink: 0;
-}
-
-.award-card__badge--placeholder {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: linear-gradient(145deg, #f7f7f7, #ececec);
 }
 
 .award-card__body {
@@ -1646,19 +1642,7 @@ html[lang="ko"] .logo__text {
 }
 
 .award-card--upcoming {
-  grid-template-columns: auto minmax(0, 1fr) auto;
-}
-
-.award-card__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 50%;
-  font-size: 1.35rem;
-  flex-shrink: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
 }
 
 .award-card__btn {
