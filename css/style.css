@@ -1535,18 +1535,20 @@ html[lang="ko"] .logo__text {
 
 .award-item {
   display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
-  gap: clamp(0.75rem, 2vw, 1.25rem);
+  grid-template-columns: 6.75rem minmax(0, 1fr);
+  column-gap: 1rem;
+  row-gap: 0.5rem;
   align-items: start;
 }
 
 .award-item__year {
-  min-width: 4.5rem;
-  padding-right: 0.15rem;
+  width: 6.75rem;
+  flex-shrink: 0;
 }
 
 .award-item__year span {
   display: inline-block;
+  max-width: 100%;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: clamp(1.35rem, 2.5vw, 1.75rem);
   font-weight: 500;
@@ -1558,13 +1560,13 @@ html[lang="ko"] .logo__text {
 }
 
 .award-item--upcoming .award-item__year span {
-  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
-  letter-spacing: 0.04em;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
 }
 
 .award-card {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: 4.5rem minmax(0, 1fr) auto;
   gap: clamp(0.75rem, 2vw, 1.25rem);
   align-items: center;
   background: #fff;
@@ -1573,14 +1575,25 @@ html[lang="ko"] .logo__text {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.award-card--no-badge {
-  grid-template-columns: minmax(0, 1fr) auto;
+.award-card__badge {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: #111;
 }
 
-.award-card__badge {
-  width: 72px;
-  height: auto;
-  flex-shrink: 0;
+.award-card__badge--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #f3f3f3;
+}
+
+.award-card__badge--empty {
+  background: #f3f3f3;
 }
 
 .award-card__body {
@@ -1653,7 +1666,7 @@ html[lang="ko"] .logo__text {
 }
 
 .award-card--upcoming {
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 4.5rem minmax(0, 1fr) auto;
 }
 
 .award-card__btn {
@@ -2105,20 +2118,22 @@ a.contact-cell:hover .contact-icon {
   }
 
   .award-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
   }
 
   .award-card--upcoming {
-    grid-template-columns: 1fr;
-  }
-
-  .award-card__thumb {
-    max-width: none;
-    min-width: 0;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
   }
 
   .award-card__btn {
+    grid-column: 2;
     justify-self: start;
+  }
+
+  .award-card__thumb {
+    grid-column: 1 / -1;
+    max-width: none;
+    min-width: 0;
   }
 
   .footer--contact .footer__inner {
