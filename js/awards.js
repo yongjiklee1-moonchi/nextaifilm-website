@@ -27,7 +27,7 @@ function renderMetaRow(icon, label) {
 function renderAwardCard(item) {
   const badge = item.badge
     ? `<img class="award-card__badge" src="${escapeHtml(item.badge)}" alt="" />`
-    : `<div class="award-card__badge award-card__badge--placeholder" aria-hidden="true"></div>`;
+    : "";
 
   const thumbBlock = item.thumb
     ? `<div class="award-card__thumb"><img src="${escapeHtml(item.thumb)}" alt="" /></div>`
@@ -42,13 +42,17 @@ function renderAwardCard(item) {
       `
       : "";
 
+  const cardClass = badge
+    ? "award-card"
+    : "award-card award-card--no-badge";
+
   return `
     <li class="awards-list__item">
       <article class="award-item">
         <div class="award-item__year">
           <span>${escapeHtml(item.year)}</span>
         </div>
-        <div class="award-card">
+        <div class="${cardClass}">
           ${badge}
           <div class="award-card__body">
             <h3 class="award-card__festival">${escapeHtml(item.festival)}</h3>
@@ -75,8 +79,7 @@ function renderUpcomingCard(item) {
         <div class="award-item__year">
           <span>${escapeHtml(item.year)}</span>
         </div>
-        <div class="award-card award-card--upcoming">
-          <div class="award-card__icon" aria-hidden="true">🎥</div>
+        <div class="award-card award-card--upcoming award-card--no-badge">
           <div class="award-card__body">
             <h3 class="award-card__festival">${escapeHtml(item.title)}</h3>
             <p class="award-card__summary">${escapeHtml(item.summary)}</p>
