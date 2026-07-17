@@ -24,24 +24,55 @@ function renderMetaRow(icon, label) {
   `;
 }
 
-function renderBadge(item, variant) {
-  if (variant === "upcoming") {
-    return `
-      <span class="award-card__badge award-card__badge--icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#333" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="6" width="18" height="14" rx="2"></rect>
-          <path d="M8 6V4M16 6V4M3 11h18"></path>
-          <circle cx="12" cy="15" r="2.2"></circle>
-        </svg>
-      </span>
+function renderIconBadge(icon) {
+  var svg = "";
+
+  if (icon === "trophy") {
+    svg = `
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M8 4h8v3a4 4 0 0 1-8 0V4z"></path>
+        <path d="M8 5H5.5a2.5 2.5 0 0 0 0 5H8"></path>
+        <path d="M16 5h2.5a2.5 2.5 0 0 1 0 5H16"></path>
+        <path d="M12 11v3"></path>
+        <path d="M9 20h6"></path>
+        <path d="M10 17h4v3h-4z"></path>
+      </svg>
+    `;
+  } else if (icon === "film") {
+    svg = `
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+        <path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"></path>
+      </svg>
+    `;
+  } else {
+    svg = `
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="7" width="14" height="11" rx="2"></rect>
+        <path d="M16 10l6-3v11l-6-3z"></path>
+        <circle cx="7.5" cy="12.5" r="1.6"></circle>
+      </svg>
     `;
   }
 
+  return `
+    <span class="award-card__badge award-card__badge--icon award-card__badge--${escapeHtml(icon)}" aria-hidden="true">
+      ${svg}
+    </span>
+  `;
+}
+
+function renderBadge(item, variant) {
+  if (variant === "upcoming" || item.icon === "camera") {
+    return renderIconBadge("camera");
+  }
+  if (item.icon === "trophy" || item.icon === "film") {
+    return renderIconBadge(item.icon);
+  }
   if (item.badge) {
     return `<img class="award-card__badge" src="${escapeHtml(item.badge)}" alt="" />`;
   }
-
-  return `<div class="award-card__badge award-card__badge--empty" aria-hidden="true"></div>`;
+  return renderIconBadge("film");
 }
 
 function renderAwardCard(item) {
