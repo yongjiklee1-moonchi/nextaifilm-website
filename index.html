@@ -25,8 +25,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/hero-poster.webp" />
-  <link rel="stylesheet" href="css/style.css?v=20260720a" />
-  <link rel="stylesheet" href="css/protect.css?v=20260720a" />
+  <link rel="stylesheet" href="css/style.css?v=20260720d" />
+  <link rel="stylesheet" href="css/protect.css?v=20260720d" />
   <script src="https://player.vimeo.com/api/player.js" defer></script>
 </head>
 <body>
@@ -49,7 +49,7 @@
           </ul>
         </nav>
 
-        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+        <div class="lang-switch" hidden role="group" aria-label="Language" data-i18n-aria="lang.label">
           <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
           <span class="lang-switch__sep" aria-hidden="true">/</span>
           <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false">한글</button>
@@ -86,7 +86,7 @@
 
       <div class="hero__ui">
         <div class="hero__actions">
-          <a href="contact.html" class="btn btn--hero">Start Your Project</a>
+          <a href="contact.html" class="btn btn--hero" hidden>Start Your Project</a>
           <div class="hero__controls">
             <button type="button" class="video-control pause-toggle" aria-label="일시정지" aria-pressed="false">
               <svg class="video-control__icon video-control__icon--pause" viewBox="0 0 24 24" aria-hidden="true">
