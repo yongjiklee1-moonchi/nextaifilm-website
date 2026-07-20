@@ -2278,26 +2278,37 @@ a.contact-cell:hover .contact-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   color: #fff;
+  overflow: hidden;
   transition: transform 0.2s, opacity 0.2s;
 }
 
 .footer__social-link:hover {
   transform: translateY(-1px);
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .footer__social-link svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.footer__social-label {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #0d0d0d;
 }
 
 .footer__social-link--imdb {
   background: #f5c518;
-  color: #111;
+  color: #0d0d0d;
 }
 
 .footer__social-link--vimeo {
@@ -2313,7 +2324,7 @@ a.contact-cell:hover .contact-icon {
 }
 
 .footer__social-link--instagram {
-  background: linear-gradient(135deg, #f58529, #dd2a7b 50%, #8134af);
+  background: linear-gradient(135deg, #f58529, #dd2a7b 45%, #8134af 75%, #515bd4);
 }
 
 .footer__mascot {
