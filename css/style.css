@@ -2170,6 +2170,7 @@ a.contact-cell:hover .contact-icon {
   width: clamp(7.25rem, 13vw, 9rem);
   height: auto;
   margin: 0 0 0.55rem;
+  background: transparent;
 }
 
 .footer__studio {
