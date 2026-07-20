@@ -837,6 +837,59 @@ html[lang="ko"] .logo__text {
   color: rgba(255, 255, 255, 0.78);
 }
 
+.about-companion {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: center;
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-companion__photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #222;
+}
+
+.about-companion__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.about-companion__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 64px;
+}
+
+.about-companion__title {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0 0 0.15rem;
+  line-height: 1.3;
+}
+
+.about-companion__role {
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  line-height: 1.3;
+}
+
 .about-values {
   background: #1a1a1a;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
