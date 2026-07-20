@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <meta http-equiv="Content-Language" content="en" />
+  <title>About | NAF</title>
+  <script>
+    (function () {
+      var lang = "en";
+      try {
+        var saved = sessionStorage.getItem("naf-lang");
+        if (saved === "en" || saved === "ko") lang = saved;
+      } catch (e) {}
+      document.documentElement.lang = lang === "ko" ? "ko" : "en";
+    })();
+  </script>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260720w" />
+  <link rel="stylesheet" href="css/protect.css?v=20260720m" />
+</head>
+<body class="subpage-body about-page">
+
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="NAF" />
+        <span class="logo__text" data-i18n="logo.text">Next AI Film Studio</span>
+      </a>
+
+      <div class="header__end">
+        <nav class="nav">
+          <ul class="nav__list">
+            <li><a href="commercial.html" data-i18n="nav.commercial">Commercial</a></li>
+            <li><a href="film.html" data-i18n="nav.film">Film</a></li>
+            <li><a href="awards.html" data-i18n="nav.awards">Awards</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="lang-switch" hidden role="group" aria-label="Language" data-i18n-aria="lang.label">
+          <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false">한글</button>
+        </div>
+
+        <button class="menu-toggle" data-i18n-aria="nav.open" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main about-main">
+    <div class="page-bar">
+      <div class="page-bar__inner">
+        <h1 class="page-bar__title">About</h1>
+        <p class="page-bar__subtitle">Exploring Humanity Through AI Cinema</p>
+      </div>
+    </div>
+
+    <section class="about-hero">
+      <div class="about-hero__inner">
+        <div class="about-intro">
+          <h2 class="about-intro__title">Next AI Film Studio</h2>
+          <p class="about-intro__text">
+            We are an independent creative studio specializing in cinematic AI production. We combine storytelling, advanced AI technology, and professional filmmaking to create powerful visual experiences for global audiences.
+          </p>
+          <div class="about-intro__links">
+            <a href="commercial.html" class="about-link-btn">
+              <span class="about-link-btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              Commercial
+            </a>
+            <a href="film.html" class="about-link-btn">
+              <span class="about-link-btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+              </span>
+              Film
+            </a>
+            <a href="awards.html" class="about-link-btn">
+              <span class="about-link-btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.2 5.6.8-4 3.9.9 5.5L12 15.8 7.1 17.4l.9-5.5-4-3.9 5.6-.8L12 2z"/></svg>
+              </span>
+              Awards
+            </a>
+          </div>
+        </div>
+
+        <div class="about-team">
+          <p class="about-label">Our Team</p>
+
+          <article class="about-member">
+            <div class="about-member__photo">
+              <img src="assets/team/myung-kwon.png" alt="Myung Kwon" width="88" height="88" />
+            </div>
+            <div class="about-member__info">
+              <p class="about-member__role">CEO</p>
+              <h3 class="about-member__name">Myung Kwon</h3>
+              <p class="about-member__title">Executive Producer</p>
+              <p class="about-member__bio">
+                Overseeing production, studio operations, and international partnerships.
+              </p>
+            </div>
+          </article>
+
+          <article class="about-member">
+            <div class="about-member__photo about-member__photo--swap" title="Yong Jik Lee">
+              <img
+                class="about-member__face"
+                src="assets/team/yongjik-lee.png?v=20260720v"
+                alt="Yong Jik Lee"
+                width="88"
+                height="88"
+              />
+              <img
+                class="about-member__symbol"
+                src="assets/team/huma-face.png?v=20260720v"
+                alt=""
+                width="88"
+                height="88"
+                aria-hidden="true"
+                decoding="async"
+              />
+            </div>
+            <div class="about-member__info">
+              <p class="about-member__role">Director</p>
+              <h3 class="about-member__name">Yong Jik Lee</h3>
+              <p class="about-member__title">Writer, Director and AI Filmmaker</p>
+              <p class="about-member__bio">
+                Exploring the future of cinematic storytelling through AI, film, and human creativity.
+              </p>
+            </div>
+          </article>
+
+          <article class="about-companion">
+            <div class="about-companion__photo">
+              <img
+                src="assets/team/studio-companion.png"
+                alt="Moong Chi, studio companion dog"
+                width="64"
+                height="64"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="about-companion__info">
+              <p class="about-companion__title">Studio Companion</p>
+              <p class="about-companion__role">Chief Happiness Officer</p>
+              <p class="about-companion__name">
+                <span class="about-companion__name-accent">Moong Chi (뭉치)</span>
+                <span class="about-companion__breed">| Maltipoo</span>
+              </p>
+              <p class="about-companion__bio">
+                Bringing joy, calm, and good vibes to our studio every day.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-values">
+      <div class="about-values__inner">
+        <div class="about-value">
+          <span class="about-value__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+          </span>
+          <h3 class="about-value__title">Story Driven</h3>
+          <p class="about-value__text">We believe strong stories create the most powerful visuals.</p>
+        </div>
+        <div class="about-value">
+          <span class="about-value__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 3v2H7v2h2v2h2V7h2V5h-2V3H9zm0 10v2H7v2h2v2h2v-2h2v-2h-2v-2H9zm10-10v2h-2v2h2v2h2V7h2V5h-2V3h-2zm0 10v2h-2v2h2v2h2v-2h2v-2h-2v-2h-2z"/></svg>
+          </span>
+          <h3 class="about-value__title">AI Powered</h3>
+          <p class="about-value__text">Cutting-edge AI tools and pipelines for high-quality cinematic production.</p>
+        </div>
+        <div class="about-value">
+          <span class="about-value__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+          </span>
+          <h3 class="about-value__title">Cinematic Quality</h3>
+          <p class="about-value__text">Film-level composition, lighting, and post-production.</p>
+        </div>
+        <div class="about-value">
+          <span class="about-value__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </span>
+          <h3 class="about-value__title">Global Collaboration</h3>
+          <p class="about-value__text">Working with clients and creatives around the world.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-details">
+      <div class="about-details__inner">
+        <div class="about-overview">
+          <h2 class="about-section-title">Studio Overview</h2>
+          <p class="about-overview__text">
+            Next AI Film Studio produces AI commercials, branded films, original stories, and experimental projects. From concept to final delivery, we provide full creative direction, AI production, and post-production services.
+          </p>
+          <ul class="about-services">
+            <li>AI Commercial &amp; Branded Content</li>
+            <li>AI Film &amp; Original IP</li>
+            <li>3D &amp; Virtual Production</li>
+            <li>AI Visual Effects &amp; Compositing</li>
+            <li>Editing &amp; Color Grading</li>
+            <li>Sound Design &amp; Music</li>
+          </ul>
+        </div>
+
+        <div class="about-achievements">
+          <h2 class="about-section-title">Achievements</h2>
+          <div class="about-award-card">
+            <div class="about-award-card__head">
+              <span class="about-award-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.2 5.6.8-4 3.9.9 5.5L12 15.8 7.1 17.4l.9-5.5-4-3.9 5.6-.8L12 2z"/></svg>
+              </span>
+              <div>
+                <p class="about-award-card__label">Best AI Winner</p>
+                <p class="about-award-card__festival">17th New Media Film Festival®</p>
+                <p class="about-award-card__location">Los Angeles, USA (2026)</p>
+              </div>
+            </div>
+            <ul class="about-award-card__list">
+              <li><strong>Nominee:</strong> Cannes World Film Festival (2025) – Best AI Film</li>
+              <li><strong>Official Selection:</strong> International Film Festivals (Multiple)</li>
+            </ul>
+            <p class="about-award-card__note">Award-winning AI film &ldquo;Sunflowers&rdquo; and more projects in development.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-bottom">
+      <div class="about-bottom__inner">
+        <blockquote class="about-bottom__quote">
+          <span class="about-quote__mark" aria-hidden="true">&ldquo;</span>
+          We believe AI should expand human creativity rather than replace it.
+          <span class="about-quote__mark" aria-hidden="true">&rdquo;</span>
+        </blockquote>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img class="footer__logo" src="assets/logo.png?v=20260720w" alt="NAF" width="144" height="53" decoding="async" />
+          <p class="footer__studio">Next AI Film Studio</p>
+          <p class="footer__tagline">Cinema in the Age of AI</p>
+        </div>
+
+        <div class="footer__col">
+          <h2 class="footer__heading">Navigation</h2>
+          <ul class="footer__nav">
+            <li><a href="commercial.html">Commercial</a></li>
+            <li><a href="film.html">Film</a></li>
+            <li><a href="awards.html">Awards</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h2 class="footer__heading">Contact</h2>
+          <ul class="footer__contact">
+            <li class="footer__contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 7 9-7"></path></svg>
+              <a href="mailto:nextaifilm@gmail.com">nextaifilm@gmail.com</a>
+            </li>
+            <li class="footer__contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+              <span>Seoul, South Korea</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__col footer__col--social">
+          <h2 class="footer__heading">Stay Connected</h2>
+          <div class="footer__social">
+            <a class="footer__social-link footer__social-link--imdb" href="https://www.imdb.com/title/tt39371743/?ref_=nm_knf_i_1" target="_blank" rel="noopener noreferrer" aria-label="IMDb">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 6h2.2l.9 8.4L8.8 6H11l1.7 8.4L13.6 6H16l-2 12h-2.7L9.9 10 8.1 18H5.4L4 6zm13.2 0H20v2.1h-1.3V18H16.5V8.1H15.2V6h2z"/></svg>
+            </a>
+            <a class="footer__social-link footer__social-link--vimeo" href="https://vimeo.com/user220966275" target="_blank" rel="noopener noreferrer" aria-label="Vimeo">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.1 8.4c-.1 2.4-1.8 5.7-5.1 9.8-3.4 4.2-6.2 6.4-8.5 6.4-1.4 0-2.6-1.3-3.6-3.9L3.2 15c-.7-2.4-1.4-4.8-2.1-7.2-.3-1.1.1-1.7 1.2-1.8.9-.1 2.1.3 3.3 1.2l.5.4c.9.7 1.5 1.1 1.9 1.1.5 0 1-.9 1.5-2.7.5-1.9 1-3.1 1.6-3.5.6-.4 1.7-.1 3.3 1 .9.6 2.8 2.1 5.7 4.5.3.3.6.5.9.7.9.5 1.2 1.1 1.1 1.7z"/></svg>
+            </a>
+            <a class="footer__social-link footer__social-link--youtube" href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 7.2a3 3 0 0 0-2.1-2.1C19.5 4.5 12 4.5 12 4.5s-7.5 0-9.4.6A3 3 0 0 0 .5 7.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-4.8zM9.8 15.5v-7l6.3 3.5-6.3 3.5z"/></svg>
+            </a>
+            <a class="footer__social-link footer__social-link--linkedin" href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.3 9.1H3.1V21h3.2V9.1zM4.7 3A1.9 1.9 0 1 0 4.7 6.8 1.9 1.9 0 0 0 4.7 3zM20.9 13.3c0-3.1-1.7-4.5-3.9-4.5a3.4 3.4 0 0 0-3 1.6V9.1H10.8c0 1.1 0 11.9 0 11.9h3.2v-6.6c0-.4 0-.7.1-1 .3-.7.9-1.4 2-1.4 1.4 0 2 1.1 2 2.6V21h3.2v-7.7z"/></svg>
+            </a>
+            <a class="footer__social-link footer__social-link--instagram" href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2zm0 7.9A3.1 3.1 0 1 1 12 8.9a3.1 3.1 0 0 1 0 6.2zm6.1-8.2a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zm3.1 1.1A5.1 5.1 0 0 0 17.7 3.7 5.1 5.1 0 0 0 12.8 2h-1.6A5.1 5.1 0 0 0 6.3 3.7 5.1 5.1 0 0 0 2.8 7.9v8.2A5.1 5.1 0 0 0 6.3 20.3 5.1 5.1 0 0 0 11.2 22h1.6a5.1 5.1 0 0 0 4.9-1.7 5.1 5.1 0 0 0 1.5-4.2V9zM19.5 16.1a3.4 3.4 0 0 1-1 2.4 3.4 3.4 0 0 1-2.4 1H9.9a3.4 3.4 0 0 1-2.4-1 3.4 3.4 0 0 1-1-2.4V7.9A3.4 3.4 0 0 1 7.5 5.5 3.4 3.4 0 0 1 9.9 4.5h4.2a3.4 3.4 0 0 1 2.4 1 3.4 3.4 0 0 1 1 2.4v8.2z"/></svg>
+            </a>
+          </div>
+
+          <div class="footer__mascot">
+            <div class="footer__mascot-photo">
+              <img src="assets/team/studio-companion.png" alt="Moong Chi" width="48" height="48" loading="lazy" decoding="async" />
+            </div>
+            <div class="footer__mascot-info">
+              <p class="footer__mascot-name">Moong Chi (뭉치)</p>
+              <p class="footer__mascot-role">Studio Companion<br />Chief Happiness Officer</p>
+              <p class="footer__mascot-note">Keeping the studio smiling.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="footer__quote">
+        &ldquo;Stories imagined by humans, brought to life with AI.&rdquo;
+      </blockquote>
+
+      <p class="footer__copy">&copy; 2026 Next AI Film Studio. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <button type="button" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5"></path>
+      <path d="M5 12l7-7 7 7"></path>
+    </svg>
+  </button>
+
+  <script src="js/nav.js?v=20260720a"></script>
+  <script src="js/i18n.js?v=20260717h" defer></script>
+  <script src="js/protect.js" defer></script>
+</body>
+</html>
