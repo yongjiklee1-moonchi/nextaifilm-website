@@ -509,8 +509,8 @@ html[lang="ko"] .logo__text {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 1.25rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   margin-bottom: 1rem;
   color: var(--naf-yellow);
 }
@@ -2216,8 +2216,26 @@ a.contact-cell:hover .contact-icon {
     gap: 1.5rem;
   }
 
+  .nav__list li:nth-child(1) a,
+  .nav__list li:nth-child(2) a,
+  .nav__list li:nth-child(3) a,
+  .nav__list li:nth-child(4) a,
+  .nav__list li:nth-child(5) a {
+    min-width: 0;
+    width: auto;
+    display: inline-block;
+    text-align: left;
+    white-space: nowrap;
+  }
+
   .nav__list a {
     font-size: 0.875rem;
+  }
+
+  .nav__list a.active::after {
+    left: 0;
+    right: 0;
+    width: auto;
   }
 
   .menu-toggle.open span:nth-child(1) {
