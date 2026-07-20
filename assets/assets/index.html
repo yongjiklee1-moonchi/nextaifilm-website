@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <meta http-equiv="Content-Language" content="en" />
+  <title>NAF</title>
+  <script>
+    (function () {
+      var lang = "en";
+      try {
+        var saved = sessionStorage.getItem("naf-lang");
+        if (saved === "en" || saved === "ko") lang = saved;
+      } catch (e) {}
+      document.documentElement.lang = lang === "ko" ? "ko" : "en";
+    })();
+  </script>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://player.vimeo.com" crossorigin />
+  <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin />
+  <link rel="preconnect" href="https://f.vimeocdn.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/hero-poster.webp" />
+  <link rel="stylesheet" href="css/style.css?v=20260720e" />
+  <link rel="stylesheet" href="css/protect.css?v=20260720e" />
+  <script src="https://player.vimeo.com/api/player.js" defer></script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="NAF" />
+        <span class="logo__text" data-i18n="logo.text">Next AI Film Studio</span>
+      </a>
+
+      <div class="header__end">
+        <nav class="nav">
+          <ul class="nav__list">
+            <li><a href="commercial.html" data-i18n="nav.commercial">Commercial</a></li>
+            <li><a href="film.html" data-i18n="nav.film">Film</a></li>
+            <li><a href="awards.html" data-i18n="nav.awards">Awards</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="lang-switch" hidden role="group" aria-label="Language" data-i18n-aria="lang.label">
+          <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false">한글</button>
+        </div>
+
+        <button class="menu-toggle" data-i18n-aria="nav.open" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero__video">
+        <div class="hero__poster" aria-hidden="true">
+          <img src="assets/hero-poster.webp" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
+        </div>
+        <iframe
+          id="hero-player"
+          class="hero__player"
+          src="https://player.vimeo.com/video/1210521996?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&muted=1&loop=1&playsinline=1&controls=0&title=0&byline=0&portrait=0"
+          title="Sunflowers트레일러85메가"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+          frameborder="0"
+        ></iframe>
+      </div>
+
+      <div class="hero__overlay"></div>
+
+      <div class="hero__ui">
+        <div class="hero__actions">
+          <a href="contact.html" class="btn btn--hero" hidden>Start Your Project</a>
+          <div class="hero__controls">
+            <button type="button" class="video-control pause-toggle" aria-label="일시정지" aria-pressed="false">
+              <svg class="video-control__icon video-control__icon--pause" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+              <svg class="video-control__icon video-control__icon--play" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+            <button type="button" class="video-control sound-toggle" aria-label="소리 켜기" aria-pressed="true">
+              <svg class="video-control__icon video-control__icon--muted" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+              </svg>
+              <svg class="video-control__icon video-control__icon--unmuted" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="studio-summary">
+      <h2 class="studio-summary__title">Studio Overview</h2>
+      <p class="studio-summary__text">
+        We create cinematic AI commercials and films that combine storytelling, visual artistry, and<br />
+        cutting-edge AI production. From concept to final delivery, we help brands and creators bring powerful ideas&nbsp;to&nbsp;life.
+      </p>
+    </section>
+
+    <section class="menu-highlights">
+      <a href="commercial.html" class="menu-highlights__item">
+        <h3>Commercial</h3>
+        <p>AI-powered commercials for brands, products, and digital campaigns.</p>
+      </a>
+      <a href="film.html" class="menu-highlights__item">
+        <h3>Film</h3>
+        <p>Original short films and cinematic storytelling driven by creative vision.</p>
+      </a>
+      <a href="awards.html" class="menu-highlights__item">
+        <h3>Awards</h3>
+        <p>International recognition for innovation in AI filmmaking and visual storytelling.</p>
+      </a>
+    </section>
+
+    <section id="about" class="section">
+      <h2><a href="about.html">About</a></h2>
+      <p>
+        Next AI Film Studio is an independent creative studio specializing in AI-powered filmmaking and commercial production.
+      </p>
+      <p>
+        We blend cinematic storytelling with advanced AI technology to create original visual experiences for audiences and brands worldwide.
+      </p>
+    </section>
+
+    <section id="contact" class="section">
+      <h2><a href="contact.html">Contact</a></h2>
+      <p>For all inquiries</p>
+      <p><a href="mailto:nextaifilm@gmail.com" class="contact__email">nextaifilm@gmail.com</a></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__text">&copy; 2026 Next AI Film. All Rights Reserved.</p>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/i18n.js?v=20260717h" defer></script>
+  <script src="js/video.js?v=20260720e" defer></script>
+  <script src="js/protect.js" defer></script>
+</body>
+</html>
