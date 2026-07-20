@@ -2294,6 +2294,23 @@ a.contact-cell:hover .contact-icon {
   padding: 2rem 0 4rem;
 }
 
+.commercial-showcase__intro {
+  max-width: 720px;
+  margin: 0 auto 1.75rem;
+  text-align: center;
+}
+
+.commercial-showcase__intro p {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.commercial-showcase__intro p + p {
+  margin-top: 0.75rem;
+}
+
 .commercial-showcase__inner picture,
 .commercial-showcase__inner img {
   display: block;
