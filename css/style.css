@@ -415,8 +415,8 @@ html[lang="ko"] .logo__text {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 1.25rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--naf-yellow);
   margin-bottom: 1.5rem;
 }
@@ -585,8 +585,8 @@ html[lang="ko"] .logo__text {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--naf-yellow);
   line-height: 1.2;
 }
@@ -628,8 +628,8 @@ html[lang="ko"] .logo__text {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--naf-yellow);
   margin-bottom: 1rem;
 }
@@ -2268,4 +2268,18 @@ a.contact-cell:hover .contact-icon {
 
 .trailer-embed__back a:hover {
   color: var(--naf-yellow);
+}
+
+.commercial-showcase {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.commercial-showcase__inner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
