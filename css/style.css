@@ -100,10 +100,7 @@ img {
 }
 
 .lang-switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  flex-shrink: 0;
+  display: none !important;
 }
 
 .lang-switch__btn {
@@ -325,9 +322,9 @@ html[lang="ko"] .logo__text {
 }
 
 .btn--hero {
+  display: none !important;
   position: static;
   transform: none;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.65rem 0.95rem;
@@ -338,6 +335,10 @@ html[lang="ko"] .logo__text {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.75);
   white-space: nowrap;
+}
+
+.btn--hero.is-visible {
+  display: inline-flex;
 }
 
 .btn--hero:hover {
@@ -498,12 +499,23 @@ html[lang="ko"] .logo__text {
 }
 
 .section h2 {
-  font-size: 1.5rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 1rem;
   color: var(--naf-yellow);
+}
+
+.section h2 a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.section h2 a:hover {
+  opacity: 0.8;
 }
 
 #about h2,
@@ -512,6 +524,7 @@ html[lang="ko"] .logo__text {
 }
 
 .section p {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   color: var(--text-muted);
 }
 
@@ -520,7 +533,9 @@ html[lang="ko"] .logo__text {
   max-width: 560px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .section p + p {
