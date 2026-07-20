@@ -2276,6 +2276,7 @@ a.contact-cell:hover .contact-icon {
   padding: 2rem 0 4rem;
 }
 
+.commercial-showcase__inner picture,
 .commercial-showcase__inner img {
   display: block;
   width: 100%;
