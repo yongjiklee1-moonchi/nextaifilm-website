@@ -2400,18 +2400,19 @@ a.contact-cell:hover .contact-icon {
 
 .back-to-top {
   position: fixed;
-  right: clamp(1rem, 3vw, 1.5rem);
-  bottom: clamp(1rem, 3vw, 1.5rem);
+  right: clamp(1.25rem, 3.5vw, 2rem);
+  /* Sit near footer band, not flush with viewport corner */
+  bottom: clamp(5.5rem, 12vw, 8.5rem);
   z-index: 9999;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.72);
   color: #fff;
   cursor: pointer;
   opacity: 0;
@@ -2431,14 +2432,14 @@ a.contact-cell:hover .contact-icon {
 }
 
 .back-to-top:hover {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   border-color: var(--naf-yellow);
   color: var(--naf-yellow);
 }
 
 .back-to-top svg {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
 }
 
 .footer__text {
