@@ -319,6 +319,8 @@ html[lang="ko"] .logo__text {
   flex-wrap: wrap;
   justify-content: flex-end;
   max-width: calc(100% - 2rem);
+  z-index: 3;
+  pointer-events: auto;
 }
 
 .btn--hero {
@@ -350,6 +352,7 @@ html[lang="ko"] .logo__text {
   position: static;
   display: flex;
   gap: 0.75rem;
+  pointer-events: auto;
 }
 
 .video-control {
@@ -364,6 +367,10 @@ html[lang="ko"] .logo__text {
   background: rgba(0, 0, 0, 0.35);
   color: #fff;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 4;
   transition: background 0.3s, border-color 0.3s;
 }
 
