@@ -18,13 +18,11 @@
   </script>
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/favicon.png" />
-  <link rel="preconnect" href="https://player.vimeo.com" crossorigin />
-  <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260717g" />
-  <link rel="stylesheet" href="css/protect.css?v=20260717g" />
+  <link rel="stylesheet" href="css/style.css?v=20260720f" />
+  <link rel="stylesheet" href="css/protect.css?v=20260720f" />
 </head>
 <body class="subpage-body commercial-page">
 
@@ -46,7 +44,7 @@
           </ul>
         </nav>
 
-        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+        <div class="lang-switch" hidden role="group" aria-label="Language" data-i18n-aria="lang.label">
           <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
           <span class="lang-switch__sep" aria-hidden="true">/</span>
           <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false">한글</button>
@@ -69,16 +67,15 @@
       </div>
     </div>
 
-    <section class="trailer-embed">
-      <div class="trailer-embed__frame">
-        <iframe
-          src="https://player.vimeo.com/video/1207096704?badge=0&autopause=0&player_id=0&app_id=58479"
-          title="caredit_25"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          frameborder="0"
-        ></iframe>
+    <section class="commercial-showcase" aria-label="Next AI Film concept gallery">
+      <div class="commercial-showcase__inner">
+        <img
+          src="assets/commercial/commercial-concept-gallery.jpg"
+          alt="Next AI Film concept gallery — jewelry, automotive, cosmetics, toy, public service, ramen, and cinema"
+          width="1200"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </section>
   </main>
