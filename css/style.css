@@ -839,7 +839,7 @@ html[lang="ko"] .logo__text {
 
 .about-companion {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
+  grid-template-columns: 88px minmax(0, 1fr);
   gap: 1.1rem;
   align-items: center;
   padding-top: 1rem;
@@ -850,6 +850,7 @@ html[lang="ko"] .logo__text {
 .about-companion__photo {
   width: 64px;
   height: 64px;
+  justify-self: end;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -870,12 +871,12 @@ html[lang="ko"] .logo__text {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  min-height: 64px;
+  min-width: 0;
 }
 
 .about-companion__title {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: #fff;
   margin: 0 0 0.15rem;
@@ -886,8 +887,32 @@ html[lang="ko"] .logo__text {
   font-size: 0.78rem;
   letter-spacing: 0.03em;
   color: rgba(255, 255, 255, 0.65);
-  margin: 0;
+  margin: 0 0 0.35rem;
   line-height: 1.3;
+}
+
+.about-companion__name {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  margin: 0 0 0.35rem;
+}
+
+.about-companion__name-accent {
+  color: var(--naf-yellow);
+  font-weight: 500;
+}
+
+.about-companion__breed {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.about-companion__bio {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
 }
 
 .about-values {
@@ -2023,31 +2048,319 @@ a.contact-cell:hover .contact-icon {
   color: rgba(255, 255, 255, 0.3);
 }
 
-.footer__social {
-  display: flex;
-  gap: 1rem;
+.footer {
+  position: relative;
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem) 1.75rem;
+  overflow: hidden;
 }
 
-.footer__social a {
+.footer__inner {
+  position: relative;
+  z-index: 1;
+  max-width: min(1200px, 96vw);
+  margin: 0 auto;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  align-items: start;
+  padding-bottom: clamp(1.75rem, 3vw, 2.25rem);
+}
+
+.footer__brand {
+  position: relative;
+  padding-right: 0.5rem;
+}
+
+.footer__brand::before {
+  content: "NAF";
+  position: absolute;
+  left: -0.15rem;
+  top: -0.35rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(4.5rem, 10vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  color: rgba(255, 255, 255, 0.035);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.footer__logo {
+  position: relative;
+  z-index: 1;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--naf-yellow);
+  line-height: 1;
+  margin-bottom: 0.45rem;
+}
+
+.footer__studio {
+  position: relative;
+  z-index: 1;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 0.65rem;
+}
+
+.footer__tagline {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.footer__col {
+  min-width: 0;
+}
+
+.footer__heading {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--naf-yellow);
+  margin-bottom: 1rem;
+}
+
+.footer__nav {
+  list-style: none;
   display: flex;
-  color: rgba(255, 255, 255, 0.75);
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.footer__nav a {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
   transition: color 0.2s;
 }
 
-.footer__social a:hover {
+.footer__nav a:hover {
   color: var(--naf-yellow);
 }
 
-.footer__social svg {
-  width: 20px;
-  height: 20px;
+.footer__contact {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.footer {
-  background: #333333;
-  border-bottom: 3px solid #2ecc71;
-  padding: 2.5rem 2rem;
+.footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.45;
+}
+
+.footer__contact-item svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 0.2rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer__contact-item a {
+  color: inherit;
+  transition: color 0.2s;
+  word-break: break-word;
+}
+
+.footer__contact-item a:hover {
+  color: var(--naf-yellow);
+}
+
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.15rem;
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: #fff;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.footer__social-link:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.footer__social-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.footer__social-link--imdb {
+  background: #f5c518;
+  color: #111;
+}
+
+.footer__social-link--vimeo {
+  background: #1ab7ea;
+}
+
+.footer__social-link--youtube {
+  background: #ff0000;
+}
+
+.footer__social-link--linkedin {
+  background: #0a66c2;
+}
+
+.footer__social-link--instagram {
+  background: linear-gradient(135deg, #f58529, #dd2a7b 50%, #8134af);
+}
+
+.footer__mascot {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.footer__mascot-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #222;
+}
+
+.footer__mascot-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.footer__mascot-name {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--naf-yellow);
+  margin: 0 0 0.15rem;
+  line-height: 1.3;
+}
+
+.footer__mascot-role {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.footer__mascot-note {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0.2rem 0 0;
+  line-height: 1.35;
+}
+
+.footer__quote {
+  margin: 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(0.88rem, 1.6vw, 1rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.footer__copy {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.02em;
+}
+
+.footer__copy::before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  margin: 0 auto 0.85rem;
+  background: var(--naf-yellow);
+}
+
+.back-to-top {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.5rem);
+  bottom: clamp(1rem, 3vw, 1.5rem);
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.25s, visibility 0.25s, transform 0.25s, background 0.2s, border-color 0.2s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: var(--naf-yellow);
+  color: var(--naf-yellow);
+}
+
+.back-to-top svg {
+  width: 18px;
+  height: 18px;
 }
 
 .footer__text {
@@ -2131,6 +2444,17 @@ a.contact-cell:hover .contact-icon {
   .about-member__photo {
     width: 72px;
     height: 72px;
+  }
+
+  .about-companion {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 1.1rem;
+  }
+
+  .about-companion__photo {
+    width: 52px;
+    height: 52px;
+    justify-self: end;
   }
 
   .about-values__inner {
@@ -2223,6 +2547,15 @@ a.contact-cell:hover .contact-icon {
   .footer--contact .footer__text {
     text-align: center;
   }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem 1.25rem;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2301,6 +2634,14 @@ a.contact-cell:hover .contact-icon {
 
   .menu-toggle.open span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__brand {
+    grid-column: auto;
   }
 }
 
