@@ -1,13 +1,13 @@
 function updateSoundToggle(soundToggle, isMuted) {
   soundToggle.classList.toggle("is-unmuted", !isMuted);
   soundToggle.setAttribute("aria-pressed", String(isMuted));
-  soundToggle.setAttribute("aria-label", isMuted ? "소리 켜기" : "소리 끄기");
+  soundToggle.setAttribute("aria-label", isMuted ? "Unmute" : "Mute");
 }
 
 function updatePauseToggle(pauseToggle, isPaused) {
   pauseToggle.classList.toggle("is-paused", isPaused);
   pauseToggle.setAttribute("aria-pressed", String(isPaused));
-  pauseToggle.setAttribute("aria-label", isPaused ? "재생" : "일시정지");
+  pauseToggle.setAttribute("aria-label", isPaused ? "Play" : "Pause");
 }
 
 function revealHeroVideo(hero) {
@@ -23,6 +23,21 @@ function isIOSDevice() {
     /iPad|iPhone|iPod/.test(navigator.userAgent) ||
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
   );
+}
+
+function isControlTarget(event) {
+  return Boolean(event.target && event.target.closest(".hero__controls, .video-control"));
+}
+
+function bindControl(button, handler) {
+  const run = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    handler();
+  };
+
+  button.addEventListener("touchstart", run, { passive: false });
+  button.addEventListener("click", run);
 }
 
 function initHeroVideo() {
@@ -51,6 +66,28 @@ function initHeroVideo() {
   let isMuted = true;
   let isPaused = true;
   let unlockBound = false;
+  let userPaused = false;
+  let iosRetryTimer = null;
+
+  const stopIOSRetry = () => {
+    if (iosRetryTimer) {
+      window.clearInterval(iosRetryTimer);
+      iosRetryTimer = null;
+    }
+  };
+
+  const syncPlayerState = () => {
+    return Promise.all([
+      player.getPaused().catch(() => true),
+      player.getMuted().catch(() => true),
+    ]).then(([paused, muted]) => {
+      isPaused = paused;
+      isMuted = muted;
+      updatePauseToggle(pauseToggle, paused);
+      updateSoundToggle(soundToggle, muted);
+      return { paused, muted };
+    });
+  };
 
   const showVideo = () => {
     if (posterRevealed) {
@@ -61,17 +98,22 @@ function initHeroVideo() {
     revealHeroVideo(hero);
   };
 
-  const tryPlay = () => {
+  const tryPlay = (force) => {
+    if (userPaused && !force) {
+      return;
+    }
+
     player.setMuted(true).catch(() => {});
     player
       .play()
       .then(() => {
         isPaused = false;
+        userPaused = false;
         updatePauseToggle(pauseToggle, false);
+        stopIOSRetry();
       })
       .catch(() => {
-        isPaused = true;
-        updatePauseToggle(pauseToggle, true);
+        syncPlayerState().catch(() => {});
       });
   };
 
@@ -82,29 +124,40 @@ function initHeroVideo() {
 
     unlockBound = true;
 
-    const unlock = () => {
+    const unlock = (event) => {
+      if (isControlTarget(event)) {
+        return;
+      }
+
       tryPlay();
     };
 
     hero.addEventListener("touchstart", unlock, { passive: true });
     hero.addEventListener("click", unlock);
-    document.addEventListener("touchstart", unlock, { passive: true, once: true });
-    document.addEventListener("click", unlock, { once: true });
-    window.addEventListener("scroll", unlock, { passive: true, once: true });
 
-    window.addEventListener("pageshow", tryPlay);
+    window.addEventListener("pageshow", () => {
+      if (!userPaused) {
+        tryPlay();
+      }
+    });
+
     document.addEventListener("visibilitychange", () => {
-      if (!document.hidden) {
+      if (!document.hidden && !userPaused) {
         tryPlay();
       }
     });
 
     let attempts = 0;
-    const retryTimer = window.setInterval(() => {
+    iosRetryTimer = window.setInterval(() => {
+      if (userPaused) {
+        stopIOSRetry();
+        return;
+      }
+
       attempts += 1;
       tryPlay();
       if (attempts >= 24) {
-        window.clearInterval(retryTimer);
+        stopIOSRetry();
       }
     }, 500);
   };
@@ -120,6 +173,7 @@ function initHeroVideo() {
   player.on("playing", () => {
     isPaused = false;
     updatePauseToggle(pauseToggle, false);
+    stopIOSRetry();
     player
       .getCurrentTime()
       .then((t) => {
@@ -167,51 +221,58 @@ function initHeroVideo() {
   });
 
   player.ready().then(() => {
-    tryPlay();
-    bindIOSUnlock();
+    syncPlayerState().finally(() => {
+      tryPlay();
+      bindIOSUnlock();
+    });
   });
-  tryPlay();
-  bindIOSUnlock();
 
-  soundToggle.addEventListener("click", () => {
-    const nextMuted = !isMuted;
+  bindControl(soundToggle, () => {
     player
-      .setMuted(nextMuted)
-      .then(() => {
+      .getMuted()
+      .then((muted) => {
+        const nextMuted = !muted;
+        return player.setMuted(nextMuted).then(() => nextMuted);
+      })
+      .then((nextMuted) => {
         isMuted = nextMuted;
-        if (!nextMuted) {
-          return player.setVolume(1);
+        updateSoundToggle(soundToggle, isMuted);
+        if (!isMuted) {
+          return player.setVolume(1).then(() => {
+            if (isPaused) {
+              userPaused = false;
+              return player.play();
+            }
+            return undefined;
+          });
         }
         return undefined;
       })
-      .then(() => {
-        updateSoundToggle(soundToggle, isMuted);
-        if (!isMuted && isPaused) {
-          tryPlay();
-        }
-      })
+      .then(() => syncPlayerState())
       .catch(() => {});
   });
 
-  pauseToggle.addEventListener("click", () => {
-    if (isPaused) {
-      player
-        .play()
-        .then(() => {
-          isPaused = false;
-          updatePauseToggle(pauseToggle, false);
-          showVideo();
-        })
-        .catch(() => {});
-    } else {
-      player
-        .pause()
-        .then(() => {
+  bindControl(pauseToggle, () => {
+    player
+      .getPaused()
+      .then((paused) => {
+        if (paused) {
+          userPaused = false;
+          return player.play().then(() => {
+            isPaused = false;
+            updatePauseToggle(pauseToggle, false);
+            showVideo();
+          });
+        }
+
+        userPaused = true;
+        stopIOSRetry();
+        return player.pause().then(() => {
           isPaused = true;
           updatePauseToggle(pauseToggle, true);
-        })
-        .catch(() => {});
-    }
+        });
+      })
+      .catch(() => syncPlayerState());
   });
 
   return true;
