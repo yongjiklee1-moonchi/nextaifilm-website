@@ -525,6 +525,34 @@ html[lang="ko"] .logo__text {
   opacity: 0.8;
 }
 
+.section-heading-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.section-face-mark {
+  display: inline-flex;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(245, 224, 0, 0.5);
+  background: #f5e000;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.section-face-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  transform: scale(1.35);
+}
+
 #about h2,
 #contact h2 {
   margin-bottom: 0.875rem;
@@ -806,6 +834,51 @@ html[lang="ko"] .logo__text {
   height: 100%;
   object-fit: cover;
   object-position: center top;
+}
+
+/* Director photo ↔ HUMA symbol hover (eye-aligned) */
+.about-member__photo--swap {
+  position: relative;
+  cursor: pointer;
+}
+
+.about-member__photo--swap img {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.35s ease;
+}
+
+.about-member__photo--swap .about-member__face {
+  object-fit: cover;
+  /* Eyes sit ~33% from top in this portrait */
+  object-position: center 18%;
+  opacity: 1;
+  z-index: 1;
+}
+
+.about-member__photo--swap .about-member__symbol {
+  object-fit: cover;
+  /* Crop to face; align symbol eyes with portrait eye band */
+  object-position: 50% 30%;
+  transform: scale(1.28);
+  transform-origin: center 32%;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about-member__photo--swap:hover .about-member__face {
+  opacity: 0;
+}
+
+.about-member__photo--swap:hover .about-member__symbol {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-member__photo--swap img {
+    transition: none;
+  }
 }
 
 .about-member__role {
