@@ -18,6 +18,13 @@ function revealHeroVideo(hero) {
   hero.classList.add("is-video-playing");
 }
 
+function isIOSDevice() {
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+  );
+}
+
 function initHeroVideo() {
   const hero = document.querySelector(".hero");
   const soundToggle = document.querySelector(".sound-toggle");
@@ -39,11 +46,12 @@ function initHeroVideo() {
   iframe.dataset.bound = "true";
 
   const player = new window.Vimeo.Player(iframe);
+  const isIOS = isIOSDevice();
   let posterRevealed = false;
   let isMuted = true;
   let isPaused = true;
+  let unlockBound = false;
 
-  // Keep poster up until real frames are moving (hides Vimeo spinner).
   const showVideo = () => {
     if (posterRevealed) {
       return;
@@ -67,6 +75,40 @@ function initHeroVideo() {
       });
   };
 
+  const bindIOSUnlock = () => {
+    if (!isIOS || unlockBound) {
+      return;
+    }
+
+    unlockBound = true;
+
+    const unlock = () => {
+      tryPlay();
+    };
+
+    hero.addEventListener("touchstart", unlock, { passive: true });
+    hero.addEventListener("click", unlock);
+    document.addEventListener("touchstart", unlock, { passive: true, once: true });
+    document.addEventListener("click", unlock, { once: true });
+    window.addEventListener("scroll", unlock, { passive: true, once: true });
+
+    window.addEventListener("pageshow", tryPlay);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        tryPlay();
+      }
+    });
+
+    let attempts = 0;
+    const retryTimer = window.setInterval(() => {
+      attempts += 1;
+      tryPlay();
+      if (attempts >= 24) {
+        window.clearInterval(retryTimer);
+      }
+    }, 500);
+  };
+
   updateSoundToggle(soundToggle, true);
   updatePauseToggle(pauseToggle, true);
 
@@ -78,13 +120,16 @@ function initHeroVideo() {
   player.on("playing", () => {
     isPaused = false;
     updatePauseToggle(pauseToggle, false);
-    player.getCurrentTime().then((t) => {
-      if (t > 0.01) {
+    player
+      .getCurrentTime()
+      .then((t) => {
+        if (t > 0.01) {
+          showVideo();
+        }
+      })
+      .catch(() => {
         showVideo();
-      }
-    }).catch(() => {
-      showVideo();
-    });
+      });
   });
 
   player.on("timeupdate", (data) => {
@@ -94,11 +139,14 @@ function initHeroVideo() {
   });
 
   player.on("bufferend", () => {
-    player.getPaused().then((paused) => {
-      if (!paused) {
-        showVideo();
-      }
-    }).catch(() => {});
+    player
+      .getPaused()
+      .then((paused) => {
+        if (!paused) {
+          showVideo();
+        }
+      })
+      .catch(() => {});
   });
 
   player.on("pause", () => {
@@ -118,8 +166,12 @@ function initHeroVideo() {
     }
   });
 
-  player.ready().then(tryPlay);
+  player.ready().then(() => {
+    tryPlay();
+    bindIOSUnlock();
+  });
   tryPlay();
+  bindIOSUnlock();
 
   soundToggle.addEventListener("click", () => {
     const nextMuted = !isMuted;
@@ -148,6 +200,7 @@ function initHeroVideo() {
         .then(() => {
           isPaused = false;
           updatePauseToggle(pauseToggle, false);
+          showVideo();
         })
         .catch(() => {});
     } else {
