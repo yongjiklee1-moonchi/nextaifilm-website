@@ -1,17 +1,56 @@
 /**
  * Awards list renderer
  *
- * 지금: data/awards.json 에서 읽음
- * 나중에 Google Sheets 연동 시 fetch URL만 교체하면 됩니다.
- *
- * 새 수상 추가: awards.json 의 items 배열에 객체 하나 추가 (연도당 카드 1개)
+ * Primary: embedded AWARDS_DATA (works with file:// and static hosting)
+ * Optional: fetch data/awards.json when available (for later Google Sheets swap)
  */
 
 const AWARDS_DATA_URL = "data/awards.json";
 
+const AWARDS_DATA = {
+  updated: "June 2026",
+  items: [
+    {
+      type: "award",
+      year: "2026",
+      festival: "17th New Media Film Festival®",
+      category: "Best AI Winner",
+      location: "Los Angeles, USA",
+      date: "June 2026",
+      summary: "Sunflowers received Best AI Winner at the 17th New Media Film Festival in Los Angeles.",
+      film: "Sunflowers",
+      country: "South Korea",
+      premiere: "World",
+      director: "YongJik Lee",
+      icon: "trophy",
+      thumb: ""
+    },
+    {
+      type: "award",
+      year: "2025",
+      festival: "Cannes World Film Festival",
+      category: "Best AI Film Nominee",
+      location: "Cannes, France",
+      date: "May 2025",
+      summary: "Sunflowers was nominated for Best AI Film at the Cannes World Film Festival.",
+      icon: "film",
+      thumb: ""
+    },
+    {
+      type: "upcoming",
+      year: "Upcoming",
+      title: "More Festivals & Screenings",
+      summary: "We are continuing our journey and will update upcoming selections.",
+      icon: "camera",
+      buttonLabel: "View All Updates",
+      buttonHref: "#"
+    }
+  ]
+};
+
 function escapeHtml(text) {
   const div = document.createElement("div");
-  div.textContent = text;
+  div.textContent = text == null ? "" : String(text);
   return div.innerHTML;
 }
 
@@ -141,34 +180,41 @@ function renderAwardsList(items) {
     .join("");
 }
 
-async function loadAwardsData() {
-  const response = await fetch(AWARDS_DATA_URL);
-  if (!response.ok) {
-    throw new Error(`Failed to load awards data: ${response.status}`);
+function applyAwardsData(data) {
+  const listEl = document.getElementById("awards-list");
+  const noteEl = document.getElementById("awards-list-note");
+  if (!listEl) return;
+
+  listEl.innerHTML = renderAwardsList((data && data.items) || []);
+
+  if (noteEl && data && data.updated) {
+    noteEl.textContent = `* Information is updated as of ${data.updated}.`;
   }
-  return response.json();
+}
+
+async function loadAwardsData() {
+  try {
+    const response = await fetch(AWARDS_DATA_URL, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`Failed to load awards data: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.warn("Using embedded awards data:", error);
+    return AWARDS_DATA;
+  }
 }
 
 async function initAwardsList() {
   const listEl = document.getElementById("awards-list");
-  const noteEl = document.getElementById("awards-list-note");
-
   if (!listEl) return;
 
   try {
     const data = await loadAwardsData();
-    listEl.innerHTML = renderAwardsList(data.items || []);
-
-    if (noteEl && data.updated) {
-      noteEl.textContent = `* Information is updated as of ${data.updated}.`;
-    }
+    applyAwardsData(data && Array.isArray(data.items) ? data : AWARDS_DATA);
   } catch (error) {
     console.error(error);
-    listEl.innerHTML = `
-      <li class="awards-list__item awards-list__item--error">
-        <p>Awards list could not be loaded. Please try again later.</p>
-      </li>
-    `;
+    applyAwardsData(AWARDS_DATA);
   }
 }
 
