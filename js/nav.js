@@ -26,7 +26,8 @@ if (menuToggle && nav) {
   });
 }
 
-const currentPage = window.location.pathname.split("/").pop() || "index.html";
+const pathEnd = window.location.pathname.split("/").pop() || "";
+const currentPage = !pathEnd || pathEnd === "index.html" ? "index.html" : pathEnd;
 
 document.querySelectorAll(".nav__list a").forEach((link) => {
   const href = link.getAttribute("href");
@@ -41,10 +42,10 @@ document.querySelectorAll(".nav__list a").forEach((link) => {
 if (!document.getElementById("hero-player")) {
   const logo = document.querySelector(".logo");
   const prefetchHome = () => {
-    if (!document.querySelector('link[rel="prefetch"][href="index.html"]')) {
+    if (!document.querySelector('link[rel="prefetch"][href="/"]')) {
       const prefetch = document.createElement("link");
       prefetch.rel = "prefetch";
-      prefetch.href = "index.html";
+      prefetch.href = "/";
       document.head.appendChild(prefetch);
     }
   };
