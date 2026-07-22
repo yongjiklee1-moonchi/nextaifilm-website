@@ -46,14 +46,6 @@
   }
 
   document.addEventListener(
-    "contextmenu",
-    function (event) {
-      event.preventDefault();
-    },
-    { passive: false }
-  );
-
-  document.addEventListener(
     "dragstart",
     function (event) {
       var target = event.target;
