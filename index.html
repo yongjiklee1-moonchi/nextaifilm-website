@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    (function () {
-      if (/\/index\.html$/i.test(location.pathname)) {
-        var path = location.pathname.replace(/\/index\.html$/i, "/");
-        location.replace(path + location.search + location.hash);
-      }
-    })();
-  </script>
+  <script src="js/clean-url.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Language" content="en" />
@@ -48,11 +41,11 @@
       <div class="header__end">
         <nav class="nav">
           <ul class="nav__list">
-            <li><a href="commercial.html" data-i18n="nav.commercial">Commercial</a></li>
-            <li><a href="film.html" data-i18n="nav.film">Film</a></li>
-            <li><a href="awards.html" data-i18n="nav.awards">Awards</a></li>
-            <li><a href="about.html" data-i18n="nav.about">About</a></li>
-            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+            <li><a href="/commercial" data-i18n="nav.commercial">Commercial</a></li>
+            <li><a href="/film" data-i18n="nav.film">Film</a></li>
+            <li><a href="/awards" data-i18n="nav.awards">Awards</a></li>
+            <li><a href="/about" data-i18n="nav.about">About</a></li>
+            <li><a href="/contact" data-i18n="nav.contact">Contact</a></li>
           </ul>
         </nav>
 
@@ -93,7 +86,7 @@
 
       <div class="hero__ui">
         <div class="hero__actions">
-          <a href="contact.html" class="btn btn--hero" hidden>Start Your Project</a>
+          <a href="/contact" class="btn btn--hero" hidden>Start Your Project</a>
           <div class="hero__controls">
             <button type="button" class="video-control pause-toggle" aria-label="일시정지" aria-pressed="false">
               <svg class="video-control__icon video-control__icon--pause" viewBox="0 0 24 24" aria-hidden="true">
@@ -125,15 +118,15 @@
     </section>
 
     <section class="menu-highlights">
-      <a href="commercial.html" class="menu-highlights__item">
+      <a href="/commercial" class="menu-highlights__item">
         <h3>Commercial</h3>
         <p>AI-powered commercials for brands, products, and digital campaigns.</p>
       </a>
-      <a href="film.html" class="menu-highlights__item">
+      <a href="/film" class="menu-highlights__item">
         <h3>Film</h3>
         <p>Original short films and cinematic storytelling driven by creative vision.</p>
       </a>
-      <a href="awards.html" class="menu-highlights__item">
+      <a href="/awards" class="menu-highlights__item">
         <h3>Awards</h3>
         <p>International recognition for innovation in AI filmmaking and visual storytelling.</p>
       </a>
@@ -141,7 +134,7 @@
 
     <section id="about" class="section">
       <h2>
-        <a href="about.html" class="section-heading-link">
+        <a href="/about" class="section-heading-link">
           <span class="section-face-mark" aria-hidden="true">
             <img src="assets/team/huma-face.png" alt="" width="28" height="28" decoding="async" />
           </span>
@@ -157,7 +150,7 @@
     </section>
 
     <section id="contact" class="section">
-      <h2><a href="contact.html">Contact</a></h2>
+      <h2><a href="/contact">Contact</a></h2>
       <p>For all inquiries</p>
       <p><a href="mailto:hello@nextaifilm.com" class="contact__email">hello@nextaifilm.com</a></p>
     </section>
@@ -175,11 +168,11 @@
         <div class="footer__col">
           <h2 class="footer__heading">Navigation</h2>
           <ul class="footer__nav">
-            <li><a href="commercial.html">Commercial</a></li>
-            <li><a href="film.html">Film</a></li>
-            <li><a href="awards.html">Awards</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/commercial">Commercial</a></li>
+            <li><a href="/film">Film</a></li>
+            <li><a href="/awards">Awards</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
 
