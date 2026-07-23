@@ -26,15 +26,19 @@ if (menuToggle && nav) {
   });
 }
 
-const pathEnd = window.location.pathname.split("/").pop() || "";
-const currentPage = !pathEnd || pathEnd === "index.html" ? "index.html" : pathEnd;
+function pageKey(path) {
+  const end = (path || "").split("/").filter(Boolean).pop() || "";
+  if (!end || end === "index.html" || end === "index") return "home";
+  return end.replace(/\.html$/i, "");
+}
+
+const currentPage = pageKey(window.location.pathname);
 
 document.querySelectorAll(".nav__list a").forEach((link) => {
   const href = link.getAttribute("href");
-  if (!href || href.startsWith("#")) return;
+  if (!href || href.startsWith("#") || href === "/") return;
 
-  const linkPage = href.split("/").pop();
-  if (linkPage === currentPage) {
+  if (pageKey(href) === currentPage) {
     link.classList.add("active");
   }
 });
