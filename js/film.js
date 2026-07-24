@@ -51,5 +51,56 @@ function initFilmCarousel(root) {
   goTo(0);
 }
 
-document.querySelectorAll("[data-carousel]").forEach(initFilmCarousel);
+function initFilmTabs() {
+  const tabs = Array.from(document.querySelectorAll(".film-tab[data-film]:not([disabled])"));
+  const panels = Array.from(document.querySelectorAll("[data-film-panel]"));
 
+  if (tabs.length === 0 || panels.length === 0) {
+    return;
+  }
+
+  function activate(filmId) {
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.film === filmId;
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      tab.tabIndex = isActive ? 0 : -1;
+    });
+
+    panels.forEach((panel) => {
+      const isActive = panel.dataset.filmPanel === filmId;
+      panel.classList.toggle("is-active", isActive);
+      panel.hidden = !isActive;
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activate(tab.dataset.film);
+    });
+
+    tab.addEventListener("keydown", (event) => {
+      const currentIndex = tabs.indexOf(tab);
+      let nextIndex = currentIndex;
+
+      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        nextIndex = (currentIndex + 1) % tabs.length;
+      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      } else if (event.key === "Home") {
+        nextIndex = 0;
+      } else if (event.key === "End") {
+        nextIndex = tabs.length - 1;
+      } else {
+        return;
+      }
+
+      event.preventDefault();
+      tabs[nextIndex].focus();
+      activate(tabs[nextIndex].dataset.film);
+    });
+  });
+}
+
+document.querySelectorAll("[data-carousel]").forEach(initFilmCarousel);
+initFilmTabs();
