@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260723i" />
+  <link rel="stylesheet" href="css/style.css?v=20260724a" />
   <link rel="stylesheet" href="css/protect.css?v=20260717g" />
 </head>
 <body class="subpage-body film-page">
@@ -75,172 +75,406 @@
       </div>
     </div>
 
-    <section class="film-showcase">
-      <div class="film-showcase__inner">
-        <figure class="film-poster">
-          <img
-            src="assets/sunflowers-poster.png"
-            alt="Sunflowers — Directed by Yong Jik Lee"
-            width="600"
-            height="900"
-          />
-        </figure>
+    <section class="film-tabs" aria-label="Film selection">
+      <div class="film-tabs__inner">
+        <div class="film-tabs__rail" role="tablist" aria-label="Films">
+          <button
+            type="button"
+            class="film-tab is-active"
+            role="tab"
+            id="tab-sunflowers"
+            aria-selected="true"
+            aria-controls="panel-sunflowers"
+            data-film="sunflowers"
+          >
+            <img src="assets/sunflowers-poster.png" alt="" width="120" height="80" />
+            <span class="film-tab__label">Sunflowers</span>
+          </button>
 
-        <div class="film-info">
-          <div class="film-info__header">
-            <h2 class="film-info__title">Sunflowers</h2>
-            <p class="film-info__meta">2025 | 7&rsquo;38&rdquo; | 4K | Color | Korean &amp; English Subtitles</p>
-            <p class="film-info__credit">Written &amp; Directed by Yong Jik Lee</p>
-          </div>
+          <button
+            type="button"
+            class="film-tab"
+            role="tab"
+            id="tab-film2"
+            aria-selected="false"
+            aria-controls="panel-film2"
+            data-film="film2"
+            tabindex="-1"
+          >
+            <img src="assets/film/film2-poster.png" alt="" width="120" height="80" />
+            <span class="film-tab__label">Film 2</span>
+          </button>
 
-          <ul class="film-awards">
-            <li>
-              <span class="film-awards__icon" aria-hidden="true">🏆</span>
-              <span><strong>Best AI Winner</strong> (2026), 17th New Media Film Festival<sup>®</sup> Los Angeles, USA</span>
-            </li>
-            <li>
-              <span class="film-awards__icon" aria-hidden="true">⭐</span>
-              <span><strong>Best AI Film Nominee</strong> Cannes World Film Festival</span>
-            </li>
-          </ul>
-
-          <div class="film-info__synopsis">
-            <p>A young boy's journey through a world transformed by AI reveals a hidden truth about history, memory, and survival.</p>
-            <p>An AI themed narrative exploring technology, identity, and emotional resonance.</p>
-          </div>
-
-          <div class="film-info__links">
-            <a href="/trailer" class="about-link-btn">
-              <span class="about-link-btn__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </span>
-              Watch Trailer
-            </a>
-            <a href="https://www.imdb.com/title/tt39371743/?ref_=nm_knf_i_1" class="about-link-btn" target="_blank" rel="noopener noreferrer">
-              <span class="about-link-btn__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
-              </span>
-              IMDb
-            </a>
-            <a href="/awards" class="about-link-btn">
-              <span class="about-link-btn__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.2 5.6.8-4 3.9.9 5.5L12 15.8 7.1 17.4l.9-5.5-4-3.9 5.6-.8L12 2z"/></svg>
-              </span>
-              Awards
-            </a>
-          </div>
+          <button
+            type="button"
+            class="film-tab film-tab--empty"
+            role="tab"
+            id="tab-film3"
+            aria-selected="false"
+            data-film="film3"
+            disabled
+            aria-disabled="true"
+            title="Coming soon"
+          >
+            <span class="film-tab__slot" aria-hidden="true"></span>
+            <span class="film-tab__label">Coming soon</span>
+          </button>
         </div>
       </div>
     </section>
 
-    <section class="film-statement">
-      <div class="film-statement__inner">
-        <h2 class="film-statement__title">Director&rsquo;s Statement</h2>
-        <div class="film-statement__body">
-          <p>
-            <em>Sunflowers</em> stems from the question of whether technological advancement will protect human dignity or, conversely, destroy it.
-          </p>
-          <p>
-            Although inspired by real testimonies from wartime, this film is not an attempt to recreate the past. Instead, it imagines how ethical failures similar to those of the past could reemerge in a future society driven by artificial intelligence, automation, and economic displacement.
-          </p>
-          <p>
-            The sunflower serves as a central symbol in the film. The sunflower, which has long symbolized obedience and silence, is reinterpreted in this film as a witness that preserves the memories society seeks to forget until the very end.
-          </p>
-          <p>
-            Ultimately, <em>Sunflowers</em> asks whether we can preserve human compassion, memory, and moral responsibility while relentlessly pursuing technological innovation.
-          </p>
-        </div>
-      </div>
-    </section>
+    <div class="film-panels">
+      <article
+        class="film-panel is-active"
+        id="panel-sunflowers"
+        role="tabpanel"
+        aria-labelledby="tab-sunflowers"
+        data-film-panel="sunflowers"
+      >
+        <section class="film-showcase">
+          <div class="film-showcase__inner">
+            <figure class="film-poster">
+              <img
+                src="assets/sunflowers-poster.png"
+                alt="Sunflowers — Directed by Yong Jik Lee"
+                width="600"
+                height="900"
+              />
+            </figure>
 
-    <section class="film-gallery" aria-label="Sunflowers stills">
-      <div class="film-gallery__inner">
-        <div class="film-carousel" data-carousel>
-          <div class="film-carousel__viewport">
-            <div class="film-carousel__track">
-              <figure class="film-carousel__slide is-active">
-                <img src="assets/film/sunflowers-pic1.png" alt="Sunflowers still — bus on a foggy city street at night" width="1600" height="800" />
-              </figure>
-              <figure class="film-carousel__slide">
-                <img src="assets/film/sunflowers-pic2.png" alt="Sunflowers still — boy in red sweater at night" width="1600" height="800" />
-              </figure>
-              <figure class="film-carousel__slide">
-                <img src="assets/film/sunflowers-pic3.png" alt="Sunflowers still — figure in water under the moon" width="1600" height="800" />
-              </figure>
-              <figure class="film-carousel__slide">
-                <img src="assets/film/sunflowers-pic4.png" alt="Sunflowers still — industrial corridor with glowing chambers" width="1600" height="800" />
-              </figure>
-              <figure class="film-carousel__slide">
-                <img src="assets/film/sunflowers-pic5.png" alt="Sunflowers still — scientist with sunflower DNA helix" width="1600" height="800" />
-              </figure>
-              <figure class="film-carousel__slide">
-                <img src="assets/film/sunflowers-pic6.png" alt="Sunflowers still — tractor in sunflower field at night" width="1600" height="800" />
-              </figure>
-              <figure class="film-carousel__slide">
-                <img src="assets/film/sunflowers-pic7.png" alt="Sunflowers still — robots working in a laboratory hall" width="1600" height="800" />
-              </figure>
+            <div class="film-info">
+              <div class="film-info__header">
+                <h2 class="film-info__title">Sunflowers</h2>
+                <p class="film-info__meta">2025 | 7&rsquo;38&rdquo; | 4K | Color | Korean &amp; English Subtitles</p>
+                <p class="film-info__credit">Written &amp; Directed by Yong Jik Lee</p>
+              </div>
+
+              <ul class="film-awards">
+                <li>
+                  <span class="film-awards__icon" aria-hidden="true">🏆</span>
+                  <span><strong>Best AI Winner</strong> (2026), 17th New Media Film Festival<sup>®</sup> Los Angeles, USA</span>
+                </li>
+                <li>
+                  <span class="film-awards__icon" aria-hidden="true">⭐</span>
+                  <span><strong>Best AI Film Nominee</strong> Cannes World Film Festival</span>
+                </li>
+              </ul>
+
+              <div class="film-info__synopsis">
+                <p>A young boy's journey through a world transformed by AI reveals a hidden truth about history, memory, and survival.</p>
+                <p>An AI themed narrative exploring technology, identity, and emotional resonance.</p>
+              </div>
+
+              <div class="film-info__links">
+                <a href="/trailer" class="about-link-btn">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                  Watch Trailer
+                </a>
+                <a href="https://www.imdb.com/title/tt39371743/?ref_=nm_knf_i_1" class="about-link-btn" target="_blank" rel="noopener noreferrer">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+                  </span>
+                  IMDb
+                </a>
+                <a href="/awards" class="about-link-btn">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.2 5.6.8-4 3.9.9 5.5L12 15.8 7.1 17.4l.9-5.5-4-3.9 5.6-.8L12 2z"/></svg>
+                  </span>
+                  Awards
+                </a>
+              </div>
             </div>
           </div>
+        </section>
 
-          <button type="button" class="film-carousel__btn film-carousel__btn--prev" aria-label="Previous image">‹</button>
-          <button type="button" class="film-carousel__btn film-carousel__btn--next" aria-label="Next image">›</button>
-          <div class="film-carousel__dots" role="tablist" aria-label="Slide navigation"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="film-expand" aria-label="Film notes">
-      <div class="film-expand__inner">
-        <details class="film-expand__item" open>
-          <summary class="film-expand__summary">
-            <span class="film-expand__summary-text">Synopsis</span>
-            <span class="film-expand__chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="film-expand__body">
-            <p>In 2045, artificial intelligence has surpassed human intelligence. Human labor is no longer needed.</p>
-            <p>Millions of people wander the world, having lost both their purpose and their means of survival. The crisis grows beyond what governments can manage.</p>
-            <p>Then, a global corporation called Sunflower Corporation announces a massive recruitment campaign. Countless people see it as their last hope and apply.</p>
-            <p>Among them is Logan, a ten-year-old boy, who sets out with his father in search of a new life. What awaits them is an unsettling truth about history, technology, and the dignity of being human.</p>
+        <section class="film-statement">
+          <div class="film-statement__inner">
+            <h2 class="film-statement__title">Director&rsquo;s Statement</h2>
+            <div class="film-statement__body">
+              <p>
+                <em>Sunflowers</em> stems from the question of whether technological advancement will protect human dignity or, conversely, destroy it.
+              </p>
+              <p>
+                Although inspired by real testimonies from wartime, this film is not an attempt to recreate the past. Instead, it imagines how ethical failures similar to those of the past could reemerge in a future society driven by artificial intelligence, automation, and economic displacement.
+              </p>
+              <p>
+                The sunflower serves as a central symbol in the film. The sunflower, which has long symbolized obedience and silence, is reinterpreted in this film as a witness that preserves the memories society seeks to forget until the very end.
+              </p>
+              <p>
+                Ultimately, <em>Sunflowers</em> asks whether we can preserve human compassion, memory, and moral responsibility while relentlessly pursuing technological innovation.
+              </p>
+            </div>
           </div>
-        </details>
+        </section>
 
-        <details class="film-expand__item">
-          <summary class="film-expand__summary">
-            <span class="film-expand__summary-text">Theme &amp; Vision</span>
-            <span class="film-expand__chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="film-expand__body">
-            <p>
-              The film explores the intersection of history, memory, and future ethics through a unique fusion of storytelling and emerging technology. Inspired by forgotten chapters of the past, it reimagines human struggles and institutional failures while asking how we might design a more responsible future. The narrative connects historical events with speculative visions, inviting audiences to reflect on dignity, resilience, and the evolving relationship between humanity and technology.
-            </p>
-          </div>
-        </details>
+        <section class="film-gallery" aria-label="Sunflowers stills">
+          <div class="film-gallery__inner">
+            <div class="film-carousel" data-carousel>
+              <div class="film-carousel__viewport">
+                <div class="film-carousel__track">
+                  <figure class="film-carousel__slide is-active">
+                    <img src="assets/film/sunflowers-pic1.png" alt="Sunflowers still — bus on a foggy city street at night" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic2.png" alt="Sunflowers still — boy in red sweater at night" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic3.png" alt="Sunflowers still — figure in water under the moon" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic4.png" alt="Sunflowers still — industrial corridor with glowing chambers" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic5.png" alt="Sunflowers still — scientist with sunflower DNA helix" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic6.png" alt="Sunflowers still — tractor in sunflower field at night" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic7.png" alt="Sunflowers still — robots working in a laboratory hall" width="1600" height="800" />
+                  </figure>
+                </div>
+              </div>
 
-        <details class="film-expand__item">
-          <summary class="film-expand__summary">
-            <span class="film-expand__summary-text">Historical Inspiration</span>
-            <span class="film-expand__chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="film-expand__body">
-            <p>
-              The film was partly inspired by the testimony of Hideo Shimizu, a former member of Japan’s Unit 731, whose account of wartime human experimentation continues to raise urgent questions about memory, responsibility, and the ethical limits of science and power.
-            </p>
+              <button type="button" class="film-carousel__btn film-carousel__btn--prev" aria-label="Previous image">‹</button>
+              <button type="button" class="film-carousel__btn film-carousel__btn--next" aria-label="Next image">›</button>
+              <div class="film-carousel__dots" role="tablist" aria-label="Slide navigation"></div>
+            </div>
           </div>
-        </details>
+        </section>
 
-        <details class="film-expand__item">
-          <summary class="film-expand__summary">
-            <span class="film-expand__summary-text">Production Notes</span>
-            <span class="film-expand__chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="film-expand__body">
-            <p>
-              Technically, the work is created through a hybrid production pipeline. Approximately 60–70% of the imagery was generated using AI, combined with traditional 3D modeling, digital compositing, and precise editing. AI was not employed as a replacement for creativity, but as a collaborator—expanding visual language and enabling experimental approaches that traditional methods alone could not achieve. Human artistic direction remained central throughout, guiding AI outputs toward a cohesive and emotionally resonant vision.
-            </p>
+        <section class="film-expand" aria-label="Film notes">
+          <div class="film-expand__inner">
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Synopsis</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body">
+                <p>In 2045, artificial intelligence has surpassed human intelligence. Human labor is no longer needed.</p>
+                <p>Millions of people wander the world, having lost both their purpose and their means of survival. The crisis grows beyond what governments can manage.</p>
+                <p>Then, a global corporation called Sunflower Corporation announces a massive recruitment campaign. Countless people see it as their last hope and apply.</p>
+                <p>Among them is Logan, a ten-year-old boy, who sets out with his father in search of a new life. What awaits them is an unsettling truth about history, technology, and the dignity of being human.</p>
+              </div>
+            </details>
+
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Theme &amp; Vision</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body">
+                <p>
+                  The film explores the intersection of history, memory, and future ethics through a unique fusion of storytelling and emerging technology. Inspired by forgotten chapters of the past, it reimagines human struggles and institutional failures while asking how we might design a more responsible future. The narrative connects historical events with speculative visions, inviting audiences to reflect on dignity, resilience, and the evolving relationship between humanity and technology.
+                </p>
+              </div>
+            </details>
+
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Historical Inspiration</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body">
+                <p>
+                  The film was partly inspired by the testimony of Hideo Shimizu, a former member of Japan’s Unit 731, whose account of wartime human experimentation continues to raise urgent questions about memory, responsibility, and the ethical limits of science and power.
+                </p>
+              </div>
+            </details>
+
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Production Notes</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body">
+                <p>
+                  Technically, the work is created through a hybrid production pipeline. Approximately 60–70% of the imagery was generated using AI, combined with traditional 3D modeling, digital compositing, and precise editing. AI was not employed as a replacement for creativity, but as a collaborator—expanding visual language and enabling experimental approaches that traditional methods alone could not achieve. Human artistic direction remained central throughout, guiding AI outputs toward a cohesive and emotionally resonant vision.
+                </p>
+              </div>
+            </details>
           </div>
-        </details>
-      </div>
-    </section>
+        </section>
+      </article>
+
+      <article
+        class="film-panel"
+        id="panel-film2"
+        role="tabpanel"
+        aria-labelledby="tab-film2"
+        data-film-panel="film2"
+        hidden
+      >
+        <section class="film-showcase">
+          <div class="film-showcase__inner">
+            <figure class="film-poster">
+              <img
+                src="assets/film/film2-poster.png"
+                alt="Film 2 — Directed by Yong Jik Lee"
+                width="600"
+                height="900"
+              />
+            </figure>
+
+            <div class="film-info">
+              <div class="film-info__header">
+                <h2 class="film-info__title">Sunflowers</h2>
+                <p class="film-info__meta">2025 | 7&rsquo;38&rdquo; | 4K | Color | Korean &amp; English Subtitles</p>
+                <p class="film-info__credit">Written &amp; Directed by Yong Jik Lee</p>
+              </div>
+
+              <ul class="film-awards">
+                <li>
+                  <span class="film-awards__icon" aria-hidden="true">🏆</span>
+                  <span><strong>Best AI Winner</strong> (2026), 17th New Media Film Festival<sup>®</sup> Los Angeles, USA</span>
+                </li>
+                <li>
+                  <span class="film-awards__icon" aria-hidden="true">⭐</span>
+                  <span><strong>Best AI Film Nominee</strong> Cannes World Film Festival</span>
+                </li>
+              </ul>
+
+              <div class="film-info__synopsis">
+                <p>A young boy's journey through a world transformed by AI reveals a hidden truth about history, memory, and survival.</p>
+                <p>An AI themed narrative exploring technology, identity, and emotional resonance.</p>
+              </div>
+
+              <div class="film-info__links">
+                <a href="/trailer" class="about-link-btn">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                  Watch Trailer
+                </a>
+                <a href="https://www.imdb.com/title/tt39371743/?ref_=nm_knf_i_1" class="about-link-btn" target="_blank" rel="noopener noreferrer">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+                  </span>
+                  IMDb
+                </a>
+                <a href="/awards" class="about-link-btn">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.2 5.6.8-4 3.9.9 5.5L12 15.8 7.1 17.4l.9-5.5-4-3.9 5.6-.8L12 2z"/></svg>
+                  </span>
+                  Awards
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="film-statement">
+          <div class="film-statement__inner">
+            <h2 class="film-statement__title">Director&rsquo;s Statement</h2>
+            <div class="film-statement__body">
+              <p>
+                <em>Sunflowers</em> stems from the question of whether technological advancement will protect human dignity or, conversely, destroy it.
+              </p>
+              <p>
+                Although inspired by real testimonies from wartime, this film is not an attempt to recreate the past. Instead, it imagines how ethical failures similar to those of the past could reemerge in a future society driven by artificial intelligence, automation, and economic displacement.
+              </p>
+              <p>
+                The sunflower serves as a central symbol in the film. The sunflower, which has long symbolized obedience and silence, is reinterpreted in this film as a witness that preserves the memories society seeks to forget until the very end.
+              </p>
+              <p>
+                Ultimately, <em>Sunflowers</em> asks whether we can preserve human compassion, memory, and moral responsibility while relentlessly pursuing technological innovation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="film-gallery" aria-label="Film 2 stills">
+          <div class="film-gallery__inner">
+            <div class="film-carousel" data-carousel>
+              <div class="film-carousel__viewport">
+                <div class="film-carousel__track">
+                  <figure class="film-carousel__slide is-active">
+                    <img src="assets/film/sunflowers-pic1.png" alt="Film still 1" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic2.png" alt="Film still 2" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic3.png" alt="Film still 3" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic4.png" alt="Film still 4" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic5.png" alt="Film still 5" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic6.png" alt="Film still 6" width="1600" height="800" />
+                  </figure>
+                  <figure class="film-carousel__slide">
+                    <img src="assets/film/sunflowers-pic7.png" alt="Film still 7" width="1600" height="800" />
+                  </figure>
+                </div>
+              </div>
+
+              <button type="button" class="film-carousel__btn film-carousel__btn--prev" aria-label="Previous image">‹</button>
+              <button type="button" class="film-carousel__btn film-carousel__btn--next" aria-label="Next image">›</button>
+              <div class="film-carousel__dots" role="tablist" aria-label="Slide navigation"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="film-expand" aria-label="Film notes">
+          <div class="film-expand__inner">
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Synopsis</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body">
+                <p>In 2045, artificial intelligence has surpassed human intelligence. Human labor is no longer needed.</p>
+                <p>Millions of people wander the world, having lost both their purpose and their means of survival. The crisis grows beyond what governments can manage.</p>
+                <p>Then, a global corporation called Sunflower Corporation announces a massive recruitment campaign. Countless people see it as their last hope and apply.</p>
+                <p>Among them is Logan, a ten-year-old boy, who sets out with his father in search of a new life. What awaits them is an unsettling truth about history, technology, and the dignity of being human.</p>
+              </div>
+            </details>
+
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Theme &amp; Vision</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body">
+                <p>
+                  The film explores the intersection of history, memory, and future ethics through a unique fusion of storytelling and emerging technology. Inspired by forgotten chapters of the past, it reimagines human struggles and institutional failures while asking how we might design a more responsible future. The narrative connects historical events with speculative visions, inviting audiences to reflect on dignity, resilience, and the evolving relationship between humanity and technology.
+                </p>
+              </div>
+            </details>
+
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Historical Inspiration</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body">
+                <p>
+                  The film was partly inspired by the testimony of Hideo Shimizu, a former member of Japan’s Unit 731, whose account of wartime human experimentation continues to raise urgent questions about memory, responsibility, and the ethical limits of science and power.
+                </p>
+              </div>
+            </details>
+
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Production Notes</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body">
+                <p>
+                  Technically, the work is created through a hybrid production pipeline. Approximately 60–70% of the imagery was generated using AI, combined with traditional 3D modeling, digital compositing, and precise editing. AI was not employed as a replacement for creativity, but as a collaborator—expanding visual language and enabling experimental approaches that traditional methods alone could not achieve. Human artistic direction remained central throughout, guiding AI outputs toward a cohesive and emotionally resonant vision.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
+      </article>
+    </div>
   </main>
 
   <footer class="footer">
@@ -327,7 +561,7 @@
 
   <script src="js/nav.js?v=20260723b"></script>
   <script src="js/i18n.js?v=20260717h" defer></script>
-  <script src="js/film.js" defer></script>
+  <script src="js/film.js?v=20260724a" defer></script>
   <script src="js/protect.js?v=20260723a" defer></script>
 </body>
 </html>
