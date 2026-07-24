@@ -1233,6 +1233,103 @@ html[lang="ko"] .logo__text {
   max-width: min(1100px, 96vw);
 }
 
+.film-tabs {
+  background: #111;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0 clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
+.film-tabs__inner {
+  max-width: min(1100px, 96vw);
+  margin: 0 auto;
+}
+
+.film-tabs__rail {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.55rem;
+  min-height: 5.25rem;
+  padding-top: 1.35rem;
+}
+
+.film-tab {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(4.75rem, 9vw, 6.25rem);
+  height: clamp(3.35rem, 6.5vw, 4.35rem);
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  background: #1a1a1a;
+  cursor: pointer;
+  transform: translateY(0);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.2s ease;
+}
+
+.film-tab img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.film-tab__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.film-tab:hover:not(:disabled) {
+  border-color: rgba(245, 224, 0, 0.45);
+}
+
+.film-tab:focus-visible {
+  outline: 2px solid var(--naf-yellow);
+  outline-offset: 2px;
+}
+
+.film-tab.is-active {
+  transform: translateY(-0.7rem);
+  border-color: rgba(245, 224, 0, 0.55);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.film-tab--empty {
+  cursor: default;
+  opacity: 0.55;
+  background: linear-gradient(180deg, #222 0%, #161616 100%);
+}
+
+.film-tab--empty .film-tab__slot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(135deg, transparent 46%, rgba(255, 255, 255, 0.12) 49%, rgba(255, 255, 255, 0.12) 51%, transparent 54%),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.03) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+}
+
+.film-panel[hidden] {
+  display: none;
+}
+
 .film-showcase {
   background: #111;
   padding: clamp(1.25rem, 3vw, 2rem) clamp(0.5rem, 1.25vw, 1.25rem);
@@ -2588,6 +2685,22 @@ a.contact-cell:hover .contact-icon {
 
   .about-services {
     grid-template-columns: 1fr;
+  }
+
+  .film-tabs__rail {
+    min-height: 4.5rem;
+    padding-top: 1rem;
+    justify-content: center;
+  }
+
+  .film-tab {
+    width: 4.5rem;
+    height: 3.15rem;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .film-tab.is-active {
+    transform: translateY(-0.5rem);
   }
 
   .film-showcase__inner {
