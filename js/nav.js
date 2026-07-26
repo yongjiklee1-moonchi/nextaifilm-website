@@ -43,6 +43,41 @@ document.querySelectorAll(".nav__list a").forEach((link) => {
   }
 });
 
+function clearBrowserTranslateCookies() {
+  const expire = "Thu, 01 Jan 1970 00:00:00 GMT";
+  const host = location.hostname;
+  ["googtrans", "googtransopt"].forEach((name) => {
+    document.cookie = `${name}=; expires=${expire}; path=/`;
+    document.cookie = `${name}=; expires=${expire}; path=/; domain=${host}`;
+    if (host.includes(".")) {
+      document.cookie = `${name}=; expires=${expire}; path=/; domain=.${host}`;
+    }
+  });
+}
+
+(function initLogoHomeEnglish() {
+  const logo = document.querySelector("a.logo");
+  if (!logo) return;
+
+  logo.addEventListener("click", (event) => {
+    if (event.defaultPrevented) return;
+    if (event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    event.preventDefault();
+
+    try {
+      sessionStorage.setItem("naf-lang", "en");
+      sessionStorage.setItem("naf-home-en", "1");
+    } catch (e) {}
+
+    clearBrowserTranslateCookies();
+
+    const href = logo.getAttribute("href") || "/";
+    window.location.assign(href);
+  });
+})();
+
 if (!document.getElementById("hero-player")) {
   const logo = document.querySelector(".logo");
   const prefetchHome = () => {
