@@ -2962,7 +2962,7 @@ a.contact-cell:hover .contact-icon {
   display: block;
   cursor: pointer;
   list-style: none;
-  aspect-ratio: 1024 / 320;
+  aspect-ratio: 1920 / 600;
   background: #111;
   overflow: hidden;
 }
