@@ -2987,6 +2987,10 @@ a.contact-cell:hover .contact-icon {
   overflow: hidden;
 }
 
+.commercial-item__cover--16x9 {
+  aspect-ratio: 16 / 9;
+}
+
 .commercial-item__cover::-webkit-details-marker {
   display: none;
 }
@@ -3003,6 +3007,10 @@ a.contact-cell:hover .contact-icon {
   object-position: center center;
   filter: none;
   transition: transform 0.45s ease, filter 0.35s ease;
+}
+
+.commercial-item__cover--16x9 .commercial-item__image {
+  object-fit: cover;
 }
 
 .commercial-item__cover:hover .commercial-item__image,
@@ -3022,6 +3030,35 @@ a.contact-cell:hover .contact-icon {
   padding: 1rem;
   text-align: center;
   background: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+.commercial-item__vimeo {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.5rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid rgba(245, 224, 0, 0.55);
+  background: rgba(0, 0, 0, 0.62);
+  color: var(--naf-yellow);
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.commercial-item__vimeo:hover,
+.commercial-item__vimeo:focus-visible {
+  background: rgba(245, 224, 0, 0.14);
+  border-color: var(--naf-yellow);
+  color: #fff;
+}
   pointer-events: none;
 }
 
@@ -3184,6 +3221,16 @@ a.contact-cell:hover .contact-icon {
   margin: 0;
   font-size: 0.88rem;
   color: rgba(255, 255, 255, 0.88);
+}
+
+.commercial-item__meta dd a {
+  color: var(--naf-yellow);
+  text-decoration: none;
+}
+
+.commercial-item__meta dd a:hover,
+.commercial-item__meta dd a:focus-visible {
+  text-decoration: underline;
 }
 
 @media (max-width: 860px) {
