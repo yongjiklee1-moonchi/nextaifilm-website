@@ -3111,6 +3111,17 @@ a.contact-cell:hover .contact-icon {
   overflow: hidden;
 }
 
+.commercial-item__player-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  pointer-events: none;
+}
+
 .commercial-item__player iframe,
 .commercial-item__player video {
   position: absolute;
@@ -3120,20 +3131,20 @@ a.contact-cell:hover .contact-icon {
   border: 0;
   background: #000;
   object-fit: contain;
+  z-index: 1;
 }
 
 .commercial-item__play {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
   border: 0;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    var(--commercial-poster, none) center / cover no-repeat;
+  background: rgba(0, 0, 0, 0.38);
   color: #fff;
   cursor: pointer;
 }
@@ -3150,16 +3161,19 @@ a.contact-cell:hover .contact-icon {
   border-width: 12px 0 12px 20px;
   border-color: transparent transparent transparent var(--naf-yellow);
   margin-left: 4px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
 }
 
 .commercial-item__play-label {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 0.85rem;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
 }
 
-.commercial-item__player.is-playing .commercial-item__play {
+.commercial-item__player.is-playing .commercial-item__play,
+.commercial-item__player.is-playing .commercial-item__player-poster {
   display: none;
 }
 
