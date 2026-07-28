@@ -3074,12 +3074,15 @@ a.contact-cell:hover .contact-icon {
   overflow: hidden;
 }
 
-.commercial-item__player iframe {
+.commercial-item__player iframe,
+.commercial-item__player video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
+  background: #000;
+  object-fit: contain;
 }
 
 .commercial-item__play {
@@ -3098,8 +3101,8 @@ a.contact-cell:hover .contact-icon {
   cursor: pointer;
 }
 
-.commercial-item__player[data-vimeo-id=""] .commercial-item__play,
-.commercial-item__player:not([data-vimeo-id]) .commercial-item__play {
+.commercial-item__player[data-vimeo-id=""]:not([data-video-src]) .commercial-item__play,
+.commercial-item__player:not([data-vimeo-id]):not([data-video-src]) .commercial-item__play {
   cursor: default;
 }
 
