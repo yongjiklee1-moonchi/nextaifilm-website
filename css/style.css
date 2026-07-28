@@ -603,6 +603,26 @@ html[lang="ko"] .logo__text {
   padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.5rem, 4vw, 4rem);
 }
 
+.commercial-page .page-bar {
+  background: #401cc6;
+}
+
+.film-page .page-bar {
+  background: #601019;
+}
+
+.awards-page .page-bar {
+  background: #8e4c02;
+}
+
+.about-page .page-bar {
+  background: #044950;
+}
+
+.contact-page .page-bar {
+  background: #06602d;
+}
+
 .page-bar__inner {
   max-width: 1400px;
   margin: 0 auto;
