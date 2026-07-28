@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="js/clean-url.js"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D20HXJP1FJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-D20HXJP1FJ');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Language" content="en" />
+  <title>Commercial | NAF</title>
+  <script>
+    (function () {
+      var lang = "en";
+      try {
+        var saved = sessionStorage.getItem("naf-lang");
+        if (saved === "en" || saved === "ko") lang = saved;
+      } catch (e) {}
+      document.documentElement.lang = lang === "ko" ? "ko" : "en";
+    })();
+  </script>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" sizes="1024x1024" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/commercial/c1.png?v=20260726g" type="image/png" />
+  <link rel="stylesheet" href="css/style.css?v=20260728c" />
+  <link rel="stylesheet" href="css/protect.css?v=20260720k" />
+</head>
+<body class="subpage-body commercial-page">
+
+  <header class="header">
+    <div class="header__inner">
+      <a href="/" class="logo">
+        <img src="assets/logo.png" alt="NAF" />
+        <span class="logo__text" data-i18n="logo.text">Next AI Film Studio</span>
+      </a>
+
+      <div class="header__end">
+        <nav class="nav">
+          <ul class="nav__list">
+            <li><a href="/commercial" data-i18n="nav.commercial">Commercial</a></li>
+            <li><a href="/film" data-i18n="nav.film">Film</a></li>
+            <li><a href="/awards" data-i18n="nav.awards">Awards</a></li>
+            <li><a href="/about" data-i18n="nav.about">About</a></li>
+            <li><a href="/contact" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="lang-switch" hidden role="group" aria-label="Language" data-i18n-aria="lang.label">
+          <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false">한글</button>
+        </div>
+
+        <button class="menu-toggle" data-i18n-aria="nav.open" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main commercial-main">
+    <div class="page-bar">
+      <div class="page-bar__inner">
+        <h1 class="page-bar__title">Commercial</h1>
+        <p class="page-bar__subtitle">AI-powered commercials for brands and campaigns</p>
+      </div>
+    </div>
+
+    <section class="commercial-list" aria-label="Commercial categories">
+      <div class="commercial-list__inner">
+
+        <!-- C1 Automotive -->
+        <details class="commercial-item" id="c1" data-commercial="c1">
+          <summary class="commercial-item__cover">
+            <img
+              class="commercial-item__image"
+              src="assets/commercial/c1.png?v=20260726g"
+              alt="Automotive commercial"
+              width="1200"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="commercial-item__overlay">
+              <p class="commercial-item__title">Automotive</p>
+              <p class="commercial-item__sub">The journey home, your most perfect moment</p>
+            </div>
+          </summary>
+          <div class="commercial-item__panel">
+            <div class="commercial-item__media">
+              <div
+                class="commercial-item__player"
+                data-video-src="assets/commercial/720_home_car.mp4"
+                data-poster="assets/commercial/c1.png?v=20260726g"
+              >
+                <button type="button" class="commercial-item__play" aria-label="Play automotive film">
+                  <span class="commercial-item__play-icon" aria-hidden="true"></span>
+                  <span class="commercial-item__play-label">Play</span>
+                </button>
+              </div>
+            </div>
+            <div class="commercial-item__info">
+              <p class="commercial-item__eyebrow">Automotive</p>
+              <h2 class="commercial-item__heading">The Comfort of Coming Home</h2>
+              <p class="commercial-item__desc">
+                A 30-second AI concept commercial imagining a future autonomous vehicle
+                safely bringing a mother and her young daughter home through a violent storm.
+                Created as a personal portfolio project exploring trust, safety, and the future of mobility.
+              </p>
+              <dl class="commercial-item__meta">
+                <div><dt>Category</dt><dd>Automotive Concept Commercial</dd></div>
+                <div><dt>Length</dt><dd>30 sec</dd></div>
+                <div><dt>Status</dt><dd>Completed</dd></div>
+                <div><dt>Video</dt><dd>MP4</dd></div>
+              </dl>
+            </div>
+          </div>
+        </details>
+
+        <!-- C2 Jewelry -->
+        <details class="commercial-item" id="c2" data-commercial="c2">
+          <summary class="commercial-item__cover">
+            <img
+              class="commercial-item__image"
+              src="assets/commercial/c2.png?v=20260726h"
+              alt="Jewelry commercial"
+              width="1200"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="commercial-item__overlay">
+              <p class="commercial-item__title">Jewelry</p>
+              <p class="commercial-item__sub">A small reward for yourself,<br />a reason to shine today</p>
+            </div>
+          </summary>
+          <div class="commercial-item__panel">
+            <div class="commercial-item__media">
+              <div
+                class="commercial-item__player"
+                data-vimeo-id=""
+                data-poster="assets/commercial/c2.png?v=20260726h"
+              >
+                <button type="button" class="commercial-item__play" aria-label="Play jewelry film">
+                  <span class="commercial-item__play-icon" aria-hidden="true"></span>
+                  <span class="commercial-item__play-label">Video coming soon</span>
+                </button>
+              </div>
+            </div>
+            <div class="commercial-item__info">
+              <p class="commercial-item__eyebrow">Jewelry</p>
+              <h2 class="commercial-item__heading">Light on Form</h2>
+              <p class="commercial-item__desc">
+                Close-up cinematic jewelry storytelling focused on material, reflection, and quiet luxury—
+                built for premium brand campaigns.
+              </p>
+              <dl class="commercial-item__meta">
+                <div><dt>Category</dt><dd>Jewelry</dd></div>
+                <div><dt>Length</dt><dd>15–30 sec (planned)</dd></div>
+                <div><dt>Status</dt><dd>Concept in development</dd></div>
+                <div><dt>Video</dt><dd>Vimeo link pending</dd></div>
+              </dl>
+            </div>
+          </div>
+        </details>
+
+        <!-- C3 Cosmetics / Beauty -->
+        <details class="commercial-item" id="c3" data-commercial="c3">
+          <summary class="commercial-item__cover">
+            <img
+              class="commercial-item__image"
+              src="assets/commercial/c3.png?v=20260726i"
+              alt="Cosmetics commercial"
+              width="1200"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="commercial-item__overlay">
+              <p class="commercial-item__title">Cosmetics</p>
+              <p class="commercial-item__sub">The moment your skin breathes,<br />you fall in love with yourself again</p>
+            </div>
+          </summary>
+          <div class="commercial-item__panel">
+            <div class="commercial-item__media">
+              <div
+                class="commercial-item__player"
+                data-vimeo-id=""
+                data-poster="assets/commercial/c3.png?v=20260726i"
+              >
+                <button type="button" class="commercial-item__play" aria-label="Play cosmetics film">
+                  <span class="commercial-item__play-icon" aria-hidden="true"></span>
+                  <span class="commercial-item__play-label">Video coming soon</span>
+                </button>
+              </div>
+            </div>
+            <div class="commercial-item__info">
+              <p class="commercial-item__eyebrow">Cosmetics</p>
+              <h2 class="commercial-item__heading">Skin in Motion</h2>
+              <p class="commercial-item__desc">
+                Beauty and cosmetics concepts emphasizing texture, light, and emotional close-ups—
+                crafted for product launches and brand films.
+              </p>
+              <dl class="commercial-item__meta">
+                <div><dt>Category</dt><dd>Cosmetics / Beauty</dd></div>
+                <div><dt>Length</dt><dd>15–30 sec (planned)</dd></div>
+                <div><dt>Status</dt><dd>Concept in development</dd></div>
+                <div><dt>Video</dt><dd>Vimeo link pending</dd></div>
+              </dl>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img class="footer__logo" src="assets/logo-naf-alpha.png?v=20260720z" alt="NAF" width="144" height="53" decoding="async" />
+          <p class="footer__studio">Next AI Film Studio</p>
+          <p class="footer__tagline">Cinema in the Age of AI</p>
+        </div>
+
+        <div class="footer__col">
+          <h2 class="footer__heading">Navigation</h2>
+          <ul class="footer__nav">
+            <li><a href="/commercial">Commercial</a></li>
+            <li><a href="/film">Film</a></li>
+            <li><a href="/awards">Awards</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h2 class="footer__heading">Contact</h2>
+          <ul class="footer__contact">
+            <li class="footer__contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 7 9-7"></path></svg>
+              <a href="mailto:hello@nextaifilm.com">hello@nextaifilm.com</a>
+            </li>
+            <li class="footer__contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+              <span>Seoul, South Korea</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__col footer__col--social">
+          <h2 class="footer__heading">Stay Connected</h2>
+          <div class="footer__social">
+            <a class="footer__social-link footer__social-link--imdb" href="https://www.imdb.com/title/tt39371743/?ref_=nm_knf_i_1" target="_blank" rel="noopener noreferrer" aria-label="IMDb">
+              <span class="footer__social-label">IMDb</span>
+            </a>
+            <a class="footer__social-link footer__social-link--vimeo" href="https://vimeo.com/user220966275" target="_blank" rel="noopener noreferrer" aria-label="Vimeo">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 9.068 3.858 7.9 3.088 7.9c-.126 0-.567.261-1.325.783L0 7.295c1.396-1.227 2.771-2.452 4.125-3.678C5.93 2.171 7.281 1.408 8.18 1.329c2.126-.187 3.433 1.25 3.92 4.312.516 3.254.873 5.275 1.069 6.059.592 2.688 1.244 4.033 1.958 4.033.553 0 1.386-.873 2.494-2.617 1.095-1.758 1.681-3.096 1.76-4.016.144-1.509-.435-2.265-1.738-2.265-.62 0-1.26.119-1.917.351 1.276-4.175 3.713-6.216 7.307-6.126 2.654.064 3.908 1.808 3.763 5.235z"/></svg>
+            </a>
+            <a class="footer__social-link footer__social-link--youtube" href="https://www.youtube.com/@HUMAaifilm" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a class="footer__social-link footer__social-link--linkedin" href="https://www.linkedin.com/in/yong-jik-lee" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S.02 4.88.02 3.5C.02 2.12 1.14 1 2.5 1s2.48 1.12 2.48 2.5zM5 8H0v16h5V8zm7.982 0H8.014v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0V24H24V14.5c0-7.884-8.922-7.593-11.018-3.714V8z"/></svg>
+            </a>
+            <a class="footer__social-link footer__social-link--instagram" href="https://www.instagram.com/huma.aifilm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+          </div>
+
+          <div class="footer__mascot">
+            <div class="footer__mascot-photo">
+              <img src="assets/team/studio-companion.png" alt="Moong Chi" width="48" height="48" loading="lazy" decoding="async" />
+            </div>
+            <div class="footer__mascot-info">
+              <p class="footer__mascot-name">Moong Chi (뭉치)</p>
+              <p class="footer__mascot-role">Studio Companion<br />Chief Happiness Officer</p>
+              <p class="footer__mascot-note">Keeping the studio smiling.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="footer__quote">
+        &ldquo;Stories imagined by humans, brought to life with AI.&rdquo;
+      </blockquote>
+
+      <p class="footer__copy">&copy; 2026 Next AI Film Studio. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <button type="button" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5"></path>
+      <path d="M5 12l7-7 7 7"></path>
+    </svg>
+  </button>
+
+  <script src="js/nav.js?v=20260726a"></script>
+  <script src="js/i18n.js?v=20260717h" defer></script>
+  <script src="js/commercial.js?v=20260728c" defer></script>
+  <script src="js/protect.js?v=20260723a" defer></script>
+</body>
+</html>
