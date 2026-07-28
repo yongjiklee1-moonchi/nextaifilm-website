@@ -11,11 +11,20 @@
     if (!player) return;
     var iframe = player.querySelector("iframe");
     if (iframe) iframe.remove();
+    var video = player.querySelector("video");
+    if (video) {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+      video.remove();
+    }
     player.classList.remove("is-playing");
   }
 
   function loadVimeo(player) {
-    if (!player || player.querySelector("iframe")) return;
+    if (!player || player.querySelector("iframe") || player.querySelector("video")) {
+      return;
+    }
 
     var id = (player.getAttribute("data-vimeo-id") || "").trim();
     if (!id) return;
@@ -31,6 +40,46 @@
     iframe.loading = "lazy";
     player.appendChild(iframe);
     player.classList.add("is-playing");
+  }
+
+  function loadLocalVideo(player) {
+    if (!player || player.querySelector("iframe") || player.querySelector("video")) {
+      return;
+    }
+
+    var src = (player.getAttribute("data-video-src") || "").trim();
+    if (!src) return;
+
+    var video = document.createElement("video");
+    video.src = src;
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.preload = "metadata";
+    video.setAttribute("playsinline", "");
+    video.title = "Commercial film";
+
+    var poster = player.getAttribute("data-poster");
+    if (poster) video.poster = poster;
+
+    player.appendChild(video);
+    player.classList.add("is-playing");
+
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(function () {});
+    }
+  }
+
+  function playMedia(player) {
+    if (!player) return;
+    var localSrc = (player.getAttribute("data-video-src") || "").trim();
+    var vimeoId = (player.getAttribute("data-vimeo-id") || "").trim();
+    if (localSrc) {
+      loadLocalVideo(player);
+      return;
+    }
+    if (vimeoId) loadVimeo(player);
   }
 
   items.forEach(function (item) {
@@ -60,10 +109,7 @@
     if (playBtn) {
       playBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        var player = item.querySelector(".commercial-item__player");
-        var id = player && (player.getAttribute("data-vimeo-id") || "").trim();
-        if (!id) return;
-        loadVimeo(player);
+        playMedia(item.querySelector(".commercial-item__player"));
       });
     }
   });
