@@ -112,12 +112,5 @@
         playMedia(item.querySelector(".commercial-item__player"));
       });
     }
-
-    var vimeoLink = item.querySelector(".commercial-item__vimeo");
-    if (vimeoLink) {
-      vimeoLink.addEventListener("click", function (event) {
-        event.stopPropagation();
-      });
-    }
   });
 })();
