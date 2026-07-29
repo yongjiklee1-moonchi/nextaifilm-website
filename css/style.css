@@ -856,49 +856,6 @@ html[lang="ko"] .logo__text {
   object-position: center top;
 }
 
-/* Director photo ↔ HUMA symbol hover (eye-aligned, same crop) */
-.about-member__photo--swap {
-  position: relative;
-  cursor: pointer;
-}
-
-.about-member__photo--swap img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  transform: none;
-  transition: opacity 0.35s ease;
-}
-
-.about-member__photo--swap .about-member__face {
-  opacity: 1;
-  z-index: 1;
-}
-
-.about-member__photo--swap .about-member__symbol {
-  opacity: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: #f5e000;
-}
-
-.about-member__photo--swap:hover .about-member__face {
-  opacity: 0;
-}
-
-.about-member__photo--swap:hover .about-member__symbol {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-member__photo--swap img {
-    transition: none;
-  }
-}
-
 .about-member__role {
   font-size: 0.72rem;
   letter-spacing: 0.1em;
@@ -913,6 +870,25 @@ html[lang="ko"] .logo__text {
   font-weight: 500;
   color: #fff;
   margin-bottom: 0.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.4rem;
+}
+
+.about-member__nick {
+  color: var(--naf-yellow);
+}
+
+.about-member__nick-symbol {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  background: var(--naf-yellow);
+  border: 1px solid rgba(245, 224, 0, 0.55);
+  flex-shrink: 0;
 }
 
 .about-member__title {
@@ -939,9 +915,9 @@ html[lang="ko"] .logo__text {
 }
 
 .about-companion__photo {
-  width: 64px;
-  height: 64px;
-  justify-self: end;
+  width: 88px;
+  height: 88px;
+  justify-self: center;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -2688,9 +2664,9 @@ a.contact-cell:hover .contact-icon {
   }
 
   .about-companion__photo {
-    width: 52px;
-    height: 52px;
-    justify-self: end;
+    width: 72px;
+    height: 72px;
+    justify-self: center;
   }
 
   .about-values__inner {
