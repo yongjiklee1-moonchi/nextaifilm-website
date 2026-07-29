@@ -916,8 +916,8 @@ html[lang="ko"] .logo__text {
 }
 
 .about-companion__photo {
-  width: 88px;
-  height: 88px;
+  width: 64px;
+  height: 64px;
   justify-self: center;
   border-radius: 50%;
   overflow: hidden;
@@ -2665,8 +2665,8 @@ a.contact-cell:hover .contact-icon {
   }
 
   .about-companion__photo {
-    width: 72px;
-    height: 72px;
+    width: 52px;
+    height: 52px;
     justify-self: center;
   }
 
