@@ -1415,6 +1415,16 @@ html[lang="ko"] .logo__text {
   margin: 0 0 0.25rem;
 }
 
+.film-info__coming {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: #fff;
+  margin: 0.15rem 0 0.35rem;
+}
+
 .film-info__meta,
 .film-info__credit {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
