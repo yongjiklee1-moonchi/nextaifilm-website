@@ -881,14 +881,15 @@ html[lang="ko"] .logo__text {
 }
 
 .about-member__nick-symbol {
-  width: 1.35rem;
-  height: 1.35rem;
-  border-radius: 50%;
-  object-fit: cover;
+  width: 1.7rem;
+  height: 1.7rem;
+  object-fit: contain;
   object-position: center center;
-  background: var(--naf-yellow);
-  border: 1px solid rgba(245, 224, 0, 0.55);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
   flex-shrink: 0;
+  vertical-align: middle;
 }
 
 .about-member__title {
