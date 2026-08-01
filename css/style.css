@@ -2562,6 +2562,20 @@ a.contact-cell:hover .contact-icon {
   letter-spacing: 0.02em;
 }
 
+.footer__copy-link {
+  display: inline-block;
+  margin-left: 0.65rem;
+  color: rgba(245, 224, 0, 0.85);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.footer__copy-link:hover,
+.footer__copy-link:focus-visible {
+  color: var(--naf-yellow);
+  text-decoration: underline;
+}
+
 .footer__copy::before {
   content: "";
   display: block;
@@ -2569,6 +2583,114 @@ a.contact-cell:hover .contact-icon {
   height: 2px;
   margin: 0 auto 0.85rem;
   background: var(--naf-yellow);
+}
+
+/* Copyright / policy page */
+.copyright-page .page-bar {
+  background: #1a1a1a;
+}
+
+.copyright-body {
+  background: var(--naf-black);
+}
+
+.copyright-body__inner {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 4rem) clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.copyright-intro {
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+  padding-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.copyright-intro__studio {
+  margin: 0 0 0.35rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.copyright-intro__date {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--naf-yellow);
+}
+
+.copyright-intro__lead {
+  margin: 0;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.copyright-sections {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.35rem, 2.8vw, 1.85rem);
+}
+
+.copyright-section__title {
+  margin: 0 0 0.55rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--naf-yellow);
+}
+
+.copyright-section p {
+  margin: 0;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.copyright-contact {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.copyright-contact li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  align-items: baseline;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.copyright-contact__label {
+  min-width: 4.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.copyright-contact a {
+  color: var(--naf-yellow);
+  text-decoration: none;
+}
+
+.copyright-contact a:hover,
+.copyright-contact a:focus-visible {
+  text-decoration: underline;
+}
+
+.copyright-statement {
+  font-size: 1rem !important;
+  color: #fff !important;
 }
 
 .back-to-top {
