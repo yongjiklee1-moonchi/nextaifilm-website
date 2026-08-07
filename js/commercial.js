@@ -138,7 +138,7 @@
     if (playBtn) {
       playBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        playMedia(item.querySelector(".commercial-item__player"), { muted: false });
+        playMedia(item.querySelector(".commercial-item__player"), { muted: true });
       });
     }
 

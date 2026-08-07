@@ -123,7 +123,7 @@ function playFilmPlayer(player, options) {
   var src = (player.getAttribute("data-video-src") || "").trim();
   if (!src) return;
 
-  var muted = options.muted !== false && (options.autoplay || player.hasAttribute("data-autoplay"));
+  var muted = options.muted !== false;
   var video = document.createElement("video");
   video.src = src;
   video.controls = true;
@@ -166,7 +166,7 @@ function initFilmPlayers() {
     var playBtn = player.querySelector(".film-player__play");
     if (playBtn) {
       playBtn.addEventListener("click", function () {
-        playFilmPlayer(player, { autoplay: true, muted: false });
+        playFilmPlayer(player, { autoplay: true, muted: true });
       });
     }
 
@@ -182,7 +182,7 @@ function initFilmPlayers() {
       if (!player) return;
       event.preventDefault();
       player.scrollIntoView({ behavior: "smooth", block: "center" });
-      playFilmPlayer(player, { autoplay: true, muted: false });
+      playFilmPlayer(player, { autoplay: true, muted: true });
     });
   });
 }
