@@ -3190,6 +3190,43 @@ a.contact-cell:hover .contact-icon {
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
 }
 
+.commercial-item__cover-play {
+  position: absolute;
+  left: clamp(0.75rem, 2vw, 1.25rem);
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2.4rem, 5vw, 3rem);
+  height: clamp(2.4rem, 5vw, 3rem);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1.5px solid rgba(245, 224, 0, 0.85);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.commercial-item__cover-play-icon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 12px;
+  border-color: transparent transparent transparent var(--naf-yellow);
+  margin-left: 3px;
+}
+
+.commercial-item__cover:hover .commercial-item__cover-play {
+  transform: scale(1.06);
+  background: rgba(0, 0, 0, 0.7);
+  border-color: var(--naf-yellow);
+}
+
+.commercial-item[open] .commercial-item__cover-play {
+  opacity: 0.55;
+}
+
 .commercial-item__panel {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
