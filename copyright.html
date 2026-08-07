@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260801a" />
+  <link rel="stylesheet" href="css/style.css?v=20260808c" />
   <link rel="stylesheet" href="css/protect.css?v=20260720d" />
 </head>
 <body class="subpage-body copyright-page">
@@ -54,10 +54,8 @@
           </ul>
         </nav>
 
-        <div class="lang-switch" hidden role="group" aria-label="Language">
-          <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
-          <span class="lang-switch__sep" aria-hidden="true">/</span>
-          <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false">한글</button>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+          <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false" aria-label="한글">한글</button>
         </div>
 
         <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
@@ -72,17 +70,17 @@
   <main class="page-main copyright-main">
     <div class="page-bar">
       <div class="page-bar__inner">
-        <h1 class="page-bar__title">Copyright</h1>
-        <p class="page-bar__subtitle">Copyright &amp; Content Use Policy</p>
+        <h1 class="page-bar__title" data-cms="copyright.page_bar.title">Copyright</h1>
+        <p class="page-bar__subtitle" data-cms="copyright.page_bar.subtitle">Copyright &amp; Content Use Policy</p>
       </div>
     </div>
 
     <section class="page-content copyright-body">
       <div class="copyright-body__inner">
         <header class="copyright-intro">
-          <p class="copyright-intro__studio">Next AI Film Studio (NAF)</p>
-          <p class="copyright-intro__date">Effective Date: July 31, 2026</p>
-          <p class="copyright-intro__lead">
+          <p class="copyright-intro__studio" data-cms="copyright.intro.studio">Next AI Film Studio (NAF)</p>
+          <p class="copyright-intro__date">Effective Date: <span data-cms="copyright.intro.effective_date">July 31, 2026</span></p>
+          <p class="copyright-intro__lead" data-cms="copyright.intro.lead">
             NAF values original storytelling and creative integrity. This policy explains how the
             content on this website may be viewed, shared, and used while protecting the
             intellectual property of our films, commercials, and brand assets.
@@ -90,9 +88,9 @@
         </header>
 
         <div class="copyright-sections">
-          <article class="copyright-section">
-            <h2 class="copyright-section__title">1. Intellectual Property</h2>
-            <p>
+          <article class="copyright-section" data-cms-copyright="1">
+            <h2 class="copyright-section__title" data-cms-field="title">1. Intellectual Property</h2>
+            <p data-cms-field="body">
               Unless otherwise stated, all films, trailers, commercials, showreels, images, posters,
               concept art, storyboards, scripts, production notes, logos, symbols, website design,
               music, sound, editing, and AI-assisted creative elements published on this website are
@@ -100,9 +98,9 @@
             </p>
           </article>
 
-          <article class="copyright-section">
-            <h2 class="copyright-section__title">2. AI-Assisted Productions</h2>
-            <p>
+          <article class="copyright-section" data-cms-copyright="2">
+            <h2 class="copyright-section__title" data-cms-field="title">2. AI-Assisted Productions</h2>
+            <p data-cms-field="body">
               Some works presented on this website are created with the assistance of generative AI
               and other digital production technologies. The creative direction, selection, editing,
               composition, and final artistic expression remain the result of human creative
@@ -111,18 +109,18 @@
             </p>
           </article>
 
-          <article class="copyright-section">
-            <h2 class="copyright-section__title">3. Permitted Use</h2>
-            <p>
+          <article class="copyright-section" data-cms-copyright="3">
+            <h2 class="copyright-section__title" data-cms-field="title">3. Permitted Use</h2>
+            <p data-cms-field="body">
               You are welcome to view our work, share official links to this website or our official
               releases, and quote limited portions for reviews, commentary, educational, or
               journalistic purposes with proper attribution.
             </p>
           </article>
 
-          <article class="copyright-section">
-            <h2 class="copyright-section__title">4. Restricted Use</h2>
-            <p>
+          <article class="copyright-section" data-cms-copyright="4">
+            <h2 class="copyright-section__title" data-cms-field="title">4. Restricted Use</h2>
+            <p data-cms-field="body">
               Without prior written permission from NAF, you may not reproduce, modify, translate,
               redistribute, commercially exploit, re-upload, remove copyright notices or watermarks,
               use our brand identity to imply endorsement, or use our content to train AI models,
@@ -130,44 +128,44 @@
             </p>
           </article>
 
-          <article class="copyright-section">
-            <h2 class="copyright-section__title">5. Third-Party Platforms</h2>
-            <p>
+          <article class="copyright-section" data-cms-copyright="5">
+            <h2 class="copyright-section__title" data-cms-field="title">5. Third-Party Platforms</h2>
+            <p data-cms-field="body">
               Embedded content from services such as Vimeo or YouTube remains subject to the
               terms and copyright policies of those platforms.
             </p>
           </article>
 
-          <article class="copyright-section">
-            <h2 class="copyright-section__title">6. Licensing &amp; Collaboration</h2>
-            <p>
+          <article class="copyright-section" data-cms-copyright="6">
+            <h2 class="copyright-section__title" data-cms-field="title">6. Licensing &amp; Collaboration</h2>
+            <p data-cms-field="body">
               For licensing, screenings, distribution, press, educational use, or co-production
               opportunities, please contact:
             </p>
             <ul class="copyright-contact">
               <li>
                 <span class="copyright-contact__label">Email</span>
-                <a href="mailto:HUMA@nextaifilm.com">HUMA@nextaifilm.com</a>
+                <a href="mailto:HUMA@nextaifilm.com" data-cms-link="L02">HUMA@nextaifilm.com</a>
               </li>
               <li>
                 <span class="copyright-contact__label">Website</span>
-                <a href="https://www.nextaifilm.com" target="_blank" rel="noopener noreferrer">nextaifilm.com</a>
+                <a href="https://www.nextaifilm.com" target="_blank" rel="noopener noreferrer" data-cms-link="L03">nextaifilm.com</a>
               </li>
             </ul>
           </article>
 
-          <article class="copyright-section">
-            <h2 class="copyright-section__title">7. Copyright Concerns</h2>
-            <p>
+          <article class="copyright-section" data-cms-copyright="7">
+            <h2 class="copyright-section__title" data-cms-field="title">7. Copyright Concerns</h2>
+            <p data-cms-field="body">
               If you believe any content on this website infringes your rights, please provide
               sufficient information identifying the material and the basis of your claim. We will
               review all legitimate requests promptly.
             </p>
           </article>
 
-          <article class="copyright-section copyright-section--statement">
-            <h2 class="copyright-section__title">8. Copyright Statement</h2>
-            <p class="copyright-statement">&copy; 2026 Next AI Film Studio. All Rights Reserved.</p>
+          <article class="copyright-section copyright-section--statement" data-cms-copyright="8">
+            <h2 class="copyright-section__title" data-cms-field="title">8. Copyright Statement</h2>
+            <p class="copyright-statement" data-cms-field="body">&copy; 2026 Next AI Film Studio. All Rights Reserved.</p>
           </article>
         </div>
       </div>
@@ -179,8 +177,8 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <img class="footer__logo" src="assets/logo-naf-alpha.png?v=20260720z" alt="NAF" width="144" height="53" decoding="async" />
-          <p class="footer__studio">Next AI Film Studio</p>
-          <p class="footer__tagline">Cinema in the Age of AI</p>
+          <p class="footer__studio" data-cms="site.brand.studio_name">Next AI Film Studio</p>
+          <p class="footer__tagline" data-cms="site.brand.tagline">Cinema in the Age of AI</p>
         </div>
 
         <div class="footer__col">
@@ -199,11 +197,11 @@
           <ul class="footer__contact">
             <li class="footer__contact-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 7 9-7"></path></svg>
-              <a href="mailto:hello@nextaifilm.com">hello@nextaifilm.com</a>
+              <a href="mailto:hello@nextaifilm.com" data-cms-link="L01">hello@nextaifilm.com</a>
             </li>
             <li class="footer__contact-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-              <span>Seoul, South Korea</span>
+              <span data-cms="site.footer.location">Seoul, South Korea</span>
             </li>
           </ul>
         </div>
@@ -242,10 +240,10 @@
       </div>
 
       <blockquote class="footer__quote">
-        &ldquo;Stories imagined by humans, brought to life with AI.&rdquo;
+        <span data-cms="site.brand.footer_quote">Stories imagined by humans, brought to life with AI.</span>
       </blockquote>
 
-      <p class="footer__copy">
+      <p class="footer__copy" data-cms="site.footer.copyright">
         &copy; 2026 Next AI Film Studio. All Rights Reserved.
         <a class="footer__copy-link" href="/copyright">Copyright</a>
       </p>
@@ -258,8 +256,11 @@
       <path d="M5 12l7-7 7 7"></path>
     </svg>
   </button>
+  <script src="js/cms-config.js?v=20260808d"></script>
+  <script src="js/cms.js?v=20260808d" defer></script>
 
   <script src="js/nav.js?v=20260726a"></script>
+  <script src="js/i18n.js?v=20260808c" defer></script>
   <script src="js/protect.js?v=20260723a" defer></script>
 </body>
 </html>

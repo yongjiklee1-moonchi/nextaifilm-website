@@ -67,7 +67,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/hero-poster.webp" />
-  <link rel="stylesheet" href="css/style.css?v=20260801a" />
+  <link rel="stylesheet" href="css/style.css?v=20260808c" />
   <link rel="stylesheet" href="css/protect.css?v=20260720i" />
   <script src="https://player.vimeo.com/api/player.js" defer></script>
 </head>
@@ -91,10 +91,8 @@
           </ul>
         </nav>
 
-        <div class="lang-switch" hidden role="group" aria-label="Language" data-i18n-aria="lang.label">
-          <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
-          <span class="lang-switch__sep" aria-hidden="true">/</span>
-          <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false">한글</button>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+          <button type="button" class="lang-switch__btn" data-lang="ko" aria-pressed="false" aria-label="한글">한글</button>
         </div>
 
         <button class="menu-toggle" data-i18n-aria="nav.open" aria-label="Open menu" aria-expanded="false">
@@ -152,8 +150,8 @@
     </section>
 
     <section class="studio-summary">
-      <h2 class="studio-summary__title">Studio Overview</h2>
-      <p class="studio-summary__text">
+      <h2 class="studio-summary__title" data-cms="home.overview.title">Studio Overview</h2>
+      <p class="studio-summary__text" data-cms="home.overview.body">
         We create cinematic AI commercials and films that combine storytelling, visual artistry, and<br />
         cutting-edge AI production. From concept to final delivery, we help brands and creators bring powerful ideas&nbsp;to&nbsp;life.
       </p>
@@ -203,8 +201,8 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <img class="footer__logo" src="assets/logo-naf-alpha.png?v=20260720z" alt="NAF" width="144" height="53" decoding="async" />
-          <p class="footer__studio">Next AI Film Studio</p>
-          <p class="footer__tagline">Cinema in the Age of AI</p>
+          <p class="footer__studio" data-cms="site.brand.studio_name">Next AI Film Studio</p>
+          <p class="footer__tagline" data-cms="site.brand.tagline">Cinema in the Age of AI</p>
         </div>
 
         <div class="footer__col">
@@ -223,11 +221,11 @@
           <ul class="footer__contact">
             <li class="footer__contact-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 7 9-7"></path></svg>
-              <a href="mailto:hello@nextaifilm.com">hello@nextaifilm.com</a>
+              <a href="mailto:hello@nextaifilm.com" data-cms-link="L01">hello@nextaifilm.com</a>
             </li>
             <li class="footer__contact-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-              <span>Seoul, South Korea</span>
+              <span data-cms="site.footer.location">Seoul, South Korea</span>
             </li>
           </ul>
         </div>
@@ -266,10 +264,10 @@
       </div>
 
       <blockquote class="footer__quote">
-        &ldquo;Stories imagined by humans, brought to life with AI.&rdquo;
+        <span data-cms="site.brand.footer_quote">Stories imagined by humans, brought to life with AI.</span>
       </blockquote>
 
-      <p class="footer__copy">
+      <p class="footer__copy" data-cms="site.footer.copyright">
         &copy; 2026 Next AI Film Studio. All Rights Reserved.
         <a class="footer__copy-link" href="/copyright">Copyright</a>
       </p>
@@ -282,9 +280,11 @@
       <path d="M5 12l7-7 7 7"></path>
     </svg>
   </button>
+  <script src="js/cms-config.js?v=20260808d"></script>
+  <script src="js/cms.js?v=20260808d" defer></script>
 
   <script src="js/nav.js?v=20260726a"></script>
-  <script src="js/i18n.js?v=20260717h" defer></script>
+  <script src="js/i18n.js?v=20260808c" defer></script>
   <script src="js/video.js?v=20260720e" defer></script>
   <script src="js/protect.js?v=20260723a" defer></script>
 </body>
