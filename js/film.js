@@ -104,3 +104,54 @@ function initFilmTabs() {
 
 document.querySelectorAll("[data-carousel]").forEach(initFilmCarousel);
 initFilmTabs();
+
+function playFilmPlayer(player) {
+  if (!player || player.querySelector("video")) return;
+
+  var src = (player.getAttribute("data-video-src") || "").trim();
+  if (!src) return;
+
+  var video = document.createElement("video");
+  video.src = src;
+  video.controls = true;
+  video.autoplay = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.setAttribute("playsinline", "");
+  video.title = "Sunflowers trailer";
+
+  var poster = player.getAttribute("data-poster");
+  if (poster) video.poster = poster;
+
+  player.appendChild(video);
+  player.classList.add("is-playing");
+
+  var playPromise = video.play();
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(function () {});
+  }
+}
+
+function initFilmPlayers() {
+  document.querySelectorAll(".film-player").forEach(function (player) {
+    var playBtn = player.querySelector(".film-player__play");
+    if (playBtn) {
+      playBtn.addEventListener("click", function () {
+        playFilmPlayer(player);
+      });
+    }
+  });
+
+  document.querySelectorAll("[data-film-play]").forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      var id = link.getAttribute("data-film-play");
+      var player = id ? document.getElementById(id) : null;
+      if (!player) return;
+      event.preventDefault();
+      player.scrollIntoView({ behavior: "smooth", block: "center" });
+      playFilmPlayer(player);
+    });
+  });
+}
+
+initFilmPlayers();
