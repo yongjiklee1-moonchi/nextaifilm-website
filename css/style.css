@@ -100,26 +100,32 @@ img {
 }
 
 .lang-switch {
-  display: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+  margin-left: 0.15rem;
 }
 
 .lang-switch__btn {
   appearance: none;
   border: 0;
   background: transparent;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.55);
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   line-height: 1;
-  padding: 0.2rem 0.15rem;
+  padding: 0.35rem 0.4rem;
   cursor: pointer;
-  transition: color 0.2s, opacity 0.2s;
+  transition: color 0.2s, opacity 0.2s, background 0.2s;
+  border-radius: 2px;
 }
 
 .lang-switch__btn[data-lang="ko"] {
   font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .lang-switch__btn:hover {
@@ -127,13 +133,13 @@ img {
 }
 
 .lang-switch__btn.is-active {
-  color: #fff;
+  color: var(--naf-yellow);
   font-weight: 500;
 }
 
 .lang-switch__sep {
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.68rem;
   line-height: 1;
   user-select: none;
 }
@@ -1441,6 +1447,15 @@ html[lang="ko"] .logo__text {
   background: #000;
   object-fit: contain;
   z-index: 1;
+}
+
+.film-player video::-webkit-media-controls-enclosure {
+  overflow: hidden;
+}
+
+.film-player video::-webkit-media-controls-download-button {
+  display: none !important;
+}
 }
 
 .film-player__play {
@@ -3627,6 +3642,15 @@ a.contact-cell:hover .contact-icon {
   background: #000;
   object-fit: contain;
   z-index: 1;
+}
+
+.commercial-item__player video::-webkit-media-controls-enclosure {
+  overflow: hidden;
+}
+
+.commercial-item__player video::-webkit-media-controls-download-button {
+  display: none !important;
+}
 }
 
 .commercial-item__play {
