@@ -100,35 +100,7 @@ img {
 }
 
 .lang-switch {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  margin-left: 0.15rem;
-}
-
-.lang-switch__btn {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.72);
-  font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  padding: 0.35rem 0.45rem;
-  cursor: pointer;
-  transition: color 0.2s;
-  border-radius: 2px;
-}
-
-.lang-switch__btn:hover {
-  color: #fff;
-}
-
-.lang-switch__btn.is-active {
-  color: var(--naf-yellow);
-  font-weight: 500;
+  display: none !important;
 }
 
 .nav__list {
