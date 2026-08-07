@@ -2539,6 +2539,43 @@ a.contact-cell:hover .contact-icon {
   color: #f0a0a0;
 }
 
+.consult-form-wrap--page {
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  max-width: 32rem;
+}
+
+.inquire-page .page-bar {
+  background: #033a1b;
+}
+
+.inquire-body {
+  background: var(--naf-black);
+}
+
+.inquire-body__inner {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2rem) clamp(3rem, 6vw, 4.5rem);
+}
+
+.inquire-back {
+  margin: 0 0 1.25rem;
+}
+
+.inquire-back a {
+  color: rgba(245, 224, 0, 0.9);
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+}
+
+.inquire-back a:hover,
+.inquire-back a:focus-visible {
+  text-decoration: underline;
+}
+
 .footer--contact {
   padding: 1.25rem clamp(1.5rem, 4vw, 2rem);
   margin-top: 0;
