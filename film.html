@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260807e" />
+  <link rel="stylesheet" href="css/style.css?v=20260807g" />
   <link rel="stylesheet" href="css/protect.css?v=20260717g" />
 </head>
 <body class="subpage-body film-page">
@@ -362,25 +362,127 @@
         hidden
       >
         <section class="film-showcase">
-          <div class="film-showcase__inner film-showcase__inner--poster">
-            <figure class="film-poster">
+          <div class="film-showcase__inner">
+            <div class="film-info">
+              <div class="film-info__intro">
+                <h2 class="film-info__title">Amusement Park (tentative)</h2>
+                <p class="film-info__coming">Coming soon</p>
+                <p class="film-info__meta">January 2027</p>
+                <p class="film-info__credit film-info__credit--muted">Written &amp; Directed by Yong Jik Lee</p>
+              </div>
+
+              <ul class="film-awards film-awards--placeholder" aria-hidden="true">
+                <li><span class="film-slot film-slot--line"></span></li>
+                <li><span class="film-slot film-slot--line"></span></li>
+              </ul>
+
+              <div class="film-info__synopsis film-info__synopsis--placeholder" aria-hidden="true">
+                <p class="film-slot film-slot--text"></p>
+                <p class="film-slot film-slot--text film-slot--text-short"></p>
+              </div>
+
+              <div class="film-info__links film-info__links--placeholder">
+                <span class="about-link-btn is-disabled" aria-disabled="true">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                  WATCH TRAILER · 4K
+                </span>
+                <span class="about-link-btn is-disabled" aria-disabled="true">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+                  </span>
+                  IMDb
+                </span>
+                <span class="about-link-btn is-disabled" aria-disabled="true">
+                  <span class="about-link-btn__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.2 5.6.8-4 3.9.9 5.5L12 15.8 7.1 17.4l.9-5.5-4-3.9 5.6-.8L12 2z"/></svg>
+                  </span>
+                  Awards
+                </span>
+              </div>
+            </div>
+
+            <div class="film-media">
+              <ul class="film-media__laurels film-media__laurels--placeholder" aria-hidden="true">
+                <li><span class="film-slot film-slot--laurel"></span></li>
+                <li><span class="film-slot film-slot--laurel"></span></li>
+              </ul>
+
+              <div class="film-player film-player--empty" aria-label="Trailer coming soon">
+                <p class="film-player__empty-label">Trailer coming soon</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="film-statement">
+          <div class="film-statement__inner">
+            <div class="film-statement__content">
+              <h2 class="film-statement__title">Director&rsquo;s Statement</h2>
+              <div class="film-statement__body film-statement__body--placeholder" aria-hidden="true">
+                <p class="film-slot film-slot--text"></p>
+                <p class="film-slot film-slot--text"></p>
+                <p class="film-slot film-slot--text"></p>
+                <p class="film-slot film-slot--text film-slot--text-short"></p>
+              </div>
+            </div>
+
+            <figure class="film-poster film-poster--statement">
               <img
                 src="assets/film/film2-poster.png"
                 alt="Amusement Park (tentative)"
                 width="600"
                 height="900"
+                loading="lazy"
+                decoding="async"
               />
             </figure>
+          </div>
+        </section>
 
-            <div class="film-info">
-              <div class="film-info__header">
-                <div class="film-info__intro">
-                  <h2 class="film-info__title">Amusement Park (tentative)</h2>
-                  <p class="film-info__coming">Coming soon</p>
-                  <p class="film-info__meta">January 2027</p>
-                </div>
+        <section class="film-gallery" aria-label="Amusement Park stills">
+          <div class="film-gallery__inner">
+            <div class="film-carousel film-carousel--empty" aria-hidden="true">
+              <div class="film-carousel__viewport film-carousel__viewport--empty">
+                <p class="film-player__empty-label">Stills coming soon</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section class="film-expand" aria-label="Film notes">
+          <div class="film-expand__inner">
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Synopsis</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body film-expand__body--placeholder" aria-hidden="true">
+                <p class="film-slot film-slot--text"></p>
+                <p class="film-slot film-slot--text film-slot--text-short"></p>
+              </div>
+            </details>
+
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Theme &amp; Vision</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body film-expand__body--placeholder" aria-hidden="true">
+                <p class="film-slot film-slot--text"></p>
+              </div>
+            </details>
+
+            <details class="film-expand__item" open>
+              <summary class="film-expand__summary">
+                <span class="film-expand__summary-text">Production Notes</span>
+                <span class="film-expand__chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="film-expand__body film-expand__body--placeholder" aria-hidden="true">
+                <p class="film-slot film-slot--text"></p>
+              </div>
+            </details>
           </div>
         </section>
       </article>
