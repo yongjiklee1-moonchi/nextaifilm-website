@@ -65,10 +65,25 @@
     }
   }
 
+  function clearBrowserTranslateCookies() {
+    try {
+      var expire = "Thu, 01 Jan 1970 00:00:00 GMT";
+      var host = location.hostname;
+      ["googtrans", "googtransopt"].forEach(function (name) {
+        document.cookie = name + "=; expires=" + expire + "; path=/";
+        document.cookie = name + "=; expires=" + expire + "; path=/; domain=" + host;
+        if (host.indexOf(".") !== -1) {
+          document.cookie = name + "=; expires=" + expire + "; path=/; domain=." + host;
+        }
+      });
+    } catch (e) {}
+  }
+
   function setLang(lang) {
     if (lang !== "en" && lang !== "ko") return;
     currentLang = lang;
     saveLang(lang);
+    clearBrowserTranslateCookies();
     applyTranslations();
     document.dispatchEvent(
       new CustomEvent("naf:langchange", { detail: { lang: currentLang } })
@@ -78,7 +93,13 @@
   function bindSwitch() {
     document.querySelectorAll(".lang-switch__btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        setLang(btn.getAttribute("data-lang"));
+        var target = btn.getAttribute("data-lang");
+        // Single 한글 button: toggle Korean on/off (default remains English)
+        if (target === "ko") {
+          setLang(currentLang === "ko" ? "en" : "ko");
+          return;
+        }
+        setLang(target);
       });
     });
   }
