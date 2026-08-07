@@ -42,22 +42,33 @@
     player.classList.add("is-playing");
   }
 
-  function loadLocalVideo(player) {
+  function loadLocalVideo(player, options) {
     if (!player || player.querySelector("iframe") || player.querySelector("video")) {
       return;
     }
 
     var src = (player.getAttribute("data-video-src") || "").trim();
     if (!src) return;
+    options = options || {};
 
     var video = document.createElement("video");
     video.src = src;
     video.controls = true;
+    video.controlsList = "nodownload noplaybackrate noremoteplayback";
+    video.disablePictureInPicture = true;
     video.autoplay = true;
+    video.muted = !!options.muted;
     video.playsInline = true;
-    video.preload = "metadata";
+    video.preload = "auto";
     video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("controlslist", "nodownload noplaybackrate noremoteplayback");
+    video.setAttribute("disablepictureinpicture", "");
+    if (options.muted) video.setAttribute("muted", "");
     video.title = "Commercial film";
+    video.addEventListener("contextmenu", function (event) {
+      event.preventDefault();
+    });
 
     var poster = player.getAttribute("data-poster");
     if (poster) video.poster = poster;
@@ -67,16 +78,32 @@
 
     var playPromise = video.play();
     if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(function () {});
+      playPromise.catch(function () {
+        // Browser blocked unmuted autoplay — retry muted
+        if (!options.muted) {
+          video.muted = true;
+          video.setAttribute("muted", "");
+          var retry = video.play();
+          if (retry && typeof retry.catch === "function") {
+            retry.catch(function () {
+              player.classList.remove("is-playing");
+              video.remove();
+            });
+          }
+        } else {
+          player.classList.remove("is-playing");
+          video.remove();
+        }
+      });
     }
   }
 
-  function playMedia(player) {
+  function playMedia(player, options) {
     if (!player) return;
     var localSrc = (player.getAttribute("data-video-src") || "").trim();
     var vimeoId = (player.getAttribute("data-vimeo-id") || "").trim();
     if (localSrc) {
-      loadLocalVideo(player);
+      loadLocalVideo(player, options);
       return;
     }
     if (vimeoId) loadVimeo(player);
@@ -103,14 +130,21 @@
           clearPlayer(other.querySelector(".commercial-item__player"));
         }
       });
+
+      playMedia(item.querySelector(".commercial-item__player"), { muted: true });
     });
 
     var playBtn = item.querySelector(".commercial-item__play");
     if (playBtn) {
       playBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        playMedia(item.querySelector(".commercial-item__player"));
+        playMedia(item.querySelector(".commercial-item__player"), { muted: false });
       });
+    }
+
+    // Page enter: autoplay open items (Automotive is open by default)
+    if (item.open) {
+      playMedia(player, { muted: true });
     }
   });
 })();

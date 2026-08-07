@@ -127,14 +127,22 @@ function playFilmPlayer(player, options) {
   var video = document.createElement("video");
   video.src = src;
   video.controls = true;
+  video.controlsList = "nodownload noplaybackrate noremoteplayback";
+  video.disablePictureInPicture = true;
   video.autoplay = !!options.autoplay || player.hasAttribute("data-autoplay");
   video.muted = muted;
   video.loop = player.hasAttribute("data-loop");
   video.playsInline = true;
   video.preload = "auto";
   video.setAttribute("playsinline", "");
+  video.setAttribute("webkit-playsinline", "");
+  video.setAttribute("controlslist", "nodownload noplaybackrate noremoteplayback");
+  video.setAttribute("disablepictureinpicture", "");
   if (muted) video.setAttribute("muted", "");
   video.title = "Sunflowers trailer";
+  video.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+  });
 
   var poster = player.getAttribute("data-poster");
   if (poster) video.poster = poster;
