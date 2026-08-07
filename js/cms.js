@@ -297,9 +297,24 @@
       el.innerHTML = copy + (linkHtml ? " " + linkHtml : "");
     });
     document.querySelectorAll('a[data-cms-link="L01"]').forEach(function (el) {
-      if (email) {
-        el.href = email.indexOf("mailto:") === 0 ? email : "mailto:" + email;
-        if (!el.getAttribute("data-cms-keep-label")) setText(el, email.replace(/^mailto:/, ""));
+      if (!email) return;
+      var href = email.indexOf("mailto:") === 0 ? email : "mailto:" + email;
+      var display = email.replace(/^mailto:/, "");
+      el.href = href;
+
+      var valueEl = el.querySelector(".contact-cell__value");
+      if (valueEl) {
+        setText(valueEl, display);
+        return;
+      }
+
+      // Do not wipe structured contact cards / rich links
+      if (el.classList.contains("contact-cell") || el.querySelector("img, svg, span")) {
+        return;
+      }
+
+      if (!el.getAttribute("data-cms-keep-label")) {
+        setText(el, display);
       }
     });
     document.querySelectorAll("[data-cms='site.footer.location']").forEach(function (el) {
