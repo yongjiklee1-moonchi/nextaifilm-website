@@ -105,19 +105,35 @@ function initFilmTabs() {
 document.querySelectorAll("[data-carousel]").forEach(initFilmCarousel);
 initFilmTabs();
 
-function playFilmPlayer(player) {
-  if (!player || player.querySelector("video")) return;
+function playFilmPlayer(player, options) {
+  if (!player) return;
+  options = options || {};
+
+  var existing = player.querySelector("video");
+  if (existing) {
+    if (options.autoplay) {
+      existing.muted = true;
+      existing.setAttribute("muted", "");
+      var resume = existing.play();
+      if (resume && typeof resume.catch === "function") resume.catch(function () {});
+    }
+    return;
+  }
 
   var src = (player.getAttribute("data-video-src") || "").trim();
   if (!src) return;
 
+  var muted = options.muted !== false && (options.autoplay || player.hasAttribute("data-autoplay"));
   var video = document.createElement("video");
   video.src = src;
   video.controls = true;
-  video.autoplay = true;
+  video.autoplay = !!options.autoplay || player.hasAttribute("data-autoplay");
+  video.muted = muted;
+  video.loop = player.hasAttribute("data-loop");
   video.playsInline = true;
-  video.preload = "metadata";
+  video.preload = "auto";
   video.setAttribute("playsinline", "");
+  if (muted) video.setAttribute("muted", "");
   video.title = "Sunflowers trailer";
 
   var poster = player.getAttribute("data-poster");
@@ -128,7 +144,12 @@ function playFilmPlayer(player) {
 
   var playPromise = video.play();
   if (playPromise && typeof playPromise.catch === "function") {
-    playPromise.catch(function () {});
+    playPromise.catch(function () {
+      // Autoplay blocked: keep poster/play UI available by removing empty playing state
+      if (!options.autoplay) return;
+      player.classList.remove("is-playing");
+      video.remove();
+    });
   }
 }
 
@@ -137,8 +158,12 @@ function initFilmPlayers() {
     var playBtn = player.querySelector(".film-player__play");
     if (playBtn) {
       playBtn.addEventListener("click", function () {
-        playFilmPlayer(player);
+        playFilmPlayer(player, { autoplay: true, muted: false });
       });
+    }
+
+    if (player.hasAttribute("data-autoplay")) {
+      playFilmPlayer(player, { autoplay: true, muted: true });
     }
   });
 
@@ -149,7 +174,7 @@ function initFilmPlayers() {
       if (!player) return;
       event.preventDefault();
       player.scrollIntoView({ behavior: "smooth", block: "center" });
-      playFilmPlayer(player);
+      playFilmPlayer(player, { autoplay: true, muted: false });
     });
   });
 }
