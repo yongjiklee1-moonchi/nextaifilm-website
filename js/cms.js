@@ -138,9 +138,19 @@
   }
 
   function applyContent(ix) {
+    // Footer copyright is handled in applyFooter so the Copyright link is preserved.
+    var skip = {
+      "site.footer.copyright": true,
+      "site.brand.studio_name": true,
+      "site.brand.tagline": true,
+      "site.brand.footer_quote": true,
+      "site.footer.location": true
+    };
+
     document.querySelectorAll("[data-cms]").forEach(function (el) {
       var key = (el.getAttribute("data-cms") || "").trim();
-      if (!key || !Object.prototype.hasOwnProperty.call(ix.contentByKey, key)) {
+      if (!key || skip[key]) return;
+      if (!Object.prototype.hasOwnProperty.call(ix.contentByKey, key)) {
         return;
       }
       setText(el, ix.contentByKey[key]);
@@ -289,12 +299,22 @@
       if (quote) setText(el, quote);
     });
     document.querySelectorAll("[data-cms='site.footer.copyright']").forEach(function (el) {
-      if (!copy) return;
-      // preserve Copyright link if present
       var link = el.querySelector("a.footer__copy-link");
-      el.childNodes.forEach(function () {});
-      var linkHtml = link ? link.outerHTML : "";
-      el.innerHTML = copy + (linkHtml ? " " + linkHtml : "");
+      if (!link) {
+        link = document.createElement("a");
+        link.className = "footer__copy-link";
+        link.href = "/copyright";
+        link.textContent = "Copyright";
+      } else {
+        link = link.cloneNode(true);
+        if (!link.getAttribute("href")) link.href = "/copyright";
+        if (!link.textContent.trim()) link.textContent = "Copyright";
+      }
+
+      var text = copy || el.textContent.replace(/\s*Copyright\s*$/i, "").trim();
+      el.innerHTML = "";
+      el.appendChild(document.createTextNode(text + " "));
+      el.appendChild(link);
     });
     document.querySelectorAll('a[data-cms-link="L01"]').forEach(function (el) {
       if (!email) return;
