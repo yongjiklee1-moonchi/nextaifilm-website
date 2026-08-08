@@ -57,6 +57,17 @@
   );
 
   document.addEventListener(
+    "contextmenu",
+    function (event) {
+      var target = event.target;
+      if (target && (target.tagName === "VIDEO" || target.closest("video"))) {
+        event.preventDefault();
+      }
+    },
+    true
+  );
+
+  document.addEventListener(
     "keydown",
     function (event) {
       if (isEditableTarget(event.target)) {
