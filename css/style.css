@@ -139,11 +139,11 @@ html[lang="ko"] .logo__text {
 }
 
 .nav__list li:nth-child(1) a {
-  min-width: 6.25rem;
+  min-width: 2.5rem;
 }
 
 .nav__list li:nth-child(2) a {
-  min-width: 2.5rem;
+  min-width: 6.25rem;
 }
 
 .nav__list li:nth-child(3) a {
