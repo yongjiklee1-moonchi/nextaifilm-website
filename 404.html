@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found | NAF</title>
+  <!--
+    GitHub Pages cannot emit HTTP 410.
+    Missing paths are served with HTTP 404 + this page (strongest permanent-removal
+    signal available on GitHub Pages). Do not recreate retired URLs as real pages.
+  -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css?v=20260808f" />
+  <style>
+    .gone-main {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+    .gone-main__inner {
+      max-width: 36rem;
+    }
+    .gone-main__code {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 0.75rem;
+    }
+    .gone-main__title {
+      font-family: "Noto Serif KR", serif;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-weight: 500;
+      margin: 0 0 0.85rem;
+    }
+    .gone-main__text {
+      margin: 0 0 1.75rem;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body class="subpage-body">
+  <header class="header">
+    <div class="header__inner">
+      <a href="/" class="logo">
+        <img src="/assets/logo.png" alt="NAF" />
+        <span class="logo__text">Next AI Film Studio</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="gone-main">
+    <div class="gone-main__inner">
+      <p class="gone-main__code" id="gone-code">404</p>
+      <h1 class="gone-main__title" id="gone-title">Page not found</h1>
+      <p class="gone-main__text" id="gone-text">
+        The page you requested does not exist on this site.
+      </p>
+      <p>
+        <a class="btn" href="/">Back to Home</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      // Retired legacy paths — never recreate as live HTML (would return HTTP 200).
+      var retired = [
+        /^\/selected-works(\/|$)/i
+      ];
+      var path = location.pathname || "";
+      var isRetired = retired.some(function (re) {
+        return re.test(path);
+      });
+      if (!isRetired) return;
+
+      var code = document.getElementById("gone-code");
+      var title = document.getElementById("gone-title");
+      var text = document.getElementById("gone-text");
+      if (code) code.textContent = "Gone";
+      if (title) title.textContent = "This page has been permanently removed";
+      if (text) {
+        text.textContent =
+          "This address is no longer part of nextaifilm.com. " +
+          "GitHub Pages returns HTTP 404 for it (410 is not supported here).";
+      }
+    })();
+  </script>
+</body>
+</html>
