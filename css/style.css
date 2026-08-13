@@ -1898,32 +1898,35 @@ html[lang="ko"] .logo__text {
 .awards-hero {
   background: var(--naf-black);
   padding: 0;
+  overflow: hidden;
 }
 
 .awards-hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-  gap: clamp(1.5rem, 3.5vw, 2.75rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: clamp(1rem, 2.2vw, 1.75rem);
   align-items: center;
-  max-width: min(1280px, 96%);
+  max-width: min(1240px, 96%);
   margin: 0 auto;
-  padding: clamp(1.1rem, 2.2vw, 1.75rem) clamp(0.75rem, 2vw, 1.5rem);
+  padding: clamp(0.9rem, 1.8vw, 1.35rem) clamp(0.75rem, 2vw, 1.25rem);
 }
 
 .awards-hero__visual {
   position: relative;
   overflow: hidden;
-  background: transparent;
-  display: block;
+  background: var(--naf-black);
+  width: 100%;
+  /* slot for 1024 x 717 hero asset */
+  aspect-ratio: 1024 / 717;
   line-height: 0;
 }
 
 .awards-hero__visual img {
-  position: static;
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  height: auto;
-  max-height: clamp(260px, 34vw, 380px);
+  height: 100%;
   object-fit: contain;
   object-position: center center;
 }
@@ -1932,13 +1935,13 @@ html[lang="ko"] .logo__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0;
-  max-width: 30rem;
+  padding: 0.15rem 0.35rem 0.15rem 0;
+  max-width: 28rem;
 }
 
 .awards-hero__label {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--naf-yellow);
@@ -1947,19 +1950,19 @@ html[lang="ko"] .logo__text {
 
 .awards-hero__title {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(1.55rem, 3vw, 2.25rem);
+  font-size: clamp(1.45rem, 2.8vw, 2.15rem);
   font-weight: 500;
   color: #fff;
   line-height: 1.2;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.7rem;
 }
 
 .awards-hero__rule {
   display: block;
-  width: 3rem;
+  width: 2.75rem;
   height: 2px;
   background: var(--naf-yellow);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.8rem;
 }
 
 .awards-hero__meta {
@@ -1971,11 +1974,11 @@ html[lang="ko"] .logo__text {
 
 .awards-hero__text {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(0.9rem, 1.4vw, 1rem);
-  line-height: 1.7;
+  font-size: clamp(0.88rem, 1.35vw, 0.98rem);
+  line-height: 1.65;
   color: rgba(255, 255, 255, 0.88);
   margin: 0;
-  max-width: 26rem;
+  max-width: 24rem;
 }
 
 .awards-hero__badges {
@@ -3386,24 +3389,25 @@ a.contact-cell:hover .contact-icon {
   .awards-hero__inner {
     grid-template-columns: 1fr;
     min-height: 0;
-    gap: 1rem;
-    padding: 1rem 0.85rem 1.35rem;
+    gap: 0.85rem;
+    padding: 0.85rem 0.85rem 1.15rem;
   }
 
   .awards-hero__visual {
-    max-height: none;
-    min-height: 0;
+    width: 100%;
+    aspect-ratio: 1024 / 717;
   }
 
   .awards-hero__visual img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    max-height: min(48vw, 320px);
+    height: 100%;
     object-fit: contain;
   }
 
   .awards-hero__info {
-    padding: 0.15rem 0.25rem 0.35rem;
+    padding: 0.15rem 0.2rem 0.35rem;
     max-width: none;
   }
 
