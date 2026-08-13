@@ -18,6 +18,7 @@ const AWARDS_DATA = {
       category: "Best AI Winner",
       location: "Los Angeles, USA",
       date: "June 2026",
+      summary: "Sunflowers received Best AI Winner at the 17th New Media Film Festival in Los Angeles.",
       icon: "trophy",
       laurel: "assets/awards/awards-badge-winner.png",
       laurelAlt: "Best AI Winner — 17th New Media Film Festival"
@@ -30,6 +31,7 @@ const AWARDS_DATA = {
       category: "Best AI Film Nominee",
       location: "Cannes, France",
       date: "May 2025",
+      summary: "Sunflowers was nominated for Best AI Film at the Cannes World Film Festival.",
       icon: "film",
       laurel: "assets/awards/awards-badge-nominee.png",
       laurelAlt: "Best AI Film Nominee — Cannes World Film Festival"
@@ -84,8 +86,12 @@ function renderIconBadge(icon) {
 
 function renderAwardCard(item) {
   const laurelBlock = item.laurel
-    ? `<div class="award-card__laurel"><img src="${escapeHtml(item.laurel)}" alt="${escapeHtml(item.laurelAlt || "")}" width="160" height="160" loading="lazy" decoding="async" /></div>`
+    ? `<div class="award-card__laurel"><img src="${escapeHtml(item.laurel)}" alt="${escapeHtml(item.laurelAlt || "")}" width="200" height="200" loading="lazy" decoding="async" /></div>`
     : "";
+
+  const metaParts = [];
+  if (item.location) metaParts.push(renderMetaRow("📍", item.location));
+  if (item.date) metaParts.push(renderMetaRow("📅", item.date));
 
   return `
     <li class="awards-list__item">
@@ -99,8 +105,10 @@ function renderAwardCard(item) {
             <h3 class="award-card__film">${escapeHtml(item.film || item.festival)}</h3>
             <p class="award-card__category">${escapeHtml(item.category)}</p>
             <p class="award-card__festival">${escapeHtml(item.festival)}</p>
-            ${item.location ? renderMetaRow("📍", item.location) : ""}
-            ${item.date ? renderMetaRow("📅", item.date) : ""}
+            <div class="award-card__meta">
+              ${metaParts.join("")}
+            </div>
+            ${item.summary ? `<p class="award-card__summary">${escapeHtml(item.summary)}</p>` : ""}
           </div>
           ${laurelBlock}
         </div>
