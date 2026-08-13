@@ -84,7 +84,28 @@ function renderIconBadge(icon) {
   `;
 }
 
+function normalizeAwardItem(item) {
+  var next = Object.assign({}, item);
+  if (!next.film && /new media/i.test(String(next.festival || ""))) {
+    next.film = "Sunflowers";
+  }
+  if (!next.film && /cannes/i.test(String(next.festival || ""))) {
+    next.film = "Sunflowers";
+  }
+  if (!next.laurel) {
+    if (next.icon === "trophy" || /winner/i.test(String(next.category || ""))) {
+      next.laurel = "assets/awards/awards-badge-winner.png";
+      next.laurelAlt = next.laurelAlt || "Best AI Winner";
+    } else if (next.icon === "film" || /nominee/i.test(String(next.category || ""))) {
+      next.laurel = "assets/awards/awards-badge-nominee.png";
+      next.laurelAlt = next.laurelAlt || "Best AI Film Nominee";
+    }
+  }
+  return next;
+}
+
 function renderAwardCard(item) {
+  item = normalizeAwardItem(item);
   const laurelBlock = item.laurel
     ? `<div class="award-card__laurel"><img src="${escapeHtml(item.laurel)}" alt="${escapeHtml(item.laurelAlt || "")}" width="200" height="200" loading="lazy" decoding="async" /></div>`
     : "";
@@ -126,7 +147,8 @@ function renderAwardsList(items) {
 function applyAwardsData(data) {
   const listEl = document.getElementById("awards-list");
   if (!listEl) return;
-  listEl.innerHTML = renderAwardsList((data && data.items) || []);
+  var items = ((data && data.items) || []).map(normalizeAwardItem);
+  listEl.innerHTML = renderAwardsList(items);
 }
 
 async function loadAwardsData() {
