@@ -108,7 +108,6 @@ function renderAwardCard(item) {
             <div class="award-card__meta">
               ${metaParts.join("")}
             </div>
-            ${item.summary ? `<p class="award-card__summary">${escapeHtml(item.summary)}</p>` : ""}
           </div>
           ${laurelBlock}
         </div>
