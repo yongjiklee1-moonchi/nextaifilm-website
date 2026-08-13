@@ -1887,37 +1887,47 @@ html[lang="ko"] .logo__text {
   padding-bottom: 0;
 }
 
+.awards-page {
+  --awards-content-max: min(1100px, 96vw);
+  --awards-content-pad-x: clamp(0.5rem, 1.25vw, 1.25rem);
+}
+
 .awards-page .page-bar {
-  padding: clamp(1rem, 2vw, 1.35rem) clamp(0.5rem, 1.25vw, 1.25rem);
+  padding: clamp(0.75rem, 1.5vw, 1.05rem) var(--awards-content-pad-x);
 }
 
 .awards-page .page-bar__inner {
-  max-width: min(1720px, 98vw);
+  max-width: var(--awards-content-max);
 }
 
 .awards-hero {
   background: var(--naf-black);
-  padding: 0;
+  padding: 0 var(--awards-content-pad-x);
   overflow: hidden;
+  --awards-hero-laurel-shift: clamp(8.5rem, 14vw, 12rem);
 }
 
 .awards-hero__inner {
-  display: grid;
-  /* left visual (1024x717) + right copy, matching collage */
-  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.55fr);
-  gap: clamp(0.65rem, 1.6vw, 1.25rem);
+  display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  max-width: min(1280px, 98%);
+  justify-content: flex-start;
+  gap: clamp(1.1rem, 2.6vw, 2rem);
+  /* same left edge as year column below, then shift left by ~1 laurel */
+  max-width: var(--awards-content-max);
   margin: 0 auto;
-  padding: clamp(0.7rem, 1.5vw, 1.15rem) clamp(0.65rem, 1.8vw, 1.35rem);
+  padding: 0;
+  box-sizing: border-box;
+  transform: translateX(calc(-1 * var(--awards-hero-laurel-shift) + 70px));
 }
 
 .awards-hero__visual {
+  flex: 0 0 auto;
   overflow: hidden;
   background: var(--naf-black);
-  width: 70%;
-  max-width: 70%;
-  justify-self: start;
+  /* 70% then -10% = 63%; real size (no scale transform = no leftover vertical gap) */
+  width: min(645.12px, 63%);
+  max-width: 645.12px;
   line-height: 0;
 }
 
@@ -1925,42 +1935,46 @@ html[lang="ko"] .logo__text {
   display: block;
   width: 100%;
   height: auto;
-  /* reserve layout for final 1024 x 717 asset */
-  aspect-ratio: 1024 / 717;
 }
 
 .awards-hero__info {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   justify-content: center;
-  padding: 0.1rem 0.25rem 0.1rem 0;
-  max-width: 22rem;
+  min-width: 0;
+  padding: 0.1rem 0;
+  max-width: 28rem;
 }
 
 .awards-hero__label {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.68rem;
+  font-size: clamp(0.78rem, 1.35vw, 0.92rem);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--naf-yellow);
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
 }
 
 .awards-hero__title {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(1.45rem, 2.8vw, 2.15rem);
+  font-size: clamp(1.85rem, 3.4vw, 2.65rem);
   font-weight: 500;
   color: #fff;
-  line-height: 1.2;
-  margin-bottom: 0.7rem;
+  line-height: 1.18;
+  margin-bottom: 0.85rem;
+}
+
+.awards-hero__title-line {
+  white-space: nowrap;
 }
 
 .awards-hero__rule {
   display: block;
-  width: 2.75rem;
+  width: 3.25rem;
   height: 2px;
   background: var(--naf-yellow);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.95rem;
 }
 
 .awards-hero__meta {
@@ -1972,11 +1986,11 @@ html[lang="ko"] .logo__text {
 
 .awards-hero__text {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(0.88rem, 1.35vw, 0.98rem);
+  font-size: clamp(1.02rem, 1.7vw, 1.18rem);
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.88);
   margin: 0;
-  max-width: 24rem;
+  max-width: 26rem;
 }
 
 .awards-hero__badges {
@@ -2000,11 +2014,11 @@ html[lang="ko"] .logo__text {
 
 .awards-list-section {
   background: #f4f4f4;
-  padding: clamp(2.25rem, 4.5vw, 3.5rem) clamp(0.5rem, 1.25vw, 1.25rem) clamp(2.5rem, 5vw, 3.5rem);
+  padding: clamp(1.35rem, 2.8vw, 1.85rem) var(--awards-content-pad-x) clamp(1.5rem, 3vw, 2.1rem);
 }
 
 .awards-list-section__inner {
-  max-width: min(1100px, 96vw);
+  max-width: var(--awards-content-max);
   margin: 0 auto;
 }
 
@@ -2015,7 +2029,7 @@ html[lang="ko"] .logo__text {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #222;
-  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin-bottom: clamp(0.75rem, 1.6vw, 1rem);
   display: flex;
   align-items: center;
   gap: 0.45rem;
@@ -2038,7 +2052,7 @@ html[lang="ko"] .logo__text {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: clamp(1.25rem, 2.4vw, 1.65rem);
+  gap: clamp(0.75rem, 1.5vw, 1rem);
   position: relative;
 }
 
@@ -2056,7 +2070,7 @@ html[lang="ko"] .logo__text {
   position: relative;
   display: grid;
   grid-template-columns: var(--awards-year-w) minmax(0, 1fr);
-  column-gap: calc(var(--awards-rail-gap) + 1rem);
+  column-gap: calc(var(--awards-rail-gap) + 1rem + 15px);
   row-gap: 0.5rem;
   align-items: start;
 }
@@ -2115,19 +2129,23 @@ html[lang="ko"] .logo__text {
 
 .award-card {
   display: grid;
-  grid-template-columns: 5.25rem minmax(0, 1.15fr) minmax(168px, 1fr);
-  gap: clamp(0.9rem, 2vw, 1.25rem);
+  grid-template-columns: 4.25rem minmax(0, 1.15fr) minmax(150px, 190px);
+  gap: clamp(0.65rem, 1.5vw, 1rem);
   align-items: center;
+  width: calc(90% - 25px);
+  max-width: calc(90% - 25px);
+  justify-self: start;
+  box-sizing: border-box;
   background: #fff;
   border-radius: 10px;
-  padding: clamp(1.05rem, 2.2vw, 1.35rem) clamp(1.05rem, 2.2vw, 1.45rem);
+  padding: clamp(0.7rem, 1.5vw, 0.95rem) max(0.55rem, calc(clamp(1.05rem, 2.2vw, 1.45rem) - 25px)) clamp(0.7rem, 1.5vw, 0.95rem) clamp(0.95rem, 2vw, 1.25rem);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .award-card__badge {
-  width: 5.25rem;
-  height: 5.25rem;
+  width: 4.25rem;
+  height: 4.25rem;
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 6px;
@@ -2170,38 +2188,38 @@ html[lang="ko"] .logo__text {
 
 .award-card__film {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-size: clamp(1.05rem, 2vw, 1.28rem);
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #111;
-  margin: 0 0 0.3rem;
-  line-height: 1.25;
+  margin: 0 0 0.18rem;
+  line-height: 1.2;
 }
 
 .award-card__festival {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #222;
-  margin: 0 0 0.55rem;
-  line-height: 1.35;
+  margin: 0 0 0.35rem;
+  line-height: 1.3;
 }
 
 .award-card__category {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #ff8a00;
-  margin: 0 0 0.22rem;
-  line-height: 1.35;
+  margin: 0 0 0.15rem;
+  line-height: 1.3;
 }
 
 .award-card__meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1rem;
-  margin: 0.15rem 0 0;
+  gap: 0.25rem 0.9rem;
+  margin: 0.05rem 0 0;
 }
 
 .award-card__meta-row {
@@ -2225,21 +2243,23 @@ html[lang="ko"] .logo__text {
 .award-card__laurel {
   flex-shrink: 0;
   width: 100%;
-  max-width: 210px;
-  min-height: 7.5rem;
-  justify-self: stretch;
-  align-self: stretch;
+  max-width: 190px;
+  min-height: 0;
+  justify-self: end;
+  align-self: center;
   padding-left: clamp(0.85rem, 1.8vw, 1.35rem);
+  padding-right: 0;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateX(-10px);
 }
 
 .award-card__laurel img {
   display: block;
   width: 100%;
-  max-width: 190px;
+  max-width: 170px;
   height: auto;
   filter: grayscale(1) brightness(0);
   opacity: 0.95;
@@ -2281,7 +2301,7 @@ html[lang="ko"] .logo__text {
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.65rem 1.1rem;
+  padding: 0.5rem 0.95rem;
   border: 1px solid #ff8a00;
   background: rgba(255, 138, 0, 0.14);
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
@@ -2313,7 +2333,7 @@ html[lang="ko"] .logo__text {
 }
 
 .awards-list-section__note {
-  margin-top: clamp(1.5rem, 3vw, 2rem);
+  margin-top: clamp(0.85rem, 1.8vw, 1.15rem);
   text-align: center;
   font-size: 0.82rem;
   color: #777;
@@ -3385,26 +3405,26 @@ a.contact-cell:hover .contact-icon {
   }
 
   .awards-hero__inner {
-    grid-template-columns: 1fr;
-    min-height: 0;
-    gap: 0.75rem;
-    padding: 0.75rem 0.85rem 1.1rem;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0;
+    transform: translateX(calc(-0.45 * var(--awards-hero-laurel-shift) + 70px));
   }
 
   .awards-hero__visual {
-    width: 70%;
-    max-width: 70%;
-    justify-self: start;
+    width: 63%;
+    max-width: 645.12px;
   }
 
   .awards-hero__visual img {
     width: 100%;
     height: auto;
-    aspect-ratio: 1024 / 717;
   }
 
   .awards-hero__info {
-    padding: 0.1rem 0.2rem 0.3rem;
+    padding: 0.35rem 0.2rem 0.55rem;
     max-width: none;
   }
 
@@ -3433,12 +3453,12 @@ a.contact-cell:hover .contact-icon {
   }
 
   .award-card {
-    grid-template-columns: 5.25rem minmax(0, 1fr);
+    grid-template-columns: 4.25rem minmax(0, 1fr);
   }
 
   .award-card--upcoming,
   .award-card--press {
-    grid-template-columns: 5.25rem minmax(0, 1fr);
+    grid-template-columns: 4.25rem minmax(0, 1fr);
   }
 
   .award-card__btn {
