@@ -2111,7 +2111,7 @@ html[lang="ko"] .logo__text {
 
 .award-card {
   display: grid;
-  grid-template-columns: 3.75rem minmax(0, 1.15fr) minmax(168px, 1fr);
+  grid-template-columns: 5.25rem minmax(0, 1.15fr) minmax(168px, 1fr);
   gap: clamp(0.9rem, 2vw, 1.25rem);
   align-items: center;
   background: #fff;
@@ -2122,8 +2122,8 @@ html[lang="ko"] .logo__text {
 }
 
 .award-card__badge {
-  width: 3.75rem;
-  height: 3.75rem;
+  width: 5.25rem;
+  height: 5.25rem;
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 6px;
@@ -2277,8 +2277,9 @@ html[lang="ko"] .logo__text {
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.55rem 0.9rem;
-  border: 1px solid #c9a227;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid #ff8a00;
+  background: #ff8a00;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 0.72rem;
   font-weight: 500;
@@ -2287,11 +2288,18 @@ html[lang="ko"] .logo__text {
   color: #111;
   white-space: nowrap;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .award-card__btn:hover {
-  background: #c9a227;
+  background: #ff9b24;
+  border-color: #ff9b24;
+  color: #111;
+}
+
+.award-card__btn--external {
+  background: #ff8a00;
+  border-color: #ff8a00;
   color: #111;
 }
 
@@ -3406,12 +3414,12 @@ a.contact-cell:hover .contact-icon {
   }
 
   .award-card {
-    grid-template-columns: 3.75rem minmax(0, 1fr);
+    grid-template-columns: 5.25rem minmax(0, 1fr);
   }
 
   .award-card--upcoming,
   .award-card--press {
-    grid-template-columns: 3.75rem minmax(0, 1fr);
+    grid-template-columns: 5.25rem minmax(0, 1fr);
   }
 
   .award-card__btn {
