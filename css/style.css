@@ -1930,25 +1930,33 @@ html[lang="ko"] .logo__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
+  padding: clamp(1.75rem, 4vw, 3.25rem) clamp(1.5rem, 4vw, 3rem);
 }
 
 .awards-hero__label {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--naf-yellow);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
 .awards-hero__title {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-size: clamp(1.85rem, 3.8vw, 2.85rem);
   font-weight: 500;
   color: #fff;
   line-height: 1.15;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.awards-hero__rule {
+  display: block;
+  width: 3.25rem;
+  height: 2px;
+  background: var(--naf-yellow);
+  margin-bottom: 1.1rem;
 }
 
 .awards-hero__meta {
@@ -1960,11 +1968,11 @@ html[lang="ko"] .logo__text {
 
 .awards-hero__text {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.92rem;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.82);
-  margin-bottom: 1.5rem;
-  max-width: 34rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+  max-width: 28rem;
 }
 
 .awards-hero__badges {
@@ -1987,8 +1995,8 @@ html[lang="ko"] .logo__text {
 }
 
 .awards-list-section {
-  background: #ececec;
-  padding: clamp(2rem, 4vw, 3rem) clamp(0.5rem, 1.25vw, 1.25rem) clamp(2.5rem, 5vw, 3.5rem);
+  background: #f4f4f4;
+  padding: clamp(2.25rem, 4.5vw, 3.5rem) clamp(0.5rem, 1.25vw, 1.25rem) clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .awards-list-section__inner {
@@ -2004,13 +2012,27 @@ html[lang="ko"] .logo__text {
   text-transform: uppercase;
   color: #222;
   margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.awards-list-section__title-icon {
+  font-size: 1.05em;
+  line-height: 1;
+  color: #c9a227;
+}
+
+.awards-press-section {
+  padding-top: 0;
 }
 
 .awards-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: clamp(1rem, 2vw, 1.25rem);
+  gap: clamp(1.15rem, 2.2vw, 1.5rem);
+  position: relative;
 }
 
 .awards-list__item {
@@ -2024,6 +2046,7 @@ html[lang="ko"] .logo__text {
 }
 
 .award-item {
+  position: relative;
   display: grid;
   grid-template-columns: 6.75rem minmax(0, 1fr);
   column-gap: 1rem;
@@ -2031,21 +2054,48 @@ html[lang="ko"] .logo__text {
   align-items: start;
 }
 
+#awards-list::before {
+  content: "";
+  position: absolute;
+  left: 1.15rem;
+  top: 0.85rem;
+  bottom: 0.85rem;
+  width: 2px;
+  background: rgba(201, 162, 39, 0.35);
+  pointer-events: none;
+}
+
 .award-item__year {
+  position: relative;
   width: 6.75rem;
   flex-shrink: 0;
+  z-index: 1;
+}
+
+.award-item__year::before {
+  content: "";
+  position: absolute;
+  left: 1.15rem;
+  top: 0.55rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #c9a227;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 3px #f4f4f4;
 }
 
 .award-item__year span {
   display: inline-block;
   max-width: 100%;
+  margin-left: 1.75rem;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
   font-weight: 500;
   color: #111;
   line-height: 1.1;
-  border-bottom: 3px solid #ff8a00;
-  padding-bottom: 0.2rem;
+  border-bottom: none;
+  padding-bottom: 0;
   white-space: nowrap;
 }
 
@@ -2057,12 +2107,13 @@ html[lang="ko"] .logo__text {
 .award-card {
   display: grid;
   grid-template-columns: 4.5rem minmax(0, 1fr) auto;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
+  gap: clamp(0.85rem, 2vw, 1.35rem);
   align-items: center;
   background: #fff;
-  border-radius: 8px;
-  padding: clamp(1rem, 2vw, 1.25rem);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: clamp(1.1rem, 2.2vw, 1.4rem);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .award-card__badge {
@@ -2070,7 +2121,7 @@ html[lang="ko"] .logo__text {
   height: 4.5rem;
   object-fit: contain;
   flex-shrink: 0;
-  border-radius: 4px;
+  border-radius: 6px;
   background: #111;
 }
 
@@ -2079,48 +2130,62 @@ html[lang="ko"] .logo__text {
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: #ff8a00;
-  background: #f7f4ef;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #c9a227;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.award-card__badge--trophy {
-  color: #d4a017;
-  background: #fff8e8;
-}
-
+.award-card__badge--trophy,
 .award-card__badge--film {
-  color: #555;
-  background: #f3f3f3;
+  color: #c9a227;
+  background: #111;
+}
+
+.award-card__badge--press {
+  color: #c9a227;
+  background: #111;
 }
 
 .award-card__badge--camera {
-  color: #444;
-  background: #f3f3f3;
+  color: #c9a227;
+  background: #111;
 }
 
 .award-card__badge--empty {
-  background: #f3f3f3;
+  background: #111;
 }
 
 .award-card__body {
   min-width: 0;
 }
 
+.award-card__film {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111;
+  margin: 0 0 0.3rem;
+  line-height: 1.25;
+}
+
 .award-card__festival {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  font-size: 0.95rem;
   font-weight: 500;
-  color: #111;
-  margin-bottom: 0.25rem;
+  color: #222;
+  margin: 0 0 0.55rem;
+  line-height: 1.35;
 }
 
 .award-card__category {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: #ff8a00;
-  margin-bottom: 0.5rem;
+  color: #c9a227;
+  margin: 0 0 0.25rem;
+  line-height: 1.4;
 }
 
 .award-card__meta-row {
@@ -2143,6 +2208,17 @@ html[lang="ko"] .logo__text {
   line-height: 1.65;
   color: #444;
   margin-top: 0.65rem;
+}
+
+.award-card__laurel {
+  flex-shrink: 0;
+  width: clamp(72px, 10vw, 110px);
+}
+
+.award-card__laurel img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .award-card__thumb {
@@ -2177,9 +2253,12 @@ html[lang="ko"] .logo__text {
 }
 
 .award-card__btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   padding: 0.55rem 0.9rem;
-  border: 1px solid #ff8a00;
+  border: 1px solid #c9a227;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 0.72rem;
   font-weight: 500;
@@ -2187,19 +2266,30 @@ html[lang="ko"] .logo__text {
   text-transform: uppercase;
   color: #111;
   white-space: nowrap;
+  text-decoration: none;
   transition: background 0.2s, color 0.2s;
 }
 
 .award-card__btn:hover {
-  background: #ff8a00;
-  color: #fff;
+  background: #c9a227;
+  color: #111;
+}
+
+.award-card__btn-icon {
+  font-size: 0.95em;
+  line-height: 1;
 }
 
 .awards-list-section__note {
-  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin-top: clamp(1.5rem, 3vw, 2rem);
   text-align: center;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: #777;
+}
+
+.awards-list-section__note--star {
+  color: #666;
+  letter-spacing: 0.01em;
 }
 
 .awards-spotlight {
@@ -3280,11 +3370,27 @@ a.contact-cell:hover .contact-icon {
     gap: 0.5rem;
   }
 
+  .awards-list::before,
+  #awards-list::before {
+    display: none;
+  }
+
+  .award-item__year::before {
+    display: none;
+  }
+
+  .award-item__year span {
+    margin-left: 0;
+    border-bottom: 2px solid #c9a227;
+    padding-bottom: 0.15rem;
+  }
+
   .award-card {
     grid-template-columns: 4.5rem minmax(0, 1fr);
   }
 
-  .award-card--upcoming {
+  .award-card--upcoming,
+  .award-card--press {
     grid-template-columns: 4.5rem minmax(0, 1fr);
   }
 
@@ -3293,10 +3399,16 @@ a.contact-cell:hover .contact-icon {
     justify-self: start;
   }
 
-  .award-card__thumb {
+  .award-card__thumb,
+  .award-card__laurel {
     grid-column: 1 / -1;
     max-width: none;
     min-width: 0;
+  }
+
+  .award-card__laurel {
+    width: min(120px, 40vw);
+    justify-self: start;
   }
 
   .footer--contact .footer__inner {
