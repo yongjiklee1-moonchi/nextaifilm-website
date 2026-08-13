@@ -1915,7 +1915,9 @@ html[lang="ko"] .logo__text {
 .awards-hero__visual {
   overflow: hidden;
   background: var(--naf-black);
-  width: 100%;
+  width: 70%;
+  max-width: 70%;
+  justify-self: start;
   line-height: 0;
 }
 
@@ -3390,7 +3392,9 @@ a.contact-cell:hover .contact-icon {
   }
 
   .awards-hero__visual {
-    width: 100%;
+    width: 70%;
+    max-width: 70%;
+    justify-self: start;
   }
 
   .awards-hero__visual img {
