@@ -1902,9 +1902,9 @@ html[lang="ko"] .logo__text {
 
 .awards-hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 0;
-  align-items: stretch;
+  align-items: center;
   max-width: min(1400px, 100%);
   margin: 0 auto;
 }
@@ -1913,17 +1913,16 @@ html[lang="ko"] .logo__text {
   position: relative;
   overflow: hidden;
   background: var(--naf-black);
-  min-height: 100%;
+  min-height: 0;
 }
 
 .awards-hero__visual img {
-  position: absolute;
-  inset: 0;
+  position: static;
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  object-fit: contain;
+  object-position: center center;
 }
 
 .awards-hero__info {
@@ -2277,9 +2276,9 @@ html[lang="ko"] .logo__text {
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.7rem 1.15rem;
+  padding: 0.65rem 1.1rem;
   border: 1px solid #ff8a00;
-  background: #ff8a00;
+  background: transparent;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 0.72rem;
   font-weight: 500;
@@ -2292,13 +2291,13 @@ html[lang="ko"] .logo__text {
 }
 
 .award-card__btn:hover {
-  background: #ff9b24;
-  border-color: #ff9b24;
+  background: rgba(255, 138, 0, 0.12);
+  border-color: #ff8a00;
   color: #111;
 }
 
 .award-card__btn--external {
-  background: #ff8a00;
+  background: transparent;
   border-color: #ff8a00;
   color: #111;
 }
@@ -3385,8 +3384,13 @@ a.contact-cell:hover .contact-icon {
   }
 
   .awards-hero__visual {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: auto;
     min-height: 0;
+  }
+
+  .awards-hero__visual img {
+    width: 100%;
+    height: auto;
   }
 
   .awards-hero__badges li {
