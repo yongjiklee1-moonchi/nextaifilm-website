@@ -1902,11 +1902,12 @@ html[lang="ko"] .logo__text {
 
 .awards-hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
-  gap: 0;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
   align-items: center;
-  max-width: min(1400px, 100%);
+  max-width: min(1320px, 96%);
   margin: 0 auto;
+  padding: clamp(1.25rem, 2.5vw, 2rem) clamp(0.75rem, 2vw, 1.5rem);
   min-height: clamp(300px, 38vw, 440px);
 }
 
@@ -1935,7 +1936,8 @@ html[lang="ko"] .logo__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(1.75rem, 4vw, 3.25rem) clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(0.5rem, 1.5vw, 1rem) clamp(0.25rem, 1vw, 0.75rem) clamp(0.5rem, 1.5vw, 1rem) 0;
+  max-width: 34rem;
 }
 
 .awards-hero__label {
@@ -1944,16 +1946,16 @@ html[lang="ko"] .logo__text {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--naf-yellow);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.7rem;
 }
 
 .awards-hero__title {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(1.85rem, 3.8vw, 2.85rem);
+  font-size: clamp(1.7rem, 3.4vw, 2.55rem);
   font-weight: 500;
   color: #fff;
-  line-height: 1.15;
-  margin-bottom: 1rem;
+  line-height: 1.18;
+  margin-bottom: 0.85rem;
 }
 
 .awards-hero__rule {
@@ -1961,7 +1963,7 @@ html[lang="ko"] .logo__text {
   width: 3.25rem;
   height: 2px;
   background: var(--naf-yellow);
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.95rem;
 }
 
 .awards-hero__meta {
@@ -1973,8 +1975,8 @@ html[lang="ko"] .logo__text {
 
 .awards-hero__text {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
-  line-height: 1.75;
+  font-size: clamp(0.92rem, 1.5vw, 1.02rem);
+  line-height: 1.7;
   color: rgba(255, 255, 255, 0.88);
   margin: 0;
   max-width: 28rem;
@@ -2284,7 +2286,7 @@ html[lang="ko"] .logo__text {
   gap: 0.35rem;
   padding: 0.65rem 1.1rem;
   border: 1px solid #ff8a00;
-  background: transparent;
+  background: rgba(255, 138, 0, 0.14);
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 0.72rem;
   font-weight: 500;
@@ -2297,13 +2299,13 @@ html[lang="ko"] .logo__text {
 }
 
 .award-card__btn:hover {
-  background: rgba(255, 138, 0, 0.12);
+  background: rgba(255, 138, 0, 0.24);
   border-color: #ff8a00;
   color: #111;
 }
 
 .award-card__btn--external {
-  background: transparent;
+  background: rgba(255, 138, 0, 0.14);
   border-color: #ff8a00;
   color: #111;
 }
@@ -3388,6 +3390,8 @@ a.contact-cell:hover .contact-icon {
   .awards-hero__inner {
     grid-template-columns: 1fr;
     min-height: 0;
+    gap: 1rem;
+    padding: 1rem 0.85rem 1.35rem;
   }
 
   .awards-hero__visual {
@@ -3400,6 +3404,11 @@ a.contact-cell:hover .contact-icon {
     height: 100%;
     max-height: min(52vw, 360px);
     object-fit: contain;
+  }
+
+  .awards-hero__info {
+    padding: 0.25rem 0.35rem 0.5rem;
+    max-width: none;
   }
 
   .awards-hero__badges li {
