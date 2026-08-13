@@ -4,37 +4,28 @@
     {
       "type": "award",
       "year": "2026",
+      "film": "Sunflowers",
       "festival": "17th New Media Film Festival®",
       "category": "Best AI Winner",
       "location": "Los Angeles, USA",
       "date": "June 2026",
       "summary": "Sunflowers received Best AI Winner at the 17th New Media Film Festival in Los Angeles.",
-      "film": "Sunflowers",
-      "country": "South Korea",
-      "premiere": "World",
-      "director": "YongJik Lee",
       "icon": "trophy",
-      "thumb": ""
+      "laurel": "assets/awards/awards-badge-winner.png",
+      "laurelAlt": "Best AI Winner — 17th New Media Film Festival"
     },
     {
       "type": "award",
       "year": "2025",
+      "film": "Sunflowers",
       "festival": "Cannes World Film Festival",
       "category": "Best AI Film Nominee",
       "location": "Cannes, France",
       "date": "May 2025",
       "summary": "Sunflowers was nominated for Best AI Film at the Cannes World Film Festival.",
       "icon": "film",
-      "thumb": ""
-    },
-    {
-      "type": "upcoming",
-      "year": "Upcoming",
-      "title": "More Festivals & Screenings",
-      "summary": "We are continuing our journey and will update upcoming selections.",
-      "icon": "camera",
-      "buttonLabel": "View All Updates",
-      "buttonHref": "#"
+      "laurel": "assets/awards/awards-badge-nominee.png",
+      "laurelAlt": "Best AI Film Nominee — Cannes World Film Festival"
     }
   ]
 }
