@@ -59,7 +59,7 @@ function renderIconBadge(icon) {
 
   if (icon === "trophy") {
     svg = `
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M8 4h8v3a4 4 0 0 1-8 0V4z"></path>
         <path d="M8 5H5.5a2.5 2.5 0 0 0 0 5H8"></path>
         <path d="M16 5h2.5a2.5 2.5 0 0 1 0 5H16"></path>
@@ -70,7 +70,7 @@ function renderIconBadge(icon) {
     `;
   } else {
     svg = `
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <rect x="3" y="4" width="18" height="16" rx="2"></rect>
         <path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"></path>
       </svg>
