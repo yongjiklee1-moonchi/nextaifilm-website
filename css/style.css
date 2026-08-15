@@ -3922,6 +3922,11 @@ a.contact-cell:hover .contact-icon {
   color: rgba(255, 255, 255, 0.82);
 }
 
+.commercial-item__desc strong {
+  color: #fff;
+  font-weight: 600;
+}
+
 .commercial-item__meta {
   margin: 0.35rem 0 0;
   display: grid;
