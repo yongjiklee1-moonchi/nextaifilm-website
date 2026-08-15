@@ -82,6 +82,11 @@
       if (row.link_id) linksById[row.link_id] = row;
     });
 
+    var mediaById = Object.create(null);
+    (data.media || []).forEach(function (row) {
+      if (row.media_id) mediaById[row.media_id] = row;
+    });
+
     var awards = (data.awards || []).slice().sort(function (a, b) {
       return Number(a.sort || 0) - Number(b.sort || 0);
     });
@@ -97,6 +102,7 @@
       teamById: teamById,
       commercialsById: commercialsById,
       linksById: linksById,
+      mediaById: mediaById,
       awards: awards,
       copyright: copyright,
       raw: data
@@ -261,6 +267,36 @@
     });
   }
 
+  function mediaUrl(item) {
+    var raw = String((item && item.file_path_or_url) || "").trim();
+    if (!raw) return "";
+    var type = String((item && item.type) || "").trim().toLowerCase();
+    if (type === "vimeo") {
+      var match = raw.match(/(\d{6,})/);
+      var id = match ? match[1] : raw.replace(/^https?:\/\/(www\.)?vimeo\.com\//i, "");
+      return "https://vimeo.com/" + id;
+    }
+    return raw;
+  }
+
+  function applyMedia(ix) {
+    document.querySelectorAll("[data-cms-media]").forEach(function (el) {
+      var id = (el.getAttribute("data-cms-media") || "").trim();
+      var item = ix.mediaById[id];
+      if (!item) return;
+      var url = mediaUrl(item);
+      if (!url) return;
+      if (el.tagName === "A") {
+        el.href = url;
+        return;
+      }
+      if (el.tagName === "IMG") {
+        el.src = url;
+        if (item.alt_text) el.alt = item.alt_text;
+      }
+    });
+  }
+
   function applyCopyright(ix) {
     document.querySelectorAll("[data-cms-copyright]").forEach(function (el) {
       var number = String(el.getAttribute("data-cms-copyright") || "").trim();
@@ -354,6 +390,7 @@
     applySections(ix);
     applyCommercials(ix);
     applyLinks(ix);
+    applyMedia(ix);
     applyCopyright(ix);
     applyFooter(ix);
     document.documentElement.classList.add("cms-loaded");
