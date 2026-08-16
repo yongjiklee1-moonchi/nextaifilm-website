@@ -60,14 +60,18 @@ function initHeroVideo() {
 
   iframe.dataset.bound = "true";
 
+  const HOLD_MS = 3000;
   const player = new window.Vimeo.Player(iframe);
   const isIOS = isIOSDevice();
   let posterRevealed = false;
+  let videoReady = false;
+  let holdDone = false;
   let isMuted = true;
   let isPaused = true;
   let unlockBound = false;
   let userPaused = false;
   let iosRetryTimer = null;
+  let holdTimer = null;
 
   const stopIOSRetry = () => {
     if (iosRetryTimer) {
@@ -96,6 +100,18 @@ function initHeroVideo() {
 
     posterRevealed = true;
     revealHeroVideo(hero);
+  };
+
+  const maybeDissolve = () => {
+    if (posterRevealed || !videoReady || !holdDone) {
+      return;
+    }
+    showVideo();
+  };
+
+  const markVideoReady = () => {
+    videoReady = true;
+    maybeDissolve();
   };
 
   const tryPlay = (force) => {
@@ -178,17 +194,17 @@ function initHeroVideo() {
       .getCurrentTime()
       .then((t) => {
         if (t > 0.01) {
-          showVideo();
+          markVideoReady();
         }
       })
       .catch(() => {
-        showVideo();
+        markVideoReady();
       });
   });
 
   player.on("timeupdate", (data) => {
     if (data && data.seconds > 0.01) {
-      showVideo();
+      markVideoReady();
     }
   });
 
@@ -197,7 +213,7 @@ function initHeroVideo() {
       .getPaused()
       .then((paused) => {
         if (!paused) {
-          showVideo();
+          markVideoReady();
         }
       })
       .catch(() => {});
@@ -226,6 +242,11 @@ function initHeroVideo() {
       bindIOSUnlock();
     });
   });
+
+  holdTimer = window.setTimeout(function () {
+    holdDone = true;
+    maybeDissolve();
+  }, HOLD_MS);
 
   bindControl(soundToggle, () => {
     player
