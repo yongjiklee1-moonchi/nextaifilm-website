@@ -60,7 +60,7 @@ function initHeroVideo() {
 
   iframe.dataset.bound = "true";
 
-  const HOLD_MS = 3000;
+  const HOLD_MS = 1000;
   const player = new window.Vimeo.Player(iframe);
   const isIOS = isIOSDevice();
   let posterRevealed = false;
