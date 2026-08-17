@@ -211,7 +211,7 @@ html[lang="ko"] .logo__text {
   overflow: hidden;
   background: var(--naf-black);
   opacity: 1;
-  transition: opacity 1.4s ease;
+  transition: opacity 0.5s ease;
   pointer-events: none;
 }
 
