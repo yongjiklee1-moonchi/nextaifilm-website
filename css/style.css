@@ -210,8 +210,7 @@ html[lang="ko"] .logo__text {
   z-index: 2;
   overflow: hidden;
   background: var(--naf-black);
-  opacity: 1;
-  transition: opacity 0.5s ease;
+  transition: none;
   pointer-events: none;
 }
 
@@ -228,7 +227,7 @@ html[lang="ko"] .logo__text {
 }
 
 .hero.is-video-playing .hero__poster {
-  opacity: 0;
+  display: none;
 }
 
 .hero__player {
