@@ -1,14 +1,14 @@
 (function () {
   "use strict";
 
+  var MIN_FILL_MS = 2500;
+  var MAIL_TO = "hello@nextaifilm.com";
   var form = document.getElementById("consult-form");
   if (!form) return;
 
   var statusEl = document.getElementById("consult-form-status");
   var submitBtn = form.querySelector('button[type="submit"]');
-  var iframe = document.getElementById("consult-form-frame");
-  var config = window.NAF_CMS_CONFIG || {};
-  var endpoint = (config.WEB_APP_URL || "").trim();
+  var startedAt = Date.now();
 
   function setStatus(message, isError) {
     if (!statusEl) return;
@@ -18,35 +18,54 @@
     statusEl.classList.toggle("is-success", !!message && !isError);
   }
 
-  if (!endpoint) {
-    setStatus("Form is not connected yet. Please email hello@nextaifilm.com.", true);
-    if (submitBtn) submitBtn.disabled = true;
-    return;
+  function setStarted() {
+    startedAt = Date.now();
+    var startedInput = form.querySelector('input[name="formStarted"]');
+    if (startedInput) startedInput.value = String(startedAt);
   }
 
-  form.setAttribute("action", endpoint);
+  setStarted();
 
-  var agentInput = form.querySelector('input[name="userAgent"]');
-  if (agentInput) {
-    agentInput.value = navigator.userAgent || "";
-  }
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  var waiting = false;
-
-  form.addEventListener("submit", function () {
-    waiting = true;
-    setStatus("Sending…", false);
-    if (submitBtn) submitBtn.disabled = true;
-  });
-
-  if (iframe) {
-    iframe.addEventListener("load", function () {
-      if (!waiting) return;
-      waiting = false;
-      if (submitBtn) submitBtn.disabled = false;
+    var honeypot = form.querySelector('input[name="website"]');
+    if (honeypot && String(honeypot.value || "").trim()) {
       form.reset();
-      if (agentInput) agentInput.value = navigator.userAgent || "";
+      setStarted();
       setStatus("Thank you. We will get back to you soon.", false);
-    });
-  }
+      return;
+    }
+
+    if (Date.now() - startedAt < MIN_FILL_MS) {
+      setStatus("Please take a moment to complete the form, then send again.", true);
+      return;
+    }
+
+    var title = String((form.elements.title && form.elements.title.value) || "").trim();
+    var email = String((form.elements.email && form.elements.email.value) || "").trim();
+    var message = String((form.elements.message && form.elements.message.value) || "").trim();
+
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      setStatus("Please enter a valid email address.", true);
+      return;
+    }
+    if (message.length < 5) {
+      setStatus("Please write a short message.", true);
+      return;
+    }
+
+    var body = "From: " + email + "\n\n" + message;
+    var href =
+      "mailto:" +
+      MAIL_TO +
+      "?subject=" +
+      encodeURIComponent(title || "Inquiry") +
+      "&body=" +
+      encodeURIComponent(body);
+
+    window.location.href = href;
+    setStatus("Your email app should open with the message ready to send.", false);
+    if (submitBtn) submitBtn.disabled = false;
+  });
 })();
