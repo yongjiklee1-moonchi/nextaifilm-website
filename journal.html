@@ -13,26 +13,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Language" content="en" />
-  <title>Next AI Film | AI Filmmaking &amp; Creative Studio</title>
+  <title>Journal | NAF</title>
   <script>
     (function () {
       var lang = "en";
       try {
-        if (sessionStorage.getItem("naf-home-en") === "1") {
-          sessionStorage.removeItem("naf-home-en");
-          sessionStorage.setItem("naf-lang", "en");
-          document.documentElement.setAttribute("translate", "no");
-          document.documentElement.classList.add("notranslate");
-          if (!document.querySelector('meta[name="google"][content="notranslate"]')) {
-            var meta = document.createElement("meta");
-            meta.name = "google";
-            meta.content = "notranslate";
-            document.head.appendChild(meta);
-          }
-          ["googtrans", "googtransopt"].forEach(function (name) {
-            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-          });
-        }
         var saved = sessionStorage.getItem("naf-lang");
         if (saved === "en" || saved === "ko") lang = saved;
       } catch (e) {}
@@ -43,35 +28,13 @@
   <link rel="icon" href="assets/favicon-48.png" type="image/png" sizes="48x48" />
   <link rel="icon" href="assets/favicon.png" type="image/png" sizes="1024x1024" />
   <link rel="apple-touch-icon" href="assets/favicon.png" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Next AI Film",
-    "alternateName": "NAF",
-    "url": "https://www.nextaifilm.com",
-    "logo": "https://www.nextaifilm.com/assets/logo.png",
-    "email": "hello@nextaifilm.com",
-    "sameAs": [
-      "https://www.youtube.com/@HUMAaifilm",
-      "https://www.linkedin.com/in/yong-jik-lee",
-      "https://www.instagram.com/huma.aifilm/",
-      "https://vimeo.com/user220966275"
-    ]
-  }
-  </script>
-  <link rel="preconnect" href="https://player.vimeo.com" crossorigin />
-  <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin />
-  <link rel="preconnect" href="https://f.vimeocdn.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="assets/hero-poster.webp?v=20260817a" />
-  <link rel="stylesheet" href="css/style.css?v=20260825a" />
-  <link rel="stylesheet" href="css/protect.css?v=20260720i" />
-  <script src="https://player.vimeo.com/api/player.js" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=20260825c" />
+  <link rel="stylesheet" href="css/protect.css?v=20260720d" />
 </head>
-<body>
+<body class="subpage-body journal-page">
 
   <header class="header">
     <div class="header__inner">
@@ -106,95 +69,20 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero__video">
-        <div class="hero__poster" aria-hidden="true">
-          <img src="assets/hero-poster.webp?v=20260817a" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
-        </div>
-        <iframe
-          id="hero-player"
-          class="hero__player"
-          src="https://player.vimeo.com/video/1210521996?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&muted=1&loop=1&playsinline=1&controls=0&title=0&byline=0&portrait=0"
-          title="Sunflowers trailer"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          frameborder="0"
-        ></iframe>
+  <main class="page-main journal-main">
+    <div class="page-bar">
+      <div class="page-bar__inner">
+        <h1 class="page-bar__title" data-cms="journal.page_bar.title">Journal</h1>
+        <p class="page-bar__subtitle" data-cms="journal.page_bar.subtitle">Notes on process, cinema, and AI</p>
       </div>
+    </div>
 
-      <div class="hero__overlay"></div>
-
-      <div class="hero__ui">
-        <div class="hero__actions">
-          <a href="/contact" class="btn btn--hero" hidden>Start Your Project</a>
-          <div class="hero__controls">
-            <button type="button" class="video-control pause-toggle" aria-label="Pause" aria-pressed="false">
-              <svg class="video-control__icon video-control__icon--pause" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-              </svg>
-              <svg class="video-control__icon video-control__icon--play" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M8 5v14l11-7z"/>
-              </svg>
-            </button>
-            <button type="button" class="video-control sound-toggle" aria-label="Mute" aria-pressed="true">
-              <svg class="video-control__icon video-control__icon--muted" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-              </svg>
-              <svg class="video-control__icon video-control__icon--unmuted" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-              </svg>
-            </button>
-          </div>
-        </div>
+    <section class="page-content journal-body">
+      <div class="journal-body__inner">
+        <p class="journal-intro" data-cms="journal.intro.body">
+          A space for writing from Next AI Film — production notes, research, and reflections in progress.
+        </p>
       </div>
-    </section>
-
-    <section class="studio-summary">
-      <h2 class="studio-summary__title" data-cms="home.overview.title">Studio Overview</h2>
-      <p class="studio-summary__text" data-cms="home.overview.body">
-        We create cinematic AI commercials and films that combine storytelling, visual artistry, and<br />
-        cutting-edge AI production. From concept to final delivery, we help brands and creators bring powerful ideas&nbsp;to&nbsp;life.
-      </p>
-    </section>
-
-    <section class="menu-highlights">
-      <a href="/commercial" class="menu-highlights__item">
-        <h3>Commercial</h3>
-        <p>AI-powered commercials for brands, products, and digital campaigns.</p>
-      </a>
-      <a href="/film" class="menu-highlights__item">
-        <h3>Film</h3>
-        <p>Original short films and cinematic storytelling driven by creative vision.</p>
-      </a>
-      <a href="/awards" class="menu-highlights__item">
-        <h3>Awards</h3>
-        <p>International recognition for innovation in AI filmmaking and visual storytelling.</p>
-      </a>
-    </section>
-
-    <section id="about" class="section">
-      <h2>
-        <a href="/about" class="section-heading-link">
-          <span class="section-face-mark" aria-hidden="true">
-            <img src="assets/team/huma-face.png" alt="" width="28" height="28" decoding="async" />
-          </span>
-          About
-        </a>
-      </h2>
-      <p>
-        Next AI Film is an independent creative studio specializing in AI-powered filmmaking and commercial production.
-      </p>
-      <p>
-        We blend cinematic storytelling with advanced AI technology to create original visual experiences for audiences and brands worldwide.
-      </p>
-    </section>
-
-    <section id="contact" class="section">
-      <h2><a href="/contact">Contact</a></h2>
-      <p>For all inquiries</p>
-      <p><a href="mailto:hello@nextaifilm.com" class="contact__email">hello@nextaifilm.com</a></p>
     </section>
   </main>
 
@@ -253,17 +141,6 @@
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
             </a>
           </div>
-
-          <div class="footer__mascot">
-            <div class="footer__mascot-photo">
-              <img src="assets/team/studio-companion.png" alt="Moong Chi" width="48" height="48" loading="lazy" decoding="async" />
-            </div>
-            <div class="footer__mascot-info">
-              <p class="footer__mascot-name">Moong Chi (뭉치)</p>
-              <p class="footer__mascot-role">Studio Companion<br />Chief Happiness Officer</p>
-              <p class="footer__mascot-note">Keeping the studio smiling.</p>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -286,10 +163,8 @@
   </button>
   <script src="js/cms-config.js?v=20260808d"></script>
   <script src="js/cms.js?v=20260808g" defer></script>
-
   <script src="js/nav.js?v=20260726a"></script>
-  <script src="js/i18n.js?v=20260808c" defer></script>
-  <script src="js/video.js?v=20260817b" defer></script>
+  <script src="js/i18n.js?v=20260825c" defer></script>
   <script src="js/protect.js?v=20260723a" defer></script>
 </body>
 </html>
