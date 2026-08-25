@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260825a" />
+  <link rel="stylesheet" href="css/style.css?v=20260825b" />
   <link rel="stylesheet" href="css/protect.css?v=20260720d" />
 </head>
 <body class="subpage-body lab-page">
@@ -69,21 +69,88 @@
   </header>
 
   <main class="page-main lab-main">
-    <div class="page-bar">
-      <div class="page-bar__inner">
-        <h1 class="page-bar__title" data-cms="lab.page_bar.title">Lab</h1>
-        <p class="page-bar__subtitle" data-cms="lab.page_bar.subtitle">Experiments in AI cinema</p>
+    <section class="lab-hero" aria-label="NAF Lab">
+      <img
+        class="lab-hero__image"
+        src="assets/lab/lab-hero.png"
+        alt=""
+        width="1920"
+        height="1080"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <div class="lab-hero__shade" aria-hidden="true"></div>
+      <div class="lab-hero__copy">
+        <h1 class="lab-hero__title">NAF LAB</h1>
+        <p class="lab-hero__sub">AI filmmaking experiments, motion studies &amp; visual tests</p>
+        <p class="lab-hero__status">Work in Progress</p>
       </div>
-    </div>
+    </section>
 
-    <section class="page-content lab-body">
-      <div class="lab-body__inner">
-        <p class="lab-intro" data-cms="lab.intro.body">
-          A space for experiments, studies, and work in progress from Next AI Film.
-        </p>
+    <section class="lab-body">
+      <div class="lab-layout">
+        <div id="lab-grid" class="lab-grid" aria-label="Lab experiments"></div>
+
+        <aside class="lab-side">
+          <div class="lab-panel">
+            <h2 class="lab-panel__title">NAF LAB</h2>
+            <p class="lab-panel__text">
+              A playground for AI cinematography — short tests, look development, and unfinished ideas before they become films.
+            </p>
+            <ul class="lab-checks">
+              <li>Motion &amp; performance tests</li>
+              <li>Camera &amp; drone studies</li>
+              <li>Look development</li>
+              <li>Sound &amp; lip-sync experiments</li>
+            </ul>
+            <h3 class="lab-exploring__heading">Now Exploring</h3>
+            <ul id="lab-exploring" class="lab-exploring"></ul>
+          </div>
+
+          <div class="lab-tools">
+            <button type="button" class="lab-tools__connect" id="lab-connect-btn">
+              Connect video
+            </button>
+            <label class="lab-tools__sort">
+              <span>Sort</span>
+              <select id="lab-sort">
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="title">Title</option>
+                <option value="manual">Default order</option>
+              </select>
+            </label>
+          </div>
+        </aside>
       </div>
     </section>
   </main>
+
+  <dialog class="lab-dialog" id="lab-connect-dialog">
+    <form id="lab-connect-form">
+      <h2>Connect video</h2>
+      <p>Paste a Vimeo, YouTube, or MP4 link for an experiment. The card will open that video.</p>
+      <label>
+        <span>Experiment</span>
+        <select id="lab-connect-item" required></select>
+      </label>
+      <label>
+        <span>Video URL</span>
+        <input id="lab-connect-url" type="text" inputmode="url" placeholder="https://vimeo.com/…" autocomplete="off" />
+      </label>
+      <p id="lab-connect-status" class="lab-dialog__status" aria-live="polite"></p>
+      <div class="lab-dialog__actions">
+        <button type="button" id="lab-connect-clear">Clear URL</button>
+        <button type="button" data-lab-dialog-close>Close</button>
+        <button type="submit">Save link</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="lab-lightbox" id="lab-lightbox" hidden>
+    <button type="button" class="lab-lightbox__close" id="lab-lightbox-close" aria-label="Close video">&times;</button>
+    <div class="lab-lightbox__frame" id="lab-lightbox-frame"></div>
+  </div>
 
   <footer class="footer">
     <div class="footer__inner">
@@ -174,6 +241,7 @@
   <script src="js/cms.js?v=20260808g" defer></script>
   <script src="js/nav.js?v=20260726a"></script>
   <script src="js/i18n.js?v=20260825a" defer></script>
+  <script src="js/lab.js?v=20260825a" defer></script>
   <script src="js/protect.js?v=20260723a" defer></script>
 </body>
 </html>
