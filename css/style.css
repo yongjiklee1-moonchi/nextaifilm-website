@@ -107,7 +107,7 @@ img {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 2rem;
+  gap: 1.35rem;
   list-style: none;
 }
 
@@ -151,10 +151,14 @@ html[lang="ko"] .logo__text {
 }
 
 .nav__list li:nth-child(4) a {
-  min-width: 2.75rem;
+  min-width: 2.25rem;
 }
 
 .nav__list li:nth-child(5) a {
+  min-width: 2.75rem;
+}
+
+.nav__list li:nth-child(6) a {
   min-width: 3.5rem;
 }
 
@@ -2695,6 +2699,28 @@ a.contact-cell:hover .contact-icon {
   background: #033a1b;
 }
 
+.lab-page .page-bar {
+  background: #1c1548;
+}
+
+.lab-body {
+  background: var(--naf-black);
+}
+
+.lab-body__inner {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 4rem) clamp(4rem, 8vw, 6rem);
+}
+
+.lab-intro {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+}
+
 .inquire-body {
   background: var(--naf-black);
 }
@@ -3522,20 +3548,11 @@ a.contact-cell:hover .contact-icon {
   }
 }
 
-@media (max-width: 480px) {
-  .header__inner {
-    padding: 0 0.75rem;
-    gap: 0.5rem;
-  }
-
-  .logo {
-    gap: 0.3rem;
-    font-size: 0.75rem;
-  }
-
+@media (max-width: 920px) {
   .menu-toggle {
     display: flex;
     flex-shrink: 0;
+    order: 3;
   }
 
   .header__end {
@@ -3544,10 +3561,6 @@ a.contact-cell:hover .contact-icon {
 
   .lang-switch {
     order: 2;
-  }
-
-  .menu-toggle {
-    order: 3;
   }
 
   .nav {
@@ -3578,7 +3591,8 @@ a.contact-cell:hover .contact-icon {
   .nav__list li:nth-child(2) a,
   .nav__list li:nth-child(3) a,
   .nav__list li:nth-child(4) a,
-  .nav__list li:nth-child(5) a {
+  .nav__list li:nth-child(5) a,
+  .nav__list li:nth-child(6) a {
     min-width: 0;
     width: auto;
     display: inline-block;
@@ -3606,6 +3620,18 @@ a.contact-cell:hover .contact-icon {
 
   .menu-toggle.open span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .header__inner {
+    padding: 0 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .logo {
+    gap: 0.3rem;
+    font-size: 0.75rem;
   }
 
   .footer__grid {
