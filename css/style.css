@@ -159,10 +159,6 @@ html[lang="ko"] .logo__text {
 }
 
 .nav__list li:nth-child(6) a {
-  min-width: 2.75rem;
-}
-
-.nav__list li:nth-child(7) a {
   min-width: 3.5rem;
 }
 
