@@ -107,7 +107,7 @@ img {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 1.35rem;
+  gap: 1.1rem;
   list-style: none;
 }
 
@@ -155,10 +155,14 @@ html[lang="ko"] .logo__text {
 }
 
 .nav__list li:nth-child(5) a {
-  min-width: 2.75rem;
+  min-width: 4rem;
 }
 
 .nav__list li:nth-child(6) a {
+  min-width: 2.75rem;
+}
+
+.nav__list li:nth-child(7) a {
   min-width: 3.5rem;
 }
 
@@ -2699,6 +2703,28 @@ a.contact-cell:hover .contact-icon {
   background: #033a1b;
 }
 
+.journal-page .page-bar {
+  background: #2a1a12;
+}
+
+.journal-body {
+  background: var(--naf-black);
+}
+
+.journal-body__inner {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 4rem) clamp(4rem, 8vw, 6rem);
+}
+
+.journal-intro {
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+}
+
 .lab-page .page-bar {
   display: none;
 }
@@ -3974,7 +4000,7 @@ body.lab-lightbox-open {
   }
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1100px) {
   .menu-toggle {
     display: flex;
     flex-shrink: 0;
@@ -4018,7 +4044,8 @@ body.lab-lightbox-open {
   .nav__list li:nth-child(3) a,
   .nav__list li:nth-child(4) a,
   .nav__list li:nth-child(5) a,
-  .nav__list li:nth-child(6) a {
+  .nav__list li:nth-child(6) a,
+  .nav__list li:nth-child(7) a {
     min-width: 0;
     width: auto;
     display: inline-block;
