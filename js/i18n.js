@@ -36,7 +36,9 @@
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       if (!key) return;
-      var value = t(key);
+      var dict = translations && (translations[currentLang] || translations.en);
+      var value = dict && dict[key];
+      if (!value) return;
       if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
         el.setAttribute("placeholder", value);
       } else {
@@ -112,7 +114,7 @@
   }
 
   function load() {
-    fetch("data/translations.json", { cache: "no-cache" })
+    fetch("data/translations.json?v=20260826a", { cache: "no-cache" })
       .then(function (res) {
         if (!res.ok) throw new Error("translations missing");
         return res.json();
