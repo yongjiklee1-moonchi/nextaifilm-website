@@ -107,7 +107,7 @@ img {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 1.1rem;
+  gap: 1.5rem;
   list-style: none;
 }
 
@@ -136,26 +136,6 @@ html[lang="ko"] .logo__text {
   font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
   font-size: 0.8em;
   letter-spacing: 0.03em;
-}
-
-.nav__list li:nth-child(1) a {
-  min-width: 2.5rem;
-}
-
-.nav__list li:nth-child(2) a {
-  min-width: 6.25rem;
-}
-
-.nav__list li:nth-child(3) a {
-  min-width: 5.5rem;
-}
-
-.nav__list li:nth-child(4) a {
-  min-width: 2.75rem;
-}
-
-.nav__list li:nth-child(5) a {
-  min-width: 3.5rem;
 }
 
 .nav__list a:hover,
@@ -2650,6 +2630,15 @@ a.contact-cell:hover .contact-icon {
 .consult-form__submit:disabled {
   opacity: 0.55;
   cursor: wait;
+}
+
+.consult-form__hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .consult-form__cancel {
