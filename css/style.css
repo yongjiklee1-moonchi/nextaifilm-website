@@ -808,6 +808,7 @@ html[lang="ko"] .logo__text {
 .about-member__photo--center {
   width: calc(72px * 0.8);
   height: calc(72px * 0.8);
+  justify-self: center;
 }
 
 .about-member__photo--center img {
