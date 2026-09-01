@@ -773,23 +773,23 @@ html[lang="ko"] .logo__text {
 
 .about-member {
   display: grid;
-  grid-template-columns: 88px minmax(0, 1fr);
-  gap: 1.1rem;
-  align-items: start;
-  padding: 1.1rem 0;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 1.15rem 0;
 }
 
 .about-member:first-of-type {
-  padding-top: 0;
+  padding-top: 0.15rem;
 }
 
 .about-member + .about-member {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .about-member__photo {
-  width: 88px;
-  height: 88px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -805,12 +805,12 @@ html[lang="ko"] .logo__text {
   object-position: center top;
 }
 
-.about-member__role {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--naf-yellow);
-  margin-bottom: 0.2rem;
+.about-member__photo--center img {
+  object-position: center center;
+}
+
+.about-member__info {
+  min-width: 0;
 }
 
 .about-member__name {
@@ -818,40 +818,23 @@ html[lang="ko"] .logo__text {
   font-size: 1.05rem;
   font-weight: 500;
   color: #fff;
-  margin-bottom: 0.15rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem 0.4rem;
-}
-
-.about-member__nick {
-  color: var(--naf-yellow);
-}
-
-.about-member__nick-symbol {
-  width: 1.7rem;
-  height: 1.7rem;
-  object-fit: contain;
-  object-position: center center;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  flex-shrink: 0;
-  vertical-align: middle;
+  margin: 0 0 0.2rem;
+  line-height: 1.3;
 }
 
 .about-member__title {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.65);
-  margin-bottom: 0.5rem;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+  line-height: 1.4;
 }
 
 .about-member__bio {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.82rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.58);
+  margin: 0.35rem 0 0;
 }
 
 .about-companion {
@@ -3751,23 +3734,13 @@ body.lab-lightbox-open {
   }
 
   .about-member {
-    grid-template-columns: 72px minmax(0, 1fr);
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 0.9rem;
   }
 
   .about-member__photo {
-    width: 72px;
-    height: 72px;
-  }
-
-  .about-companion {
-    grid-template-columns: 72px minmax(0, 1fr);
-    gap: 1.1rem;
-  }
-
-  .about-companion__photo {
-    width: 52px;
-    height: 52px;
-    justify-self: center;
+    width: 64px;
+    height: 64px;
   }
 
   .about-values__inner {
