@@ -717,7 +717,10 @@ html[lang="ko"] .logo__text {
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.82);
   margin-bottom: 0;
-  flex: 1;
+}
+
+.about-intro__text + .about-intro__text {
+  margin-top: 0.85rem;
 }
 
 .about-intro__links {
