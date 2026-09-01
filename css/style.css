@@ -805,6 +805,11 @@ html[lang="ko"] .logo__text {
   object-position: center top;
 }
 
+.about-member__photo--center {
+  width: calc(72px * 0.8);
+  height: calc(72px * 0.8);
+}
+
 .about-member__photo--center img {
   object-position: center center;
 }
@@ -3741,6 +3746,11 @@ body.lab-lightbox-open {
   .about-member__photo {
     width: 64px;
     height: 64px;
+  }
+
+  .about-member__photo--center {
+    width: calc(64px * 0.8);
+    height: calc(64px * 0.8);
   }
 
   .about-values__inner {
