@@ -1,4 +1,4 @@
-/* Content protection — selection & drag deterrence only */
+/* Content protection — selection, drag, and save-as deterrence */
 
 *,
 *::before,
@@ -19,9 +19,18 @@ canvas {
   user-drag: none;
   -webkit-user-select: none;
   user-select: none;
+  -webkit-touch-callout: none;
 }
 
-/* Keep form fields usable if added later */
+video::-webkit-media-controls-download-button {
+  display: none;
+}
+
+video::-internal-media-controls-download-button {
+  display: none;
+}
+
+/* Keep form fields usable */
 input,
 textarea,
 select,

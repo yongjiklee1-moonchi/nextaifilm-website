@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; worker-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; upgrade-insecure-requests" />
   <title>Page not found | NAF</title>
   <!--
     GitHub Pages cannot emit HTTP 410.
@@ -15,7 +17,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=20260825a" />
+  <link rel="stylesheet" href="/css/style.css?v=20260826a" />
+  <link rel="stylesheet" href="/css/protect.css?v=20260904p" />
   <style>
     .gone-main {
       min-height: 70vh;
@@ -95,5 +98,6 @@
       }
     })();
   </script>
+  <script src="/js/protect.js?v=20260904p" defer></script>
 </body>
 </html>
