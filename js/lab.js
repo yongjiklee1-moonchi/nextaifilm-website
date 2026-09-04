@@ -2,54 +2,21 @@
   "use strict";
 
   var DATA_URL = "data/lab.json";
-  var SORT_KEY = "naf-lab-sort";
 
   var grid = document.getElementById("lab-grid");
-  var exploring = document.getElementById("lab-exploring");
-  var sortSelect = document.getElementById("lab-sort");
-  var lightbox = document.getElementById("lab-lightbox");
-  var lightboxFrame = document.getElementById("lab-lightbox-frame");
-  var lightboxClose = document.getElementById("lab-lightbox-close");
+  var player = document.getElementById("lab-player");
+  var playerFrame = document.getElementById("lab-player-frame");
+  var playerIdle = document.getElementById("lab-player-idle");
 
   if (!grid) return;
 
   var items = [];
+  var activeId = "";
 
-  function readSort() {
-    try {
-      return localStorage.getItem(SORT_KEY) || "manual";
-    } catch (e) {
-      return "manual";
-    }
-  }
-
-  function writeSort(value) {
-    try {
-      localStorage.setItem(SORT_KEY, value);
-    } catch (e) {}
-  }
-
-  function sortedItems() {
-    var mode = (sortSelect && sortSelect.value) || readSort();
-    var copy = items.slice();
-    if (mode === "oldest") {
-      copy.sort(function (a, b) {
-        return String(a.date).localeCompare(String(b.date)) || a.sort - b.sort;
-      });
-    } else if (mode === "title") {
-      copy.sort(function (a, b) {
-        return String(a.title).localeCompare(String(b.title));
-      });
-    } else if (mode === "manual") {
-      copy.sort(function (a, b) {
-        return Number(a.sort) - Number(b.sort);
-      });
-    } else {
-      copy.sort(function (a, b) {
-        return String(b.date).localeCompare(String(a.date)) || a.sort - b.sort;
-      });
-    }
-    return copy;
+  function orderedItems() {
+    return items.slice().sort(function (a, b) {
+      return Number(a.sort) - Number(b.sort);
+    });
   }
 
   function parseVideo(url) {
@@ -89,18 +56,14 @@
 
   function cardHtml(item) {
     var linked = !!(item.video && String(item.video).trim());
-    var tag = linked ? "a" : "article";
-    var href = linked ? ' href="#"' : "";
+    var active = item.id === activeId;
     return (
-      "<" +
-      tag +
-      ' class="lab-card' +
+      '<button type="button" class="lab-card' +
       (linked ? " is-linked" : "") +
+      (active ? " is-active" : "") +
       '" data-lab-id="' +
       escapeHtml(item.id) +
-      '"' +
-      href +
-      ">" +
+      '">' +
       '<div class="lab-card__media">' +
       '<img src="' +
       escapeHtml(item.thumb) +
@@ -108,84 +71,63 @@
       '" alt="' +
       escapeHtml(item.title) +
       '" width="640" height="360" loading="lazy" decoding="async" />' +
-      (linked ? '<span class="lab-card__play" aria-hidden="true"></span>' : "") +
+      '<span class="lab-card__play" aria-hidden="true"></span>' +
       "</div>" +
-      '<h2 class="lab-card__title">' +
+      '<span class="lab-card__title">' +
       escapeHtml(item.title) +
-      "</h2>" +
-      "</" +
-      tag +
-      ">"
-    );
-  }
-
-  function exploringHtml(item) {
-    return (
-      '<li class="lab-exploring__item">' +
-      '<img src="' +
-      escapeHtml(item.thumb) +
-      '" alt="" width="56" height="40" loading="lazy" decoding="async" />' +
-      "<div>" +
-      "<strong>" +
-      escapeHtml(item.title) +
-      "</strong>" +
-      "<span>" +
-      escapeHtml(item.exploringNote || item.category) +
       "</span>" +
-      "</div>" +
-      "</li>"
+      "</button>"
     );
   }
 
   function render() {
-    var list = sortedItems();
-    grid.innerHTML = list.map(cardHtml).join("");
-    if (exploring) {
-      var side = list.filter(function (item) {
-        return item.exploring;
-      });
-      if (!side.length) side = list.slice(0, 3);
-      exploring.innerHTML = side.slice(0, 3).map(exploringHtml).join("");
-    }
+    grid.innerHTML = orderedItems().map(cardHtml).join("");
   }
 
-  function openLightbox(item) {
-    var parsed = parseVideo(item.video);
-    if (!parsed) return;
-    if (parsed.type === "link") {
-      window.open(parsed.href, "_blank", "noopener,noreferrer");
-      return;
-    }
-    if (!lightbox || !lightboxFrame) {
-      window.open(item.video, "_blank", "noopener,noreferrer");
-      return;
-    }
+  function playItem(item) {
+    if (!player || !playerFrame || !item) return;
 
-    lightboxFrame.innerHTML = "";
-    if (parsed.type === "file") {
+    activeId = item.id;
+    render();
+    player.classList.add("is-playing");
+    if (playerIdle) playerIdle.hidden = true;
+    playerFrame.innerHTML = "";
+
+    var parsed = parseVideo(item.video);
+    if (parsed && parsed.type === "file") {
       var video = document.createElement("video");
       video.src = parsed.src;
       video.controls = true;
       video.autoplay = true;
       video.playsInline = true;
-      lightboxFrame.appendChild(video);
-    } else {
+      video.setAttribute("playsinline", "");
+      video.setAttribute("controlslist", "nodownload noplaybackrate noremoteplayback");
+      playerFrame.appendChild(video);
+      var playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(function () {});
+      }
+    } else if (parsed && (parsed.type === "vimeo" || parsed.type === "youtube")) {
       var iframe = document.createElement("iframe");
       iframe.src = parsed.embed;
       iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
       iframe.setAttribute("allowfullscreen", "");
       iframe.title = item.title;
-      lightboxFrame.appendChild(iframe);
+      playerFrame.appendChild(iframe);
+    } else if (parsed && parsed.type === "link") {
+      window.open(parsed.href, "_blank", "noopener,noreferrer");
+      player.classList.remove("is-playing");
+      if (playerIdle) playerIdle.hidden = false;
+    } else {
+      var still = document.createElement("img");
+      still.src = item.thumb + "?v=20260904a";
+      still.alt = item.title;
+      playerFrame.appendChild(still);
     }
-    lightbox.hidden = false;
-    document.body.classList.add("lab-lightbox-open");
-  }
 
-  function closeLightbox() {
-    if (!lightbox || !lightboxFrame) return;
-    lightbox.hidden = true;
-    lightboxFrame.innerHTML = "";
-    document.body.classList.remove("lab-lightbox-open");
+    if (window.matchMedia("(max-width: 980px)").matches) {
+      player.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   function findItem(id) {
@@ -199,27 +141,8 @@
     var card = event.target.closest("[data-lab-id]");
     if (!card) return;
     var item = findItem(card.getAttribute("data-lab-id"));
-    if (!item || !item.video) return;
-    event.preventDefault();
-    openLightbox(item);
-  });
-
-  if (sortSelect) {
-    sortSelect.value = readSort();
-    sortSelect.addEventListener("change", function () {
-      writeSort(sortSelect.value);
-      render();
-    });
-  }
-
-  if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
-  if (lightbox) {
-    lightbox.addEventListener("click", function (event) {
-      if (event.target === lightbox) closeLightbox();
-    });
-  }
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") closeLightbox();
+    if (!item) return;
+    playItem(item);
   });
 
   fetch(DATA_URL, { cache: "no-cache" })
