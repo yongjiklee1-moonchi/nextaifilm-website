@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260904e" />
+  <link rel="stylesheet" href="css/style.css?v=20260904f" />
   <link rel="stylesheet" href="css/protect.css?v=20260904p" />
 </head>
 <body class="subpage-body lab-page">
@@ -109,9 +109,6 @@
           </div>
 
           <div class="lab-tools">
-            <button type="button" class="lab-tools__connect" id="lab-connect-btn">
-              Connect video
-            </button>
             <label class="lab-tools__sort">
               <span>Sort</span>
               <select id="lab-sort">
@@ -126,27 +123,6 @@
       </div>
     </section>
   </main>
-
-  <dialog class="lab-dialog" id="lab-connect-dialog">
-    <form id="lab-connect-form">
-      <h2>Connect video</h2>
-      <p>Paste a Vimeo, YouTube, or MP4 link for an experiment. The card will open that video.</p>
-      <label>
-        <span>Experiment</span>
-        <select id="lab-connect-item" required></select>
-      </label>
-      <label>
-        <span>Video URL</span>
-        <input id="lab-connect-url" type="text" inputmode="url" placeholder="https://vimeo.com/…" autocomplete="off" />
-      </label>
-      <p id="lab-connect-status" class="lab-dialog__status" aria-live="polite"></p>
-      <div class="lab-dialog__actions">
-        <button type="button" id="lab-connect-clear">Clear URL</button>
-        <button type="button" data-lab-dialog-close>Close</button>
-        <button type="submit">Save link</button>
-      </div>
-    </form>
-  </dialog>
 
   <div class="lab-lightbox" id="lab-lightbox" hidden>
     <button type="button" class="lab-lightbox__close" id="lab-lightbox-close" aria-label="Close video">&times;</button>
@@ -239,7 +215,7 @@
   </button>
   <script src="js/nav.js?v=20260726a"></script>
   <script src="js/i18n.js?v=20260826a" defer></script>
-  <script src="js/lab.js?v=20260904a" defer></script>
+  <script src="js/lab.js?v=20260904b" defer></script>
   <script src="js/protect.js?v=20260904p" defer></script>
 </body>
 </html>
