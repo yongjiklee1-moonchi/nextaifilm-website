@@ -765,6 +765,27 @@ html[lang="ko"] .logo__text {
 .about-team {
   border-left: 1px solid rgba(255, 255, 255, 0.12);
   padding-left: clamp(1.5rem, 3vw, 2.5rem);
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+.about-team-visual {
+  margin: 0;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.about-team-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 46%;
 }
 
 .about-team .about-label {
@@ -3737,6 +3758,13 @@ body.lab-lightbox-open {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 1.75rem;
     margin-top: 0.5rem;
+    height: auto;
+  }
+
+  .about-team-visual {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1024 / 682;
   }
 
   .about-member {
