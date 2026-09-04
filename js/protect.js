@@ -2,7 +2,15 @@
   "use strict";
 
   function isEditableTarget(target) {
-    if (!target || target.nodeType !== 1) {
+    if (!target) {
+      return false;
+    }
+
+    if (target.nodeType !== 1) {
+      target = target.parentElement;
+    }
+
+    if (!target) {
       return false;
     }
 
@@ -15,7 +23,7 @@
       return true;
     }
 
-    return false;
+    return Boolean(target.closest("input, textarea, select, [contenteditable='true']"));
   }
 
   function isBlockedShortcut(event) {
@@ -34,35 +42,80 @@
 
     var letter = typeof key === "string" ? key.toLowerCase() : "";
 
-    if (shift && (letter === "i" || letter === "j" || letter === "c")) {
+    if (shift && (letter === "i" || letter === "j" || letter === "c" || letter === "k" || letter === "e")) {
       return true;
     }
 
-    if (!shift && (letter === "u" || letter === "s" || letter === "a" || letter === "c")) {
+    if (!shift && (letter === "u" || letter === "s" || letter === "a" || letter === "c" || letter === "p")) {
       return true;
     }
 
     return false;
   }
 
-  document.addEventListener(
-    "dragstart",
-    function (event) {
-      var target = event.target;
-      if (target && (target.tagName === "IMG" || target.closest("img"))) {
-        event.preventDefault();
-      }
-    },
-    { passive: false }
-  );
+  function lockMedia(root) {
+    var scope = root && root.querySelectorAll ? root : document;
+    var nodes = scope.querySelectorAll("img, video");
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute("draggable", "false");
+    }
+
+    if (root && (root.tagName === "IMG" || root.tagName === "VIDEO")) {
+      root.setAttribute("draggable", "false");
+    }
+  }
 
   document.addEventListener(
     "contextmenu",
     function (event) {
-      var target = event.target;
-      if (target && (target.tagName === "VIDEO" || target.closest("video"))) {
-        event.preventDefault();
+      if (isEditableTarget(event.target)) {
+        return;
       }
+      event.preventDefault();
+    },
+    true
+  );
+
+  document.addEventListener(
+    "dragstart",
+    function (event) {
+      if (isEditableTarget(event.target)) {
+        return;
+      }
+      event.preventDefault();
+    },
+    { capture: true, passive: false }
+  );
+
+  document.addEventListener(
+    "selectstart",
+    function (event) {
+      if (isEditableTarget(event.target)) {
+        return;
+      }
+      event.preventDefault();
+    },
+    true
+  );
+
+  document.addEventListener(
+    "copy",
+    function (event) {
+      if (isEditableTarget(event.target)) {
+        return;
+      }
+      event.preventDefault();
+    },
+    true
+  );
+
+  document.addEventListener(
+    "cut",
+    function (event) {
+      if (isEditableTarget(event.target)) {
+        return;
+      }
+      event.preventDefault();
     },
     true
   );
@@ -81,4 +134,29 @@
     },
     true
   );
+
+  lockMedia(document);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      lockMedia(document);
+    });
+  }
+
+  if (typeof MutationObserver === "function") {
+    var observer = new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var added = mutations[i].addedNodes;
+        for (var j = 0; j < added.length; j++) {
+          var node = added[j];
+          if (node.nodeType !== 1) {
+            continue;
+          }
+          lockMedia(node);
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
 })();

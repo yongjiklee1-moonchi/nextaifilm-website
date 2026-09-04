@@ -40,7 +40,7 @@
 
   function readSort() {
     try {
-      return localStorage.getItem(SORT_KEY) || "newest";
+      return localStorage.getItem(SORT_KEY) || "manual";
     } catch (e) {
       return "newest";
     }
@@ -136,27 +136,15 @@
       '<div class="lab-card__media">' +
       '<img src="' +
       escapeHtml(item.thumb) +
+      "?v=20260904a" +
       '" alt="' +
       escapeHtml(item.title) +
       '" width="640" height="360" loading="lazy" decoding="async" />' +
-      '<span class="lab-card__play" aria-hidden="true"></span>' +
-      '<span class="lab-card__tag">' +
-      escapeHtml(item.category) +
-      "</span>" +
+      (linked ? '<span class="lab-card__play" aria-hidden="true"></span>' : "") +
       "</div>" +
-      '<div class="lab-card__meta">' +
-      '<div class="lab-card__row">' +
       '<h2 class="lab-card__title">' +
       escapeHtml(item.title) +
       "</h2>" +
-      '<span class="lab-card__date">' +
-      escapeHtml(item.dateLabel) +
-      "</span>" +
-      "</div>" +
-      '<p class="lab-card__desc">' +
-      escapeHtml(item.description) +
-      "</p>" +
-      "</div>" +
       "</" +
       tag +
       ">"
