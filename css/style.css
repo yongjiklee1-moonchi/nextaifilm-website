@@ -2412,7 +2412,7 @@ html[lang="ko"] .logo__text {
 }
 
 .contact-page .page-bar__inner {
-  max-width: min(1720px, 98vw);
+  max-width: min(1200px, 96vw);
 }
 
 .contact-page .contact-body {
@@ -2421,18 +2421,20 @@ html[lang="ko"] .logo__text {
 
 .contact-body__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(1rem, 2vw, 2rem);
-  max-width: min(1720px, 98vw);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3rem);
+  max-width: min(1200px, 96vw);
   margin: 0 auto;
-  align-items: stretch;
-  padding: clamp(1rem, 2vw, 1.5rem) clamp(0.5rem, 1.25vw, 1.25rem) 0;
+  align-items: start;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(0.5rem, 1.25vw, 1.25rem) clamp(2rem, 4vw, 3rem);
 }
 
 .contact-visual {
-  align-self: stretch;
-  height: 100%;
+  align-self: start;
+  width: 100%;
+  height: auto;
   min-height: 0;
+  aspect-ratio: 1 / 1;
   background-color: #111;
   overflow: hidden;
 }
@@ -2447,7 +2449,6 @@ html[lang="ko"] .logo__text {
   display: block;
   height: 100%;
   width: 100%;
-  max-width: none;
   object-fit: cover;
   object-position: center center;
 }
@@ -3719,16 +3720,12 @@ body.lab-lightbox-open {
     width: 100%;
     height: auto;
     min-height: 0;
-    overflow: visible;
+    aspect-ratio: 1 / 1;
   }
 
-  .contact-visual picture {
-    height: auto;
-    width: 100%;
-  }
-
+  .contact-visual picture,
   .contact-visual img {
-    height: auto;
+    height: 100%;
     width: 100%;
   }
 
