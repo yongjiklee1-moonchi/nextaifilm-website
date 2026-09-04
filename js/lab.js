@@ -2,18 +2,11 @@
   "use strict";
 
   var DATA_URL = "data/lab.json";
-  var LINK_KEY = "naf-lab-links";
   var SORT_KEY = "naf-lab-sort";
 
   var grid = document.getElementById("lab-grid");
   var exploring = document.getElementById("lab-exploring");
   var sortSelect = document.getElementById("lab-sort");
-  var connectBtn = document.getElementById("lab-connect-btn");
-  var dialog = document.getElementById("lab-connect-dialog");
-  var form = document.getElementById("lab-connect-form");
-  var itemSelect = document.getElementById("lab-connect-item");
-  var urlInput = document.getElementById("lab-connect-url");
-  var statusEl = document.getElementById("lab-connect-status");
   var lightbox = document.getElementById("lab-lightbox");
   var lightboxFrame = document.getElementById("lab-lightbox-frame");
   var lightboxClose = document.getElementById("lab-lightbox-close");
@@ -22,27 +15,11 @@
 
   var items = [];
 
-  function readLinks() {
-    try {
-      var raw = localStorage.getItem(LINK_KEY);
-      var parsed = raw ? JSON.parse(raw) : {};
-      return parsed && typeof parsed === "object" ? parsed : {};
-    } catch (e) {
-      return {};
-    }
-  }
-
-  function writeLinks(map) {
-    try {
-      localStorage.setItem(LINK_KEY, JSON.stringify(map));
-    } catch (e) {}
-  }
-
   function readSort() {
     try {
       return localStorage.getItem(SORT_KEY) || "manual";
     } catch (e) {
-      return "newest";
+      return "manual";
     }
   }
 
@@ -50,15 +27,6 @@
     try {
       localStorage.setItem(SORT_KEY, value);
     } catch (e) {}
-  }
-
-  function mergeLinks(list) {
-    var saved = readLinks();
-    return list.map(function (item) {
-      var next = Object.assign({}, item);
-      if (saved[item.id]) next.video = saved[item.id];
-      return next;
-    });
   }
 
   function sortedItems() {
@@ -169,15 +137,6 @@
     );
   }
 
-  function fillConnectSelect() {
-    if (!itemSelect) return;
-    itemSelect.innerHTML = items
-      .map(function (item) {
-        return '<option value="' + escapeHtml(item.id) + '">' + escapeHtml(item.title) + "</option>";
-      })
-      .join("");
-  }
-
   function render() {
     var list = sortedItems();
     grid.innerHTML = list.map(cardHtml).join("");
@@ -253,56 +212,6 @@
     });
   }
 
-  if (connectBtn && dialog) {
-    connectBtn.addEventListener("click", function () {
-      if (typeof dialog.showModal === "function") dialog.showModal();
-      else dialog.setAttribute("open", "");
-      if (statusEl) statusEl.textContent = "";
-      var current = itemSelect && itemSelect.value;
-      var item = findItem(current);
-      if (urlInput) urlInput.value = (item && item.video) || "";
-    });
-  }
-
-  if (itemSelect) {
-    itemSelect.addEventListener("change", function () {
-      var item = findItem(itemSelect.value);
-      if (urlInput) urlInput.value = (item && item.video) || "";
-    });
-  }
-
-  if (form) {
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      var id = itemSelect && itemSelect.value;
-      var url = urlInput ? urlInput.value.trim() : "";
-      if (!id) return;
-      var map = readLinks();
-      if (url) map[id] = url;
-      else delete map[id];
-      writeLinks(map);
-      items = mergeLinks(items);
-      render();
-      if (statusEl) {
-        statusEl.textContent = url ? "Video linked. Saved in this browser." : "Link removed.";
-      }
-    });
-  }
-
-  var clearBtn = document.getElementById("lab-connect-clear");
-  if (clearBtn) {
-    clearBtn.addEventListener("click", function () {
-      if (urlInput) urlInput.value = "";
-    });
-  }
-
-  document.querySelectorAll("[data-lab-dialog-close]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (dialog && typeof dialog.close === "function") dialog.close();
-      else if (dialog) dialog.removeAttribute("open");
-    });
-  });
-
   if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
   if (lightbox) {
     lightbox.addEventListener("click", function (event) {
@@ -319,8 +228,7 @@
       return res.json();
     })
     .then(function (data) {
-      items = mergeLinks(Array.isArray(data.items) ? data.items : []);
-      fillConnectSelect();
+      items = Array.isArray(data.items) ? data.items : [];
       render();
     })
     .catch(function () {
