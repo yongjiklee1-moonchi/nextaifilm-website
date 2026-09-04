@@ -154,6 +154,89 @@ html[lang="ko"] .logo__text {
   background: #ff8a00;
 }
 
+.nav__item--works {
+  position: relative;
+}
+
+.nav__works-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  padding: 0 0 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  color: #fff;
+  opacity: 0.9;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.nav__works-toggle::after {
+  content: "";
+  width: 0.38rem;
+  height: 0.38rem;
+  margin-top: -0.12rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+html[lang="ko"] .nav__works-toggle {
+  font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+  letter-spacing: 0.06em;
+}
+
+.nav__works-toggle:hover,
+.nav__works-toggle.active,
+.nav__item--works.is-open .nav__works-toggle,
+.nav__item--works:hover .nav__works-toggle {
+  opacity: 1;
+  color: var(--naf-yellow);
+}
+
+.nav__works-toggle.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0.7rem;
+  bottom: 0;
+  height: 1px;
+  background: #ff8a00;
+}
+
+.nav__sub {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 10.75rem;
+  margin: 0;
+  padding: 0.4rem 0;
+  list-style: none;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 130;
+}
+
+.nav__item--works:hover .nav__sub,
+.nav__item--works:focus-within .nav__sub,
+.nav__item--works.is-open .nav__sub {
+  display: block;
+}
+
+.nav__sub a {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -4017,6 +4100,46 @@ a.contact-cell:hover .contact-icon {
 
   .nav__list a {
     font-size: 0.875rem;
+  }
+
+  .nav__item--works {
+    width: 100%;
+  }
+
+  .nav__works-toggle {
+    font-size: 0.875rem;
+    padding-bottom: 0;
+  }
+
+  .nav__works-toggle.active::before {
+    display: none;
+  }
+
+  .nav__sub {
+    position: static;
+    transform: none;
+    display: none;
+    min-width: 0;
+    margin: 0.65rem 0 0 0.85rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+
+  .nav__item--works:hover .nav__sub,
+  .nav__item--works:focus-within .nav__sub {
+    display: none;
+  }
+
+  .nav__item--works.is-open .nav__sub {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .nav__sub a {
+    padding: 0;
   }
 
   .nav__list a.active::after {
