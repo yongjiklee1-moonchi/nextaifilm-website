@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260826a" />
+  <link rel="stylesheet" href="css/style.css?v=20260905a" />
   <link rel="stylesheet" href="css/protect.css?v=20260904p" />
 </head>
 <body class="subpage-body journal-page">
@@ -48,11 +48,16 @@
       <div class="header__end">
         <nav class="nav">
           <ul class="nav__list">
-            <li><a href="/film" data-i18n="nav.film">Film</a></li>
-            <li><a href="/commercial" data-i18n="nav.commercial">Commercial</a></li>
+            <li class="nav__item nav__item--works">
+              <button type="button" class="nav__works-toggle" aria-expanded="false" aria-haspopup="true" data-i18n="nav.works">Works</button>
+              <ul class="nav__sub">
+                <li><a href="/film" data-i18n="nav.film">Film</a></li>
+                <li><a href="/commercial" data-i18n="nav.commercial">Commercial</a></li>
+              </ul>
+            </li>
             <li><a href="/awards" data-i18n="nav.awards">Awards</a></li>
-            <li><a href="/about" data-i18n="nav.about">About</a></li>
             <li><a href="/lab" data-i18n="nav.lab">Lab</a></li>
+            <li><a href="/about" data-i18n="nav.about">About</a></li>
           </ul>
         </nav>
 
@@ -159,8 +164,8 @@
       <path d="M5 12l7-7 7 7"></path>
     </svg>
   </button>
-  <script src="js/nav.js?v=20260726a"></script>
-  <script src="js/i18n.js?v=20260826a" defer></script>
+  <script src="js/nav.js?v=20260904z"></script>
+  <script src="js/i18n.js?v=20260904z" defer></script>
   <script src="js/protect.js?v=20260904p" defer></script>
 </body>
 </html>
