@@ -40,7 +40,40 @@ document.querySelectorAll(".nav__list a").forEach((link) => {
 
   if (pageKey(href) === currentPage) {
     link.classList.add("active");
+    const worksItem = link.closest(".nav__item--works");
+    if (worksItem) {
+      const toggle = worksItem.querySelector(".nav__works-toggle");
+      if (toggle) toggle.classList.add("active");
+    }
   }
+});
+
+document.querySelectorAll(".nav__item--works").forEach((item) => {
+  const toggle = item.querySelector(".nav__works-toggle");
+  if (!toggle) return;
+
+  toggle.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const isOpen = item.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+    document.querySelectorAll(".nav__item--works").forEach((other) => {
+      if (other === item) return;
+      other.classList.remove("is-open");
+      const otherToggle = other.querySelector(".nav__works-toggle");
+      if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+});
+
+document.addEventListener("click", (event) => {
+  document.querySelectorAll(".nav__item--works.is-open").forEach((item) => {
+    if (item.contains(event.target)) return;
+    item.classList.remove("is-open");
+    const toggle = item.querySelector(".nav__works-toggle");
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+  });
 });
 
 function clearBrowserTranslateCookies() {

@@ -125,6 +125,7 @@
           en: {
             "nav.commercial": "Commercial",
             "nav.film": "Film",
+            "nav.works": "Works",
             "nav.awards": "Awards",
             "nav.lab": "Lab",
             "nav.journal": "Journal",
@@ -138,6 +139,7 @@
           ko: {
             "nav.commercial": "광고제작",
             "nav.film": "영화",
+            "nav.works": "작품",
             "nav.awards": "수상&성과",
             "nav.lab": "랩",
             "nav.journal": "저널",
