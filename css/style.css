@@ -769,6 +769,48 @@ html[lang="ko"] .logo__text {
   height: 100%;
   display: flex;
   align-items: stretch;
+  scroll-margin-top: 5.5rem;
+}
+
+.about-contact {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-contact .contact-info__title {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  margin-bottom: 0.45rem;
+}
+
+.about-contact .contact-info__intro {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+}
+
+.about-contact .contact-cell {
+  padding: 0.7rem 0.65rem;
+}
+
+.about-contact .contact-icon {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 0.4rem;
+}
+
+.about-contact .contact-cell__label {
+  font-size: 0.7rem;
+}
+
+.about-contact .contact-cell__value {
+  font-size: 0.82rem;
+  word-break: break-word;
+}
+
+.about-contact .contact-cta {
+  margin-top: auto;
 }
 
 .about-team-visual {
@@ -2876,10 +2918,55 @@ a.contact-cell:hover .contact-icon {
   transition: transform 0.35s ease;
 }
 
+.lab-card__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 1.5rem 0.75rem 0.7rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.84) 58%);
+  opacity: 0;
+  transform: translateY(0.35rem);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  text-align: left;
+}
+
+.lab-card:hover .lab-card__caption,
+.lab-card:focus-visible .lab-card__caption,
+.lab-card.is-active .lab-card__caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lab-card__caption strong {
+  display: block;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.lab-card__caption span {
+  display: block;
+  margin-top: 0.22rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.lab-card:hover .lab-card__play,
+.lab-card.is-active .lab-card__play {
+  opacity: 0;
+}
+
 .lab-card__play {
   position: absolute;
   left: 0.7rem;
   bottom: 0.7rem;
+  z-index: 1;
   width: 1.7rem;
   height: 1.7rem;
   border-radius: 50%;
