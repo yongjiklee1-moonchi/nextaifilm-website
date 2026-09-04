@@ -695,7 +695,7 @@ html[lang="ko"] .logo__text {
 .about-intro {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1.25rem;
   min-height: 100%;
 }
@@ -809,8 +809,40 @@ html[lang="ko"] .logo__text {
   word-break: break-word;
 }
 
-.about-contact .contact-cta {
+.about-contact .contact-board {
+  margin-bottom: 0.85rem;
+}
+
+.about-contact .contact-icon--svg {
+  fill: var(--naf-yellow);
+}
+
+.about-contact-mail {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
   margin-top: auto;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.about-contact-mail:hover {
+  background: rgba(245, 224, 0, 0.05);
+}
+
+.about-contact-mail .contact-icon {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.about-contact-mail__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .about-team-visual {
