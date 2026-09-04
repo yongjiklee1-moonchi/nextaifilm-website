@@ -686,7 +686,7 @@ html[lang="ko"] .logo__text {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(1rem, 2vw, 1.5rem);
-  align-items: start;
+  align-items: stretch;
   max-width: min(1200px, 96vw);
   margin: 0 auto;
   padding: 0;
@@ -766,34 +766,25 @@ html[lang="ko"] .logo__text {
   border-left: 1px solid rgba(255, 255, 255, 0.12);
   padding-left: clamp(1.15rem, 2.4vw, 1.75rem);
   min-height: 0;
-  height: auto;
+  height: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   scroll-margin-top: 5.5rem;
 }
 
 .about-contact {
   width: 100%;
   min-height: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 .about-contact.contact-info--frame {
   background: transparent;
   border: none;
   padding: 0;
-}
-
-.about-contact .contact-info__title {
-  font-size: clamp(1.15rem, 2vw, 1.4rem);
-  margin-bottom: 0.45rem;
-}
-
-.about-contact .contact-info__intro {
-  font-size: 0.85rem;
-  line-height: 1.55;
-  margin-bottom: 0.7rem;
 }
 
 .about-contact .contact-cell {
@@ -822,6 +813,7 @@ html[lang="ko"] .logo__text {
 }
 
 .about-contact .contact-board {
+  flex: 1 1 auto;
   margin-bottom: 0.65rem;
 }
 
