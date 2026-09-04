@@ -33,9 +33,12 @@
 
     var yt = raw.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/i);
     if (yt) {
+      var startMatch = raw.match(/[?&]t=(\d+)/i);
+      var embed = "https://www.youtube.com/embed/" + yt[1] + "?autoplay=1&rel=0";
+      if (startMatch) embed += "&start=" + startMatch[1];
       return {
         type: "youtube",
-        embed: "https://www.youtube.com/embed/" + yt[1] + "?autoplay=1&rel=0"
+        embed: embed
       };
     }
 
@@ -72,6 +75,14 @@
       escapeHtml(item.title) +
       '" width="640" height="360" loading="lazy" decoding="async" />' +
       '<span class="lab-card__play" aria-hidden="true"></span>' +
+      '<span class="lab-card__caption">' +
+      "<strong>" +
+      escapeHtml(item.title) +
+      "</strong>" +
+      "<span>" +
+      escapeHtml(item.description || item.category) +
+      "</span>" +
+      "</span>" +
       "</div>" +
       '<span class="lab-card__title">' +
       escapeHtml(item.title) +
@@ -84,9 +95,19 @@
     grid.innerHTML = orderedItems().map(cardHtml).join("");
   }
 
-  function playItem(item) {
+  function latestItem() {
+    var list = items.slice().sort(function (a, b) {
+      var byDate = String(b.date || "").localeCompare(String(a.date || ""));
+      if (byDate) return byDate;
+      return Number(a.sort) - Number(b.sort);
+    });
+    return list[0] || null;
+  }
+
+  function playItem(item, options) {
     if (!player || !playerFrame || !item) return;
 
+    var opts = options || {};
     activeId = item.id;
     render();
     player.classList.add("is-playing");
@@ -125,7 +146,7 @@
       playerFrame.appendChild(still);
     }
 
-    if (window.matchMedia("(max-width: 980px)").matches) {
+    if (!opts.silent && window.matchMedia("(max-width: 980px)").matches) {
       player.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
@@ -153,6 +174,8 @@
     .then(function (data) {
       items = Array.isArray(data.items) ? data.items : [];
       render();
+      var first = latestItem();
+      if (first) playItem(first, { silent: true });
     })
     .catch(function () {
       grid.innerHTML = "<p class=\"lab-empty\">Lab experiments will appear here.</p>";
