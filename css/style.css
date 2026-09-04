@@ -2999,21 +2999,6 @@ a.contact-cell:hover .contact-icon {
   gap: 0.75rem;
 }
 
-.lab-tools__connect {
-  width: 100%;
-  border: 1px solid #c48a3a;
-  background: transparent;
-  color: #c48a3a;
-  padding: 0.7rem 0.85rem;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-}
-
-.lab-tools__connect:hover {
-  background: rgba(196, 138, 58, 0.12);
-}
-
 .lab-tools__sort {
   display: flex;
   flex-direction: column;
@@ -3038,77 +3023,6 @@ a.contact-cell:hover .contact-icon {
 .lab-empty {
   color: #8a8a8a;
   padding: 2rem 0;
-}
-
-.lab-dialog {
-  width: min(28rem, calc(100% - 2rem));
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: #111;
-  color: #fff;
-  padding: 1.25rem;
-}
-
-.lab-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.65);
-}
-
-.lab-dialog h2 {
-  font-family: "Noto Serif KR", serif;
-  font-size: 1.25rem;
-  font-weight: 400;
-}
-
-.lab-dialog p {
-  margin: 0.55rem 0 0.9rem;
-  font-size: 0.82rem;
-  color: #9a9a9a;
-}
-
-.lab-dialog label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  margin-bottom: 0.75rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #8a8a8a;
-}
-
-.lab-dialog input,
-.lab-dialog select {
-  background: #000;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.55rem 0.6rem;
-  font-size: 0.85rem;
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-.lab-dialog__status {
-  min-height: 1.2em;
-  color: #c48a3a !important;
-}
-
-.lab-dialog__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.lab-dialog__actions button {
-  background: #1a1a1a;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.45rem 0.7rem;
-  cursor: pointer;
-}
-
-.lab-dialog__actions button[type="submit"] {
-  border-color: #c48a3a;
-  color: #c48a3a;
 }
 
 .lab-lightbox {
