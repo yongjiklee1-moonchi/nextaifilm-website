@@ -34,7 +34,11 @@
     var yt = raw.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/i);
     if (yt) {
       var startMatch = raw.match(/[?&]t=(\d+)/i);
-      var embed = "https://www.youtube.com/embed/" + yt[1] + "?autoplay=1&rel=0";
+      var embed =
+        "https://www.youtube-nocookie.com/embed/" +
+        yt[1] +
+        "?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3&cc_load_policy=0" +
+        "&playsinline=1&controls=0&fs=0&disablekb=1&color=white";
       if (startMatch) embed += "&start=" + startMatch[1];
       return {
         type: "youtube",
@@ -131,8 +135,8 @@
     } else if (parsed && (parsed.type === "vimeo" || parsed.type === "youtube")) {
       var iframe = document.createElement("iframe");
       iframe.src = parsed.embed;
-      iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
-      iframe.setAttribute("allowfullscreen", "");
+      iframe.setAttribute("allow", "autoplay; fullscreen");
+      iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
       iframe.title = item.title;
       playerFrame.appendChild(iframe);
     } else if (parsed && parsed.type === "link") {
