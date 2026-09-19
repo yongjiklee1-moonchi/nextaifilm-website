@@ -68,6 +68,45 @@
       "exploringNote": "Creature portrait"
     },
     {
+      "id": "moongchi-dive",
+      "title": "Moongchi's Dive",
+      "date": "2026-09",
+      "dateLabel": "2026",
+      "category": "Motion Study",
+      "description": "From Maya to AI — motion test with Moongchi.",
+      "thumb": "assets/lab/lab-01.jpg",
+      "video": "",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501265695607828480/",
+      "sort": 1,
+      "exploring": false
+    },
+    {
+      "id": "moongchi-dive",
+      "title": "Moongchi's Dive",
+      "date": "2026-09",
+      "dateLabel": "2026",
+      "category": "Motion Study",
+      "description": "From Maya to AI — motion test with Moongchi.",
+      "thumb": "assets/lab/lab-01.jpg",
+      "video": "",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501265695607828480/",
+      "sort": 1,
+      "exploring": false
+    },
+    {
+      "id": "moongchi-dive",
+      "title": "Moongchi's Dive",
+      "date": "2026-09",
+      "dateLabel": "2026",
+      "category": "Motion Study",
+      "description": "From Maya to AI — motion test with Moongchi.",
+      "thumb": "assets/lab/lab-01.jpg",
+      "video": "",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501265695607828480/",
+      "sort": 1,
+      "exploring": false
+    },
+    {
       "id": "heaven-hell",
       "title": "Heaven & Hell",
       "date": "2023-01",
