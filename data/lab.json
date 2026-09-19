@@ -68,20 +68,6 @@
       "exploringNote": "Creature portrait"
     },
     {
-      "id": "heaven-hell",
-      "title": "Heaven & Hell",
-      "date": "2023-01",
-      "dateLabel": "2023",
-      "category": "AI Short Film",
-      "description": "Early AI short-film project, created in 2023.",
-      "thumb": "assets/lab/lab-06.jpg",
-      "video": "",
-      "link": "https://www.youtube.com/watch?v=2uZbnvK9CCQ&t=3s",
-      "sort": 6,
-      "exploring": true,
-      "exploringNote": "Early project, 2023"
-    },
-    {
       "id": "orc-warlord",
       "title": "Orc Warlord",
       "date": "2026-09",
@@ -119,6 +105,20 @@
       "link": "https://www.linkedin.com/feed/update/urn:li:activity:7506695534049583104/",
       "sort": 9,
       "exploring": false
+    },    
+    {
+      "id": "heaven-hell",
+      "title": "Heaven & Hell",
+      "date": "2023-01",
+      "dateLabel": "2023",
+      "category": "AI Short Film",
+      "description": "Early AI short-film project, created in 2023.",
+      "thumb": "assets/lab/lab-06.jpg",
+      "video": "",
+      "link": "https://www.youtube.com/watch?v=2uZbnvK9CCQ&t=3s",
+      "sort": 6,
+      "exploring": true,
+      "exploringNote": "Early project, 2023"
     }
   ]
 }
