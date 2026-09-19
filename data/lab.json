@@ -68,45 +68,6 @@
       "exploringNote": "Creature portrait"
     },
     {
-      "id": "moongchi-dive",
-      "title": "Moongchi's Dive",
-      "date": "2026-09",
-      "dateLabel": "2026",
-      "category": "Motion Study",
-      "description": "From Maya to AI — motion test with Moongchi.",
-      "thumb": "assets/lab/lab-01.jpg",
-      "video": "",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501265695607828480/",
-      "sort": 1,
-      "exploring": false
-    },
-    {
-      "id": "moongchi-dive",
-      "title": "Moongchi's Dive",
-      "date": "2026-09",
-      "dateLabel": "2026",
-      "category": "Motion Study",
-      "description": "From Maya to AI — motion test with Moongchi.",
-      "thumb": "assets/lab/lab-01.jpg",
-      "video": "",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501265695607828480/",
-      "sort": 1,
-      "exploring": false
-    },
-    {
-      "id": "moongchi-dive",
-      "title": "Moongchi's Dive",
-      "date": "2026-09",
-      "dateLabel": "2026",
-      "category": "Motion Study",
-      "description": "From Maya to AI — motion test with Moongchi.",
-      "thumb": "assets/lab/lab-01.jpg",
-      "video": "",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501265695607828480/",
-      "sort": 1,
-      "exploring": false
-    },
-    {
       "id": "heaven-hell",
       "title": "Heaven & Hell",
       "date": "2023-01",
@@ -119,6 +80,45 @@
       "sort": 6,
       "exploring": true,
       "exploringNote": "Early project, 2023"
+    },
+    {
+      "id": "orc-warlord",
+      "title": "Orc Warlord",
+      "date": "2026-09",
+      "dateLabel": "2026",
+      "category": "Character Test",
+      "description": "Creature close-up and battlefield scale study.",
+      "thumb": "assets/lab/lab-07.png",
+      "video": "",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7503433642807820288/",
+      "sort": 7,
+      "exploring": false
+    },
+    {
+      "id": "night-drive",
+      "title": "Night Drive",
+      "date": "2026-09",
+      "dateLabel": "2026",
+      "category": "Look Dev",
+      "description": "Wet-road lighting and motion study for a cinematic car shot.",
+      "thumb": "assets/lab/lab-08.png",
+      "video": "",
+      "link": "https://www.youtube.com/watch?v=N4hXcJt_Xs0",
+      "sort": 8,
+      "exploring": false
+    },
+    {
+      "id": "led-volume",
+      "title": "LED Volume",
+      "date": "2026-09",
+      "dateLabel": "2026",
+      "category": "Virtual Production",
+      "description": "On-set LED volume study — live action against a generated castle plate.",
+      "thumb": "assets/lab/lab-09.png",
+      "video": "",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7506695534049583104/",
+      "sort": 9,
+      "exploring": false
     }
   ]
 }
