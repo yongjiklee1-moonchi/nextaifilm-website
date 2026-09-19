@@ -23,11 +23,22 @@
     var raw = String(url || "").trim();
     if (!raw) return null;
 
+    if (/^https?:\/\//i.test(raw)) return null;
+
     if (/\.(mp4|webm|mov)(\?|$)/i.test(raw) || raw.indexOf("assets/") === 0) {
       return { type: "file", src: raw };
     }
 
     return null;
+  }
+
+  function itemLink(item) {
+    if (!item) return "";
+    var link = String(item.link || "").trim();
+    if (/^https?:\/\//i.test(link)) return link;
+    var video = String(item.video || "").trim();
+    if (/^https?:\/\//i.test(video)) return video;
+    return "";
   }
 
   function escapeHtml(value) {
@@ -39,15 +50,16 @@
   }
 
   function cardHtml(item) {
-    var linked = !!(item.video && String(item.video).trim() && parseVideo(item.video));
+    var video = parseVideo(item.video);
+    var link = itemLink(item);
+    var linked = !!(video || link);
     var active = item.id === activeId;
-    return (
-      '<button type="button" class="lab-card' +
+    var classes =
+      "lab-card" +
       (linked ? " is-linked" : "") +
-      (active ? " is-active" : "") +
-      '" data-lab-id="' +
-      escapeHtml(item.id) +
-      '">' +
+      (link ? " is-external" : "") +
+      (active ? " is-active" : "");
+    var inner =
       '<div class="lab-card__media">' +
       '<img src="' +
       escapeHtml(item.thumb) +
@@ -67,7 +79,29 @@
       "</div>" +
       '<span class="lab-card__title">' +
       escapeHtml(item.title) +
-      "</span>" +
+      "</span>";
+
+    if (link && !video) {
+      return (
+        '<a class="' +
+        classes +
+        '" data-lab-id="' +
+        escapeHtml(item.id) +
+        '" href="' +
+        escapeHtml(link) +
+        '" target="_blank" rel="noopener noreferrer">' +
+        inner +
+        "</a>"
+      );
+    }
+
+    return (
+      '<button type="button" class="' +
+      classes +
+      '" data-lab-id="' +
+      escapeHtml(item.id) +
+      '">' +
+      inner +
       "</button>"
     );
   }
