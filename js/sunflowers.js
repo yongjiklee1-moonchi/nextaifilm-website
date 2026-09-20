@@ -5,15 +5,12 @@
     "https://script.google.com/macros/s/AKfycbzxflmPdifREqT7Ffrxg_KeofOTNsI_m3EPpuf3y2SvUgGOMQm8mGUvMh2YnDf-tLGdZw/exec";
   var STORAGE_KEY = "naf-sunflowers-gate";
   var SESSION_HOURS = 1;
-  var FALLBACK_EMBED =
-    "https://player.vimeo.com/video/1212021254?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0";
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
   var screen = document.getElementById("sunflowers-screen");
   var frame = document.getElementById("sunflowers-frame");
   var statusEl = document.getElementById("sunflowers-login-status");
-  var loginFrame = document.getElementById("sunflowers-login-frame");
   var submitBtn = form && form.querySelector('button[type="submit"]');
   var waiting = false;
   var waitTimer = 0;
@@ -110,29 +107,13 @@
     );
   }
 
-  function currentCredentials() {
-    if (!form) {
-      return { user: "", password: "" };
-    }
-    var userInput = form.querySelector('input[name="username"]');
-    var passInput = form.querySelector('input[name="password"]');
-    return {
-      user: String(userInput && userInput.value ? userInput.value : "").trim(),
-      password: String(passInput && passInput.value ? passInput.value : "")
-    };
-  }
-
-  function fallbackUnlocked() {
-    var creds = currentCredentials();
-    return creds.user === "sunflowers" && creds.password === "1234";
-  }
-
   function openTheater(embedUrl, sessionHours) {
-    var exp = saveSession(embedUrl || FALLBACK_EMBED, sessionHours);
+    if (!embedUrl) return;
+    var exp = saveSession(embedUrl, sessionHours);
     setStatus("", false);
     if (form) form.reset();
     if (originInput) originInput.value = location.origin;
-    showScreen(embedUrl || FALLBACK_EMBED, exp);
+    showScreen(embedUrl, exp);
   }
 
   function finishWait() {
@@ -174,28 +155,10 @@
     if (waitTimer) window.clearTimeout(waitTimer);
     waitTimer = window.setTimeout(function () {
       if (!waiting) return;
-      if (fallbackUnlocked()) {
-        finishWait();
-        openTheater(FALLBACK_EMBED, SESSION_HOURS);
-        return;
-      }
       finishWait();
-      setStatus("ID or password is incorrect.", true);
-    }, 2500);
+      setStatus("Login server did not respond. Deploy the latest Code.gs as a new web app version, then try again.", true);
+    }, 12000);
   });
-
-  if (loginFrame) {
-    loginFrame.addEventListener("load", function () {
-      if (!waiting) return;
-      window.setTimeout(function () {
-        if (!waiting) return;
-        if (fallbackUnlocked()) {
-          finishWait();
-          openTheater(FALLBACK_EMBED, SESSION_HOURS);
-        }
-      }, 600);
-    });
-  }
 
   window.addEventListener("message", function (event) {
     if (!waiting) return;
