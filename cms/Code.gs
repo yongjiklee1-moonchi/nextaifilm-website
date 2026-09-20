@@ -387,9 +387,7 @@ function sunflowersAuthPage_(payload, origin) {
     "<!doctype html><html><body><script>" +
     "window.parent.postMessage(" +
     JSON.stringify(data) +
-    "," +
-    JSON.stringify(target) +
-    ");" +
+    ",'*');" +
     "</script></body></html>";
   return HtmlService.createHtmlOutput(html).setXFrameOptionsMode(
     HtmlService.XFrameOptionsMode.ALLOWALL
