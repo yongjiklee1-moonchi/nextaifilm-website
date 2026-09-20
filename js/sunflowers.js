@@ -1,12 +1,10 @@
 (function () {
   "use strict";
 
+  var config = window.NAF_CMS_CONFIG || {};
+  var AUTH_ENDPOINT = String(config.AUTH_URL || config.WEB_APP_URL || "").trim();
   var STORAGE_KEY = "naf-sunflowers-gate";
-  var gateConfig = window.NAF_SUNFLOWERS || {};
-  var SESSION_HOURS = Number(gateConfig.sessionHours) || 1;
-  var EMBED_URL = gateConfig.embedUrl || "";
-  var EXPECTED_USER = String(gateConfig.user || "sunflowers");
-  var EXPECTED_PASSWORD = String(gateConfig.password || "");
+  var SESSION_HOURS = 1;
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
@@ -14,6 +12,8 @@
   var frame = document.getElementById("sunflowers-frame");
   var statusEl = document.getElementById("sunflowers-login-status");
   var submitBtn = form && form.querySelector('button[type="submit"]');
+  var waiting = false;
+  var waitTimer = 0;
   var logoutTimer = 0;
 
   function setStatus(message, isError) {
@@ -76,8 +76,10 @@
     }
   }
 
-  function saveSession(embedUrl) {
-    var exp = Date.now() + SESSION_HOURS * 60 * 60 * 1000;
+  function saveSession(embedUrl, sessionHours) {
+    var hours = Number(sessionHours);
+    if (!hours || hours <= 0) hours = SESSION_HOURS;
+    var exp = Date.now() + hours * 60 * 60 * 1000;
     try {
       sessionStorage.setItem(
         STORAGE_KEY,
@@ -96,17 +98,48 @@
     } catch (err) {}
   }
 
-  function openTheater() {
-    var exp = saveSession(EMBED_URL);
+  function isAllowedOrigin(origin) {
+    return (
+      origin === "https://script.google.com" ||
+      origin === "https://script.googleusercontent.com" ||
+      /^(https:\/\/)[\w.-]*googleusercontent\.com$/.test(origin) ||
+      /^(https:\/\/)[\w.-]*script\.google\.com$/.test(origin)
+    );
+  }
+
+  function openTheater(embedUrl, sessionHours) {
+    if (!embedUrl) return;
+    var exp = saveSession(embedUrl, sessionHours);
     setStatus("", false);
     if (form) form.reset();
-    showScreen(EMBED_URL, exp);
+    if (originInput) originInput.value = location.origin;
+    showScreen(embedUrl, exp);
+  }
+
+  function finishWait() {
+    waiting = false;
+    if (waitTimer) {
+      window.clearTimeout(waitTimer);
+      waitTimer = 0;
+    }
+    if (submitBtn) submitBtn.disabled = false;
   }
 
   if (!form) return;
 
-  form.removeAttribute("action");
-  form.removeAttribute("target");
+  if (!AUTH_ENDPOINT) {
+    setStatus("Login server is not connected.", true);
+    return;
+  }
+
+  form.setAttribute("action", AUTH_ENDPOINT);
+  form.setAttribute("method", "POST");
+  form.setAttribute("target", "sunflowers-login-frame");
+
+  var originInput = form.querySelector('input[name="origin"]');
+  if (originInput) {
+    originInput.value = location.origin;
+  }
 
   var session = readSession();
   if (session) {
@@ -114,30 +147,43 @@
   }
 
   form.addEventListener("submit", function (event) {
-    event.preventDefault();
-
     var honeypot = form.querySelector('input[name="website"]');
     if (honeypot && String(honeypot.value || "").trim()) {
+      event.preventDefault();
       setStatus("ID or password is incorrect.", true);
       return;
     }
 
-    var userInput = form.querySelector('input[name="username"]');
-    var passInput = form.querySelector('input[name="password"]');
-    var user = String(userInput && userInput.value ? userInput.value : "").trim();
-    var password = String(passInput && passInput.value ? passInput.value : "");
-
-    if (submitBtn) submitBtn.disabled = true;
+    waiting = true;
     setStatus("Entering…", false);
+    if (submitBtn) submitBtn.disabled = true;
+    if (waitTimer) window.clearTimeout(waitTimer);
+    waitTimer = window.setTimeout(function () {
+      if (!waiting) return;
+      finishWait();
+      setStatus("Login server did not respond. Deploy the latest Code.gs as a new web app version.", true);
+    }, 12000);
+  });
 
-    window.setTimeout(function () {
-      if (submitBtn) submitBtn.disabled = false;
-      if (user === EXPECTED_USER && password === EXPECTED_PASSWORD && EMBED_URL) {
-        openTheater();
-        return;
-      }
-      setStatus("ID or password is incorrect.", true);
-    }, 200);
+  window.addEventListener("message", function (event) {
+    if (!waiting) return;
+    if (!isAllowedOrigin(event.origin)) return;
+
+    var data = event.data;
+    if (!data || data.type !== "naf-sunflowers-auth") return;
+
+    finishWait();
+
+    if (data.ok && data.embedUrl) {
+      openTheater(data.embedUrl, data.sessionHours);
+      return;
+    }
+
+    var message = "ID or password is incorrect.";
+    if (data && data.error === "too_many") {
+      message = "Too many attempts. Please wait a few minutes.";
+    }
+    setStatus(message, true);
   });
 
   var logout = document.getElementById("sunflowers-logout");
