@@ -282,7 +282,7 @@ function buildPayload_() {
 }
 
 var SUNFLOWERS_DEFAULT_EMBED =
-  "https://player.vimeo.com/video/1210535916?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0";
+  "https://player.vimeo.com/video/1212021254?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0";
 
 /**
  * Run once after deploy (or whenever the password should change).
@@ -296,7 +296,7 @@ function setupSunflowersGate(newPassword) {
   var secret = props.getProperty("SUNFLOWERS_TOKEN_SECRET") || Utilities.getUuid();
   var user = props.getProperty("SUNFLOWERS_USER") || "sunflowers";
   var hash = props.getProperty("SUNFLOWERS_PASS_HASH");
-  var embed = props.getProperty("SUNFLOWERS_EMBED") || SUNFLOWERS_DEFAULT_EMBED;
+  var embed = SUNFLOWERS_DEFAULT_EMBED;
   var sessionHours = props.getProperty("SUNFLOWERS_SESSION_HOURS") || "1";
 
   if (!hash || newPassword) {
@@ -362,7 +362,7 @@ function handleSunflowersLogin_(p) {
   var expectedUser = String(props.getProperty("SUNFLOWERS_USER") || "sunflowers");
   var salt = String(props.getProperty("SUNFLOWERS_SALT") || "");
   var expectedHash = String(props.getProperty("SUNFLOWERS_PASS_HASH") || "");
-  var embed = String(props.getProperty("SUNFLOWERS_EMBED") || SUNFLOWERS_DEFAULT_EMBED);
+  var embed = SUNFLOWERS_DEFAULT_EMBED;
 
   var user = String(p.username || p.user || "").trim();
   var password = String(p.password || p.pass || "");
