@@ -4288,8 +4288,59 @@ a.contact-cell:hover .contact-icon {
   margin-top: 0.55rem;
 }
 
-.sunflowers-page.is-screening .page-bar {
-  display: none;
+.sunflowers-page.is-screening .page-bar,
+.sunflowers-page.is-screening .footer,
+.sunflowers-page.is-screening .back-to-top,
+.sunflowers-page:has(#sunflowers-screen:not([hidden])) .page-bar,
+.sunflowers-page:has(#sunflowers-screen:not([hidden])) .footer,
+.sunflowers-page:has(#sunflowers-screen:not([hidden])) .back-to-top {
+  display: none !important;
+}
+
+.sunflowers-screen {
+  padding-top: 4.5rem;
+}
+
+.sunflowers-linkedin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  max-width: 100%;
+  min-width: min(24rem, 100%);
+  padding: 0.9rem 1.5rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #0a66c2;
+  color: #fff;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background 0.2s;
+}
+
+.sunflowers-linkedin__icon {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  overflow: hidden;
+}
+
+.sunflowers-linkedin__icon svg,
+.sunflowers-linkedin svg {
+  display: block;
+  width: 22px !important;
+  height: 22px !important;
+  max-width: 22px !important;
+  max-height: 22px !important;
+}
+
+.sunflowers-linkedin:hover,
+.sunflowers-linkedin:focus-visible {
+  background: #004182;
 }
 
 .sunflowers-logout {
@@ -4359,31 +4410,11 @@ a.contact-cell:hover .contact-icon {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.sunflowers-linkedin {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  min-width: min(22rem, 100%);
-  padding: 0.85rem 1.35rem;
-  border-radius: 8px;
-  background: #0a66c2;
-  color: #fff;
-  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition: background 0.2s, transform 0.15s;
-}
-
-.sunflowers-linkedin svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  flex: 0 0 auto;
-}
-
-.sunflowers-linkedin:hover,
-.sunflowers-linkedin:focus-visible {
-  background: #004182;
+.sunflowers-after__rule {
+  width: 4.5rem;
+  margin: 1.25rem auto;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .trailer-embed {
