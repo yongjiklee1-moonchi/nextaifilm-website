@@ -6,7 +6,7 @@
   var STORAGE_KEY = "naf-sunflowers-gate";
   var SESSION_HOURS = 1;
   var FALLBACK_EMBED =
-    "https://player.vimeo.com/video/1210535916?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0";
+    "https://player.vimeo.com/video/1212021254?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0";
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
