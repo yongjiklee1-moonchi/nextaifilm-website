@@ -6,7 +6,7 @@
   var STORAGE_KEY = "naf-sunflowers-gate";
   var SESSION_HOURS = 1;
 
-  var FILM_END_SECONDS = 7 * 60 + 23;
+  var FILM_END_SECONDS = 7 * 60 + 25;
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
