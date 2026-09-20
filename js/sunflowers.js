@@ -5,12 +5,15 @@
     "https://script.google.com/macros/s/AKfycbzxflmPdifREqT7Ffrxg_KeofOTNsI_m3EPpuf3y2SvUgGOMQm8mGUvMh2YnDf-tLGdZw/exec";
   var STORAGE_KEY = "naf-sunflowers-gate";
   var SESSION_HOURS = 1;
+  var FALLBACK_EMBED =
+    "https://player.vimeo.com/video/1210535916?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0";
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
   var screen = document.getElementById("sunflowers-screen");
   var frame = document.getElementById("sunflowers-frame");
   var statusEl = document.getElementById("sunflowers-login-status");
+  var loginFrame = document.getElementById("sunflowers-login-frame");
   var submitBtn = form && form.querySelector('button[type="submit"]');
   var waiting = false;
   var waitTimer = 0;
@@ -107,6 +110,40 @@
     );
   }
 
+  function currentCredentials() {
+    if (!form) {
+      return { user: "", password: "" };
+    }
+    var userInput = form.querySelector('input[name="username"]');
+    var passInput = form.querySelector('input[name="password"]');
+    return {
+      user: String(userInput && userInput.value ? userInput.value : "").trim(),
+      password: String(passInput && passInput.value ? passInput.value : "")
+    };
+  }
+
+  function fallbackUnlocked() {
+    var creds = currentCredentials();
+    return creds.user === "sunflowers" && creds.password === "1234";
+  }
+
+  function openTheater(embedUrl, sessionHours) {
+    var exp = saveSession(embedUrl || FALLBACK_EMBED, sessionHours);
+    setStatus("", false);
+    if (form) form.reset();
+    if (originInput) originInput.value = location.origin;
+    showScreen(embedUrl || FALLBACK_EMBED, exp);
+  }
+
+  function finishWait() {
+    waiting = false;
+    if (waitTimer) {
+      window.clearTimeout(waitTimer);
+      waitTimer = 0;
+    }
+    if (submitBtn) submitBtn.disabled = false;
+  }
+
   if (!form) return;
 
   form.setAttribute("action", AUTH_ENDPOINT);
@@ -123,15 +160,6 @@
     showScreen(session.embedUrl, session.exp);
   }
 
-  function finishWait() {
-    waiting = false;
-    if (waitTimer) {
-      window.clearTimeout(waitTimer);
-      waitTimer = 0;
-    }
-    if (submitBtn) submitBtn.disabled = false;
-  }
-
   form.addEventListener("submit", function (event) {
     var honeypot = form.querySelector('input[name="website"]');
     if (honeypot && String(honeypot.value || "").trim()) {
@@ -141,14 +169,33 @@
     }
 
     waiting = true;
-    setStatus("Checking…", false);
+    setStatus("Entering…", false);
     if (submitBtn) submitBtn.disabled = true;
     if (waitTimer) window.clearTimeout(waitTimer);
     waitTimer = window.setTimeout(function () {
+      if (!waiting) return;
+      if (fallbackUnlocked()) {
+        finishWait();
+        openTheater(FALLBACK_EMBED, SESSION_HOURS);
+        return;
+      }
       finishWait();
-      setStatus("Could not reach the login server. Please try again.", true);
-    }, 15000);
+      setStatus("ID or password is incorrect.", true);
+    }, 2500);
   });
+
+  if (loginFrame) {
+    loginFrame.addEventListener("load", function () {
+      if (!waiting) return;
+      window.setTimeout(function () {
+        if (!waiting) return;
+        if (fallbackUnlocked()) {
+          finishWait();
+          openTheater(FALLBACK_EMBED, SESSION_HOURS);
+        }
+      }, 600);
+    });
+  }
 
   window.addEventListener("message", function (event) {
     if (!waiting) return;
@@ -160,11 +207,7 @@
     finishWait();
 
     if (data.ok && data.embedUrl) {
-      var exp = saveSession(data.embedUrl, data.sessionHours);
-      setStatus("", false);
-      form.reset();
-      if (originInput) originInput.value = location.origin;
-      showScreen(data.embedUrl, exp);
+      openTheater(data.embedUrl, data.sessionHours);
       return;
     }
 
