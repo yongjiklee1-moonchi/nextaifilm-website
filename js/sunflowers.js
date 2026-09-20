@@ -16,6 +16,68 @@
   var waiting = false;
   var waitTimer = 0;
   var logoutTimer = 0;
+  var vimeoPlayer = null;
+  var lastEmbedUrl = "";
+  var filmEnded = false;
+  var replayBtn = document.getElementById("sunflowers-replay");
+
+  function unloadPlayer() {
+    if (vimeoPlayer) {
+      try {
+        vimeoPlayer.off("ended");
+        vimeoPlayer.off("timeupdate");
+      } catch (err) {}
+      vimeoPlayer = null;
+    }
+    if (frame) {
+      frame.removeAttribute("src");
+    }
+  }
+
+  function finishFilm() {
+    if (filmEnded) return;
+    filmEnded = true;
+    if (screen) screen.classList.add("is-ended");
+    unloadPlayer();
+    if (replayBtn) replayBtn.hidden = false;
+    window.setTimeout(function () {
+      var after = document.querySelector(".sunflowers-after");
+      if (after && after.scrollIntoView) {
+        after.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
+  }
+
+  function attachPlayer() {
+    if (!frame || typeof window.Vimeo === "undefined" || !window.Vimeo.Player) return;
+    if (vimeoPlayer) {
+      try {
+        vimeoPlayer.off("ended");
+        vimeoPlayer.off("timeupdate");
+      } catch (err) {}
+      vimeoPlayer = null;
+    }
+    vimeoPlayer = new window.Vimeo.Player(frame);
+    vimeoPlayer.on("ended", finishFilm);
+    vimeoPlayer.on("timeupdate", function (data) {
+      if (!data || !data.duration) return;
+      if (data.duration - data.seconds <= 0.4) finishFilm();
+    });
+  }
+
+  function replayFilm() {
+    if (!lastEmbedUrl) return;
+    filmEnded = false;
+    if (screen) screen.classList.remove("is-ended");
+    if (replayBtn) replayBtn.hidden = true;
+    var url = lastEmbedUrl;
+    url += url.indexOf("?") >= 0 ? "&autoplay=1" : "?autoplay=1";
+    frame.src = url;
+    window.setTimeout(attachPlayer, 400);
+    if (screen && screen.scrollIntoView) {
+      screen.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
 
   function setStatus(message, isError) {
     if (!statusEl) return;
@@ -27,10 +89,15 @@
 
   function showScreen(embedUrl, exp) {
     if (!embedUrl || !frame || !screen || !gate) return;
+    lastEmbedUrl = embedUrl;
+    filmEnded = false;
+    screen.classList.remove("is-ended");
+    if (replayBtn) replayBtn.hidden = true;
     frame.src = embedUrl;
     gate.hidden = true;
     screen.hidden = false;
     document.body.classList.add("is-screening");
+    window.setTimeout(attachPlayer, 400);
     scheduleLogout(exp);
   }
 
@@ -39,7 +106,10 @@
       window.clearTimeout(logoutTimer);
       logoutTimer = 0;
     }
-    if (frame) frame.removeAttribute("src");
+    filmEnded = false;
+    if (screen) screen.classList.remove("is-ended");
+    if (replayBtn) replayBtn.hidden = true;
+    unloadPlayer();
     if (screen) screen.hidden = true;
     if (gate) gate.hidden = false;
     document.body.classList.remove("is-screening");
@@ -239,5 +309,9 @@
       hideScreen();
       setStatus("", false);
     });
+  }
+
+  if (replayBtn) {
+    replayBtn.addEventListener("click", replayFilm);
   }
 })();
