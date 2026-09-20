@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260920a" />
+  <link rel="stylesheet" href="css/style.css?v=20260920d" />
   <link rel="stylesheet" href="css/protect.css?v=20260904p" />
 </head>
 <body class="subpage-body trailer-page sunflowers-page">
@@ -81,17 +81,24 @@
     <div class="page-bar">
       <div class="page-bar__inner">
         <h1 class="page-bar__title">Sunflowers</h1>
-        <p class="page-bar__subtitle">Official Trailer</p>
+        <p class="page-bar__subtitle">Private Screening</p>
       </div>
     </div>
 
     <section id="sunflowers-gate" class="sunflowers-gate">
-      <h2 class="sunflowers-gate__title">Private screening</h2>
-      <p class="sunflowers-gate__intro">Enter the ID and password to watch the trailer.</p>
+      <h2 class="sunflowers-gate__title">Screening Room</h2>
+      <p class="sunflowers-gate__intro">Enter your ID and password to enter the screening room.</p>
 
       <iframe id="sunflowers-login-frame" name="sunflowers-login-frame" title="Login" hidden></iframe>
 
-      <form id="sunflowers-login" class="consult-form" method="POST" target="sunflowers-login-frame" autocomplete="on">
+      <form
+        id="sunflowers-login"
+        class="consult-form"
+        method="POST"
+        action="https://script.google.com/macros/s/AKfycbzxflmPdifREqT7Ffrxg_KeofOTNsI_m3EPpuf3y2SvUgGOMQm8mGUvMh2YnDf-tLGdZw/exec"
+        target="sunflowers-login-frame"
+        autocomplete="on"
+      >
         <input type="hidden" name="action" value="sunflowersLogin" />
         <input type="hidden" name="origin" value="" />
         <label class="consult-form__hp" aria-hidden="true">
@@ -118,7 +125,7 @@
       <div class="trailer-embed__frame">
         <iframe
           id="sunflowers-frame"
-          title="Sunflowers trailer 4K"
+          title="Sunflowers"
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
@@ -220,6 +227,6 @@
   <script src="js/nav.js?v=20260904z"></script>
   <script src="js/i18n.js?v=20260904z" defer></script>
   <script src="js/protect.js?v=20260904p" defer></script>
-  <script src="js/sunflowers.js?v=20260920c" defer></script>
+  <script src="js/sunflowers.js?v=20260920d"></script>
 </body>
 </html>
