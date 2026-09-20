@@ -4371,8 +4371,17 @@ a.contact-cell:hover .contact-icon {
   display: none !important;
 }
 
-.sunflowers-replay {
+.sunflowers-replay,
+.sunflowers-logout {
+  display: none;
+}
+
+.sunflowers-screen.is-ended .sunflowers-replay,
+.sunflowers-screen.is-ended .sunflowers-logout {
   display: block;
+}
+
+.sunflowers-replay {
   margin: 0.85rem auto 0;
   border: 0;
   background: transparent;
@@ -4393,7 +4402,6 @@ a.contact-cell:hover .contact-icon {
 }
 
 .sunflowers-logout {
-  display: block;
   margin: 1.15rem auto 0;
   border: 0;
   background: transparent;
