@@ -285,10 +285,21 @@ var SUNFLOWERS_DEFAULT_EMBED =
   "https://player.vimeo.com/video/1212021254?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0";
 
 /**
+ * 매주 비밀번호 변경:
+ * 1) 아래 setWeeklyPassword 안의 따옴표 안 글자만 새 비밀번호로 바꿉니다.
+ * 2) Apps Script 상단 함수 목록에서 setWeeklyPassword 를 고릅니다.
+ * 3) 실행 버튼을 누릅니다. 홈페이지 파일은 올리지 않아도 됩니다.
+ * 아이디는 그대로 sunflowers 입니다.
+ */
+function setWeeklyPassword() {
+  setupSunflowersGate("1234");
+}
+
+/**
  * Run once after deploy (or whenever the password should change).
  * Default: username sunflowers / password 1234.
  * The plaintext password is written only into Script Properties as a salted SHA-256 hash.
- * To change later: setupSunflowersGate("new-password") then save.
+ * To change later: run setWeeklyPassword after editing the password string.
  */
 function setupSunflowersGate(newPassword) {
   var props = PropertiesService.getScriptProperties();
