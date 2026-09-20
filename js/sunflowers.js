@@ -4,6 +4,7 @@
   var AUTH_ENDPOINT =
     "https://script.google.com/macros/s/AKfycbzxflmPdifREqT7Ffrxg_KeofOTNsI_m3EPpuf3y2SvUgGOMQm8mGUvMh2YnDf-tLGdZw/exec";
   var STORAGE_KEY = "naf-sunflowers-gate";
+  var SESSION_HOURS = 1;
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
@@ -13,6 +14,7 @@
   var submitBtn = form && form.querySelector('button[type="submit"]');
   var waiting = false;
   var waitTimer = 0;
+  var logoutTimer = 0;
 
   function setStatus(message, isError) {
     if (!statusEl) return;
@@ -22,17 +24,41 @@
     statusEl.classList.toggle("is-success", !!message && !isError);
   }
 
-  function showScreen(embedUrl) {
+  function showScreen(embedUrl, exp) {
     if (!embedUrl || !frame || !screen || !gate) return;
     frame.src = embedUrl;
     gate.hidden = true;
     screen.hidden = false;
+    scheduleLogout(exp);
   }
 
   function hideScreen() {
+    if (logoutTimer) {
+      window.clearTimeout(logoutTimer);
+      logoutTimer = 0;
+    }
     if (frame) frame.removeAttribute("src");
     if (screen) screen.hidden = true;
     if (gate) gate.hidden = false;
+  }
+
+  function scheduleLogout(exp) {
+    if (logoutTimer) {
+      window.clearTimeout(logoutTimer);
+      logoutTimer = 0;
+    }
+    var wait = Number(exp) - Date.now();
+    if (!exp || wait <= 0) {
+      expireSession();
+      return;
+    }
+    logoutTimer = window.setTimeout(expireSession, wait);
+  }
+
+  function expireSession() {
+    clearSession();
+    hideScreen();
+    setStatus("Session expired. Please sign in again.", true);
   }
 
   function readSession() {
@@ -50,16 +76,20 @@
     }
   }
 
-  function saveSession(embedUrl) {
+  function saveSession(embedUrl, sessionHours) {
+    var hours = Number(sessionHours);
+    if (!hours || hours <= 0) hours = SESSION_HOURS;
+    var exp = Date.now() + hours * 60 * 60 * 1000;
     try {
       sessionStorage.setItem(
         STORAGE_KEY,
         JSON.stringify({
           embedUrl: embedUrl,
-          exp: Date.now() + 12 * 60 * 60 * 1000
+          exp: exp
         })
       );
     } catch (err) {}
+    return exp;
   }
 
   function clearSession() {
@@ -90,7 +120,7 @@
 
   var session = readSession();
   if (session) {
-    showScreen(session.embedUrl);
+    showScreen(session.embedUrl, session.exp);
   }
 
   function finishWait() {
@@ -130,11 +160,11 @@
     finishWait();
 
     if (data.ok && data.embedUrl) {
-      saveSession(data.embedUrl);
+      var exp = saveSession(data.embedUrl, data.sessionHours);
       setStatus("", false);
       form.reset();
       if (originInput) originInput.value = location.origin;
-      showScreen(data.embedUrl);
+      showScreen(data.embedUrl, exp);
       return;
     }
 
