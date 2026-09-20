@@ -198,7 +198,7 @@
     waitTimer = window.setTimeout(function () {
       if (!waiting) return;
       finishWait();
-      setStatus("ID or password is incorrect.", true);
+      setStatus("Could not complete login. Please try again.", true);
     }, 12000);
   });
 
