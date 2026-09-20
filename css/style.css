@@ -4344,12 +4344,27 @@ a.contact-cell:hover .contact-icon {
 }
 
 .sunflowers-screen .sunflowers-after {
-  display: none;
+  display: block;
+  margin-top: 1.35rem;
 }
 
-.sunflowers-screen.is-ended .sunflowers-after {
-  display: block;
-  padding-top: 1.5rem;
+.sunflowers-after__copy {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2.25rem) clamp(1rem, 5vw, 3rem);
+  overflow: auto;
+  background: #000;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.sunflowers-screen.is-ended .sunflowers-after__copy {
+  display: flex;
 }
 
 .sunflowers-screen.is-ended .trailer-embed__frame iframe {
@@ -4436,7 +4451,7 @@ a.contact-cell:hover .contact-icon {
 }
 
 .sunflowers-after__close {
-  margin: 0 0 1.35rem;
+  margin: 0;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 1.02rem;
   font-style: italic;
