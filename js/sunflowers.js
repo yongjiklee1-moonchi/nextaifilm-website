@@ -30,6 +30,7 @@
     frame.src = embedUrl;
     gate.hidden = true;
     screen.hidden = false;
+    document.body.classList.add("is-screening");
     scheduleLogout(exp);
   }
 
@@ -41,6 +42,7 @@
     if (frame) frame.removeAttribute("src");
     if (screen) screen.hidden = true;
     if (gate) gate.hidden = false;
+    document.body.classList.remove("is-screening");
   }
 
   function scheduleLogout(exp) {
