@@ -6,7 +6,7 @@
   var STORAGE_KEY = "naf-sunflowers-gate";
   var SESSION_HOURS = 1;
 
-  var FILM_END_SECONDS = 7 * 60 + 30;
+  var FILM_END_SECONDS = 7 * 60 + 23;
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
@@ -41,13 +41,9 @@
     filmEnded = true;
     if (screen) screen.classList.add("is-ended");
     unloadPlayer();
-    if (replayBtn) replayBtn.hidden = false;
-    window.setTimeout(function () {
-      var after = document.querySelector(".sunflowers-after");
-      if (after && after.scrollIntoView) {
-        after.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 50);
+    if (screen && screen.scrollIntoView) {
+      screen.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   function attachPlayer() {
@@ -75,7 +71,6 @@
     if (!lastEmbedUrl) return;
     filmEnded = false;
     if (screen) screen.classList.remove("is-ended");
-    if (replayBtn) replayBtn.hidden = true;
     var url = lastEmbedUrl;
     url += url.indexOf("?") >= 0 ? "&autoplay=1" : "?autoplay=1";
     frame.src = url;
@@ -98,7 +93,6 @@
     lastEmbedUrl = embedUrl;
     filmEnded = false;
     screen.classList.remove("is-ended");
-    if (replayBtn) replayBtn.hidden = true;
     frame.src = embedUrl;
     gate.hidden = true;
     screen.hidden = false;
@@ -114,7 +108,6 @@
     }
     filmEnded = false;
     if (screen) screen.classList.remove("is-ended");
-    if (replayBtn) replayBtn.hidden = true;
     unloadPlayer();
     if (screen) screen.hidden = true;
     if (gate) gate.hidden = false;
