@@ -4288,20 +4288,102 @@ a.contact-cell:hover .contact-icon {
   margin-top: 0.55rem;
 }
 
+.sunflowers-page.is-screening .page-bar {
+  display: none;
+}
+
 .sunflowers-logout {
-  margin-top: 0.85rem;
+  display: block;
+  margin: 1.15rem auto 0;
   border: 0;
   background: transparent;
-  color: rgba(255, 255, 255, 0.55);
+  color: #c45c5c;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
   cursor: pointer;
 }
 
 .sunflowers-logout:hover,
 .sunflowers-logout:focus-visible {
+  color: #e07070;
+  text-decoration: underline;
+}
+
+.sunflowers-after {
+  width: min(42rem, 100%);
+  margin: 1.75rem auto 0;
+  padding: 0 0.5rem 1rem;
+  text-align: center;
+}
+
+.sunflowers-after__thanks {
+  margin: 0;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.55rem, 3vw, 2.05rem);
+  font-weight: 400;
   color: #fff;
+}
+
+.sunflowers-after__title {
+  margin: 0.15rem 0 1.1rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: clamp(1.7rem, 3.4vw, 2.35rem);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  color: var(--naf-yellow);
+}
+
+.sunflowers-after__prompt {
+  margin: 0.15rem 0;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.sunflowers-after__rule {
+  width: 4.5rem;
+  margin: 1.25rem auto;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.sunflowers-after__close {
+  margin: 0 0 1.35rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 1.02rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.sunflowers-linkedin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-width: min(22rem, 100%);
+  padding: 0.85rem 1.35rem;
+  border-radius: 8px;
+  background: #0a66c2;
+  color: #fff;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.sunflowers-linkedin svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+}
+
+.sunflowers-linkedin:hover,
+.sunflowers-linkedin:focus-visible {
+  background: #004182;
 }
 
 .trailer-embed {
