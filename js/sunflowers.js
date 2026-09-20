@@ -6,6 +6,8 @@
   var STORAGE_KEY = "naf-sunflowers-gate";
   var SESSION_HOURS = 1;
 
+  var FILM_END_SECONDS = 7 * 60 + 30;
+
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
   var screen = document.getElementById("sunflowers-screen");
@@ -60,8 +62,12 @@
     vimeoPlayer = new window.Vimeo.Player(frame);
     vimeoPlayer.on("ended", finishFilm);
     vimeoPlayer.on("timeupdate", function (data) {
-      if (!data || !data.duration) return;
-      if (data.duration - data.seconds <= 0.4) finishFilm();
+      if (!data) return;
+      if (data.seconds >= FILM_END_SECONDS) {
+        finishFilm();
+        return;
+      }
+      if (data.duration && data.duration - data.seconds <= 0.4) finishFilm();
     });
   }
 
