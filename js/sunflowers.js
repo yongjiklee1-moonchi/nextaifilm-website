@@ -22,6 +22,11 @@
   var lastEmbedUrl = "";
   var filmEnded = false;
   var replayBtn = document.getElementById("sunflowers-replay");
+  var eventForm = document.getElementById("sunflowers-event");
+  var linkedinBtn = document.getElementById("sunflowers-linkedin");
+  var currentSessionId = "";
+  var eventWaitTimer = 0;
+  var eventWaitDone = null;
 
   function unloadPlayer() {
     if (vimeoPlayer) {
@@ -41,6 +46,7 @@
     filmEnded = true;
     if (screen) screen.classList.add("is-ended");
     unloadPlayer();
+    trackScreeningEvent("film_complete");
     if (screen && screen.scrollIntoView) {
       screen.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -148,16 +154,18 @@
     }
   }
 
-  function saveSession(embedUrl, sessionHours) {
+  function saveSession(embedUrl, sessionHours, sessionId) {
     var hours = Number(sessionHours);
     if (!hours || hours <= 0) hours = SESSION_HOURS;
     var exp = Date.now() + hours * 60 * 60 * 1000;
+    if (sessionId) currentSessionId = String(sessionId);
     try {
       sessionStorage.setItem(
         STORAGE_KEY,
         JSON.stringify({
           embedUrl: embedUrl,
-          exp: exp
+          exp: exp,
+          sessionId: currentSessionId || ""
         })
       );
     } catch (err) {}
@@ -165,9 +173,61 @@
   }
 
   function clearSession() {
+    currentSessionId = "";
     try {
       sessionStorage.removeItem(STORAGE_KEY);
     } catch (err) {}
+  }
+
+  function authErrorMessage(error) {
+    if (error === "too_many") return "Too many attempts. Please wait a few minutes.";
+    if (error === "name") return "Please enter your LinkedIn name.";
+    return "Password is incorrect.";
+  }
+
+  function finishEventWait() {
+    if (eventWaitTimer) {
+      window.clearTimeout(eventWaitTimer);
+      eventWaitTimer = 0;
+    }
+    var cb = eventWaitDone;
+    eventWaitDone = null;
+    if (cb) cb();
+  }
+
+  function trackScreeningEvent(eventName, done) {
+    if (typeof done !== "function") done = null;
+    if (!AUTH_ENDPOINT || !eventForm || !currentSessionId) {
+      if (done) done();
+      return;
+    }
+
+    var originField = eventForm.querySelector('input[name="origin"]');
+    var sessionField = eventForm.querySelector('input[name="sessionId"]');
+    var eventField = eventForm.querySelector('input[name="event"]');
+    if (originField) originField.value = location.origin;
+    if (sessionField) sessionField.value = currentSessionId;
+    if (eventField) eventField.value = eventName;
+    eventForm.setAttribute("action", AUTH_ENDPOINT);
+
+    if (eventWaitTimer) {
+      window.clearTimeout(eventWaitTimer);
+      eventWaitTimer = 0;
+    }
+    eventWaitDone = done;
+    eventWaitTimer = window.setTimeout(finishEventWait, done ? 1800 : 4000);
+
+    try {
+      eventForm.submit();
+    } catch (err) {
+      finishEventWait();
+    }
+  }
+
+  function openLinkedIn(href) {
+    if (!href) return;
+    var opened = window.open(href, "_blank", "noopener,noreferrer");
+    if (!opened) window.location.href = href;
   }
 
   function isAllowedOrigin(origin) {
@@ -180,9 +240,9 @@
     );
   }
 
-  function openTheater(embedUrl, sessionHours) {
+  function openTheater(embedUrl, sessionHours, sessionId) {
     if (!embedUrl) return;
-    var exp = saveSession(embedUrl, sessionHours);
+    var exp = saveSession(embedUrl, sessionHours, sessionId);
     setStatus("", false);
     if (form) form.reset();
     if (originInput) originInput.value = location.origin;
@@ -214,20 +274,16 @@
     try {
       data = JSON.parse(decodeURIComponent(raw));
     } catch (err) {
-      setStatus("ID or password is incorrect.", true);
+      setStatus(authErrorMessage("invalid"), true);
       return true;
     }
 
     if (data && data.ok && data.embedUrl) {
-      openTheater(data.embedUrl, data.sessionHours);
+      openTheater(data.embedUrl, data.sessionHours, data.sessionId);
       return true;
     }
 
-    var message = "ID or password is incorrect.";
-    if (data && data.error === "too_many") {
-      message = "Too many attempts. Please wait a few minutes.";
-    }
-    setStatus(message, true);
+    setStatus(authErrorMessage(data && data.error), true);
     return true;
   }
 
@@ -242,6 +298,12 @@
   form.setAttribute("method", "POST");
   form.setAttribute("target", "sunflowers-login-frame");
 
+  if (eventForm) {
+    eventForm.setAttribute("action", AUTH_ENDPOINT);
+    eventForm.setAttribute("method", "POST");
+    eventForm.setAttribute("target", "sunflowers-event-frame");
+  }
+
   if (originInput) {
     originInput.value = location.origin;
   }
@@ -249,6 +311,7 @@
   if (!consumeAuthHash()) {
     var session = readSession();
     if (session) {
+      currentSessionId = String(session.sessionId || "");
       showScreen(session.embedUrl, session.exp);
     }
   }
@@ -257,9 +320,18 @@
     var honeypot = form.querySelector('input[name="website"]');
     if (honeypot && String(honeypot.value || "").trim()) {
       event.preventDefault();
-      setStatus("ID or password is incorrect.", true);
+      setStatus(authErrorMessage("invalid"), true);
       return;
     }
+
+    var nameInput = form.querySelector('input[name="linkedinName"]');
+    var linkedinName = nameInput ? String(nameInput.value || "").replace(/\s+/g, " ").trim() : "";
+    if (linkedinName.length < 2) {
+      event.preventDefault();
+      setStatus(authErrorMessage("name"), true);
+      return;
+    }
+    if (nameInput) nameInput.value = linkedinName;
 
     if (originInput) originInput.value = location.origin;
     waiting = true;
@@ -274,8 +346,6 @@
   });
 
   window.addEventListener("message", function (event) {
-    if (!waiting) return;
-
     var data = event.data;
     if (typeof data === "string") {
       try {
@@ -284,21 +354,25 @@
         return;
       }
     }
-    if (!data || data.type !== "naf-sunflowers-auth") return;
+    if (!data || !data.type) return;
     if (event.origin && !isAllowedOrigin(event.origin)) return;
+
+    if (data.type === "naf-sunflowers-event") {
+      finishEventWait();
+      return;
+    }
+
+    if (!waiting) return;
+    if (data.type !== "naf-sunflowers-auth") return;
 
     finishWait();
 
     if (data.ok && data.embedUrl) {
-      openTheater(data.embedUrl, data.sessionHours);
+      openTheater(data.embedUrl, data.sessionHours, data.sessionId);
       return;
     }
 
-    var message = "ID or password is incorrect.";
-    if (data && data.error === "too_many") {
-      message = "Too many attempts. Please wait a few minutes.";
-    }
-    setStatus(message, true);
+    setStatus(authErrorMessage(data && data.error), true);
   });
 
   var logout = document.getElementById("sunflowers-logout");
@@ -312,5 +386,15 @@
 
   if (replayBtn) {
     replayBtn.addEventListener("click", replayFilm);
+  }
+
+  if (linkedinBtn) {
+    linkedinBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      var href = linkedinBtn.getAttribute("href");
+      trackScreeningEvent("linkedin_click", function () {
+        openLinkedIn(href);
+      });
+    });
   }
 })();
