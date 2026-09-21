@@ -46,6 +46,7 @@
     filmEnded = true;
     if (screen) screen.classList.add("is-ended");
     unloadPlayer();
+    sendGaScreeningEvent("film_complete");
     trackScreeningEvent("film_complete");
     if (screen && screen.scrollIntoView) {
       screen.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -195,6 +196,18 @@
     if (cb) cb();
   }
 
+  function sendGaScreeningEvent(eventName) {
+    if (typeof window.gtag !== "function") return;
+    if (
+      eventName !== "screening_login" &&
+      eventName !== "film_complete" &&
+      eventName !== "linkedin_click"
+    ) {
+      return;
+    }
+    window.gtag("event", eventName, { film: "SUNFLOWERS" });
+  }
+
   function trackScreeningEvent(eventName, done) {
     if (typeof done !== "function") done = null;
     if (!AUTH_ENDPOINT || !eventForm || !currentSessionId) {
@@ -243,6 +256,7 @@
   function openTheater(embedUrl, sessionHours, sessionId) {
     if (!embedUrl) return;
     var exp = saveSession(embedUrl, sessionHours, sessionId);
+    sendGaScreeningEvent("screening_login");
     setStatus("", false);
     if (form) form.reset();
     if (originInput) originInput.value = location.origin;
@@ -392,6 +406,7 @@
     linkedinBtn.addEventListener("click", function (event) {
       event.preventDefault();
       var href = linkedinBtn.getAttribute("href");
+      sendGaScreeningEvent("linkedin_click");
       trackScreeningEvent("linkedin_click", function () {
         openLinkedIn(href);
       });
