@@ -87,9 +87,10 @@
 
     <section id="sunflowers-gate" class="sunflowers-gate">
       <h2 class="sunflowers-gate__title">Screening Room</h2>
-      <p class="sunflowers-gate__intro">Enter your ID and password to enter the screening room.</p>
+      <p class="sunflowers-gate__intro">Enter your LinkedIn name and screening password to enter the screening room.</p>
 
       <iframe id="sunflowers-login-frame" name="sunflowers-login-frame" title="Login" hidden></iframe>
+      <iframe id="sunflowers-event-frame" name="sunflowers-event-frame" title="Screening event" hidden></iframe>
 
       <form id="sunflowers-login" class="consult-form" method="POST" target="sunflowers-login-frame" autocomplete="on">
         <input type="hidden" name="action" value="sunflowersLogin" />
@@ -100,8 +101,8 @@
         </label>
 
         <label class="consult-form__field">
-          <span>ID</span>
-          <input type="text" name="username" required maxlength="80" autocomplete="username" />
+          <span>LinkedIn Name</span>
+          <input type="text" name="linkedinName" required minlength="2" maxlength="80" autocomplete="name" />
         </label>
 
         <label class="consult-form__field">
@@ -111,6 +112,13 @@
 
         <button type="submit" class="contact-cta consult-form__submit">Enter</button>
         <p id="sunflowers-login-status" class="consult-form__status" hidden></p>
+      </form>
+
+      <form id="sunflowers-event" method="POST" target="sunflowers-event-frame" hidden>
+        <input type="hidden" name="action" value="sunflowersEvent" />
+        <input type="hidden" name="origin" value="" />
+        <input type="hidden" name="sessionId" value="" />
+        <input type="hidden" name="event" value="" />
       </form>
     </section>
 
@@ -141,6 +149,7 @@
           <button type="button" id="sunflowers-logout" class="sunflowers-logout">Sign out of Screening Room</button>
         </div>
         <a
+          id="sunflowers-linkedin"
           class="sunflowers-linkedin"
           href="https://www.linkedin.com/in/yong-jik-lee"
           target="_blank"
@@ -248,6 +257,6 @@
   <script src="js/protect.js?v=20260904p" defer></script>
   <script src="https://player.vimeo.com/api/player.js"></script>
   <script src="js/cms-config.js?v=20260920m"></script>
-  <script src="js/sunflowers.js?v=20260921h"></script>
+  <script src="js/sunflowers.js?v=20260921i"></script>
 </body>
 </html>
