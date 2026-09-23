@@ -5,6 +5,7 @@
   var AUTH_ENDPOINT = String(config.AUTH_URL || config.WEB_APP_URL || "").trim();
   var STORAGE_KEY = "naf-sunflowers-gate";
   var SESSION_HOURS = 1;
+  var FILM_END_SECONDS = 7 * 60 + 23;
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
@@ -26,6 +27,14 @@
   var currentSessionId = "";
   var eventWaitTimer = 0;
   var eventWaitDone = null;
+  var endFadeTimer = 0;
+
+  function clearEndFadeTimer() {
+    if (endFadeTimer) {
+      window.clearTimeout(endFadeTimer);
+      endFadeTimer = 0;
+    }
+  }
 
   function unloadPlayer() {
     if (vimeoPlayer) {
@@ -44,8 +53,17 @@
     if (filmEnded) return;
     filmEnded = true;
     recordFilmCompleteOnce();
+    if (vimeoPlayer) {
+      try {
+        vimeoPlayer.pause();
+      } catch (err) {}
+    }
     if (screen) screen.classList.add("is-ended");
-    unloadPlayer();
+    clearEndFadeTimer();
+    endFadeTimer = window.setTimeout(function () {
+      endFadeTimer = 0;
+      unloadPlayer();
+    }, 1600);
     if (screen && screen.scrollIntoView) {
       screen.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -74,15 +92,21 @@
     if (vimeoPlayer) {
       try {
         vimeoPlayer.off("ended");
+        vimeoPlayer.off("timeupdate");
       } catch (err) {}
       vimeoPlayer = null;
     }
     vimeoPlayer = new window.Vimeo.Player(frame);
     vimeoPlayer.on("ended", finishFilm);
+    vimeoPlayer.on("timeupdate", function (data) {
+      if (!data || filmEnded) return;
+      if (data.seconds >= FILM_END_SECONDS) finishFilm();
+    });
   }
 
   function replayFilm() {
     if (!lastEmbedUrl) return;
+    clearEndFadeTimer();
     filmEnded = false;
     if (screen) screen.classList.remove("is-ended");
     var url = lastEmbedUrl;
@@ -106,6 +130,7 @@
     if (!embedUrl || !frame || !screen || !gate) return;
     lastEmbedUrl = embedUrl;
     filmEnded = false;
+    clearEndFadeTimer();
     screen.classList.remove("is-ended");
     frame.src = embedUrl;
     gate.hidden = true;
@@ -122,6 +147,7 @@
     }
     filmEnded = false;
     if (screen) screen.classList.remove("is-ended");
+    clearEndFadeTimer();
     unloadPlayer();
     if (screen) screen.hidden = true;
     if (gate) gate.hidden = false;
