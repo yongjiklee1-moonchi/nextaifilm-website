@@ -4385,7 +4385,7 @@ a.contact-cell:hover .contact-icon {
   visibility: hidden;
   pointer-events: none;
   transform: translateY(0.35rem);
-  transition: opacity 1.35s ease, transform 1.35s ease, visibility 1.35s ease;
+  transition: opacity 1.6s ease, transform 1.6s ease, visibility 1.6s ease;
 }
 
 .sunflowers-screen.is-ended .sunflowers-after__copy {
@@ -4393,10 +4393,6 @@ a.contact-cell:hover .contact-icon {
   visibility: visible;
   pointer-events: auto;
   transform: none;
-}
-
-.sunflowers-screen.is-ended .trailer-embed__frame iframe {
-  display: none !important;
 }
 
 .sunflowers-after__end {
