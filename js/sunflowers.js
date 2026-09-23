@@ -20,7 +20,18 @@
   var vimeoPlayer = null;
   var lastEmbedUrl = "";
   var filmEnded = false;
-  var filmCompleteLogged = false;
+  var START_NEAR_SECONDS = 3;
+  var PROGRESS_INTERVAL_MS = 12000;
+  var playStartCount = 0;
+  var replayCount = 0;
+  var completedViewCount = 0;
+  var lastPosition = 0;
+  var lastDuration = 0;
+  var nearStartArmed = true;
+  var lastProgressSentAt = 0;
+  var lastPauseSentAt = 0;
+  var progressTimer = 0;
+  var exitSent = false;
   var replayBtn = document.getElementById("sunflowers-replay");
   var eventForm = document.getElementById("sunflowers-event");
   var linkedinBtn = document.getElementById("sunflowers-linkedin");
@@ -37,10 +48,17 @@
   }
 
   function unloadPlayer() {
+    if (progressTimer) {
+      window.clearInterval(progressTimer);
+      progressTimer = 0;
+    }
     if (vimeoPlayer) {
       try {
         vimeoPlayer.off("ended");
         vimeoPlayer.off("timeupdate");
+        vimeoPlayer.off("play");
+        vimeoPlayer.off("pause");
+        vimeoPlayer.off("seeked");
       } catch (err) {}
       vimeoPlayer = null;
     }
@@ -52,7 +70,12 @@
   function finishFilm() {
     if (filmEnded) return;
     filmEnded = true;
-    recordFilmCompleteOnce();
+    lastPosition = FILM_END_SECONDS;
+    completedViewCount += 1;
+    nearStartArmed = true;
+    persistAnalytics();
+    sendGaScreeningEvent("film_complete");
+    trackScreeningEvent("film_complete");
     if (vimeoPlayer) {
       try {
         vimeoPlayer.pause();
@@ -69,22 +92,79 @@
     }
   }
 
-  function recordFilmCompleteOnce() {
-    if (filmCompleteLogged) return;
-    filmCompleteLogged = true;
-    persistFilmComplete();
-    sendGaScreeningEvent("film_complete");
-    trackScreeningEvent("film_complete");
-  }
-
-  function persistFilmComplete() {
+  function persistAnalytics() {
     try {
       var raw = sessionStorage.getItem(STORAGE_KEY);
       var data = raw ? JSON.parse(raw) : {};
       if (!data || !data.embedUrl) return;
-      data.filmComplete = true;
+      data.sessionId = currentSessionId || data.sessionId || "";
+      data.playStartCount = playStartCount;
+      data.replayCount = replayCount;
+      data.completedViewCount = completedViewCount;
+      data.lastPosition = lastPosition;
+      data.lastDuration = lastDuration;
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch (err) {}
+  }
+
+  function resetAnalyticsCounts() {
+    playStartCount = 0;
+    replayCount = 0;
+    completedViewCount = 0;
+    lastPosition = 0;
+    lastDuration = 0;
+    nearStartArmed = true;
+    lastProgressSentAt = 0;
+    lastPauseSentAt = 0;
+    exitSent = false;
+  }
+
+  function loadAnalyticsFromSession(data) {
+    if (!data) return;
+    playStartCount = Number(data.playStartCount || 0);
+    replayCount = Number(data.replayCount || 0);
+    completedViewCount = Number(data.completedViewCount || 0);
+    lastPosition = Number(data.lastPosition || 0);
+    lastDuration = Number(data.lastDuration || 0);
+    nearStartArmed = true;
+  }
+
+  function analyticsStats() {
+    return {
+      position: Math.max(0, Math.round(lastPosition * 10) / 10),
+      duration: Math.max(0, Math.round(lastDuration * 10) / 10),
+      playStartCount: playStartCount,
+      completedViewCount: completedViewCount,
+      replayCount: replayCount
+    };
+  }
+
+  function notePlaybackTime(seconds, duration) {
+    if (typeof seconds === "number" && !isNaN(seconds)) lastPosition = seconds;
+    if (typeof duration === "number" && duration > 0) lastDuration = duration;
+    persistAnalytics();
+  }
+
+  function maybeGenuineStart(seconds) {
+    if (seconds > START_NEAR_SECONDS) {
+      nearStartArmed = false;
+      return;
+    }
+    if (!nearStartArmed) return;
+    nearStartArmed = false;
+    playStartCount += 1;
+    if (playStartCount > 1) replayCount += 1;
+    persistAnalytics();
+    exitSent = false;
+    trackScreeningEvent("video_start");
+  }
+
+  function flushProgress(force) {
+    var now = Date.now();
+    if (!force && lastProgressSentAt && now - lastProgressSentAt < PROGRESS_INTERVAL_MS) return;
+    lastProgressSentAt = now;
+    persistAnalytics();
+    trackScreeningEvent("video_progress");
   }
 
   function attachPlayer() {
@@ -93,13 +173,59 @@
       try {
         vimeoPlayer.off("ended");
         vimeoPlayer.off("timeupdate");
+        vimeoPlayer.off("play");
+        vimeoPlayer.off("pause");
+        vimeoPlayer.off("seeked");
       } catch (err) {}
       vimeoPlayer = null;
     }
     vimeoPlayer = new window.Vimeo.Player(frame);
+    if (progressTimer) window.clearInterval(progressTimer);
+    progressTimer = window.setInterval(function () {
+      if (filmEnded || !vimeoPlayer) return;
+      flushProgress(false);
+    }, PROGRESS_INTERVAL_MS);
+
     vimeoPlayer.on("ended", finishFilm);
+    vimeoPlayer.on("play", function () {
+      if (filmEnded || !vimeoPlayer) return;
+      vimeoPlayer.getCurrentTime().then(function (t) {
+        vimeoPlayer.getDuration().then(function (d) {
+          notePlaybackTime(Number(t || 0), Number(d || 0));
+          maybeGenuineStart(Number(t || 0));
+        });
+      }).catch(function () {});
+    });
+    vimeoPlayer.on("pause", function () {
+      if (filmEnded || !vimeoPlayer) return;
+      vimeoPlayer.getCurrentTime().then(function (t) {
+        vimeoPlayer.getDuration().then(function (d) {
+          notePlaybackTime(Number(t || 0), Number(d || 0));
+          var now = Date.now();
+          if (!lastPauseSentAt || now - lastPauseSentAt > 8000) {
+            lastPauseSentAt = now;
+            trackScreeningEvent("video_pause");
+          } else {
+            flushProgress(true);
+          }
+        });
+      }).catch(function () {});
+    });
+    vimeoPlayer.on("seeked", function (data) {
+      if (filmEnded) return;
+      var t = data && typeof data.seconds === "number" ? data.seconds : lastPosition;
+      if (t <= START_NEAR_SECONDS && lastPosition > START_NEAR_SECONDS + 2) {
+        nearStartArmed = true;
+      } else if (t > START_NEAR_SECONDS) {
+        nearStartArmed = false;
+      }
+      notePlaybackTime(t, lastDuration);
+      flushProgress(true);
+    });
     vimeoPlayer.on("timeupdate", function (data) {
       if (!data || filmEnded) return;
+      notePlaybackTime(data.seconds, data.duration);
+      if (data.seconds > START_NEAR_SECONDS) nearStartArmed = false;
       if (data.seconds >= FILM_END_SECONDS) finishFilm();
     });
   }
@@ -108,6 +234,7 @@
     if (!lastEmbedUrl) return;
     clearEndFadeTimer();
     filmEnded = false;
+    nearStartArmed = true;
     if (screen) screen.classList.remove("is-ended");
     var url = lastEmbedUrl;
     url += url.indexOf("?") >= 0 ? "&autoplay=1" : "?autoplay=1";
@@ -168,6 +295,7 @@
   }
 
   function expireSession() {
+    sendExitIfNeeded();
     clearSession();
     hideScreen();
     setStatus("Session expired. Please sign in again.", true);
@@ -193,7 +321,7 @@
     if (!hours || hours <= 0) hours = SESSION_HOURS;
     var exp = Date.now() + hours * 60 * 60 * 1000;
     if (sessionId) currentSessionId = String(sessionId);
-    filmCompleteLogged = false;
+    resetAnalyticsCounts();
     try {
       sessionStorage.setItem(
         STORAGE_KEY,
@@ -201,7 +329,11 @@
           embedUrl: embedUrl,
           exp: exp,
           sessionId: currentSessionId || "",
-          filmComplete: false
+          playStartCount: 0,
+          replayCount: 0,
+          completedViewCount: 0,
+          lastPosition: 0,
+          lastDuration: 0
         })
       );
     } catch (err) {}
@@ -210,7 +342,7 @@
 
   function clearSession() {
     currentSessionId = "";
-    filmCompleteLogged = false;
+    resetAnalyticsCounts();
     filmEnded = false;
     try {
       sessionStorage.removeItem(STORAGE_KEY);
@@ -245,19 +377,41 @@
     window.gtag("event", eventName, { film: "SUNFLOWERS" });
   }
 
+  function sendExitIfNeeded() {
+    if (!currentSessionId || exitSent) return;
+    if (playStartCount < 1 && lastPosition <= 0) return;
+    exitSent = true;
+    trackScreeningEvent("video_exit");
+  }
+
   function trackScreeningEvent(eventName, done) {
     if (typeof done !== "function") done = null;
     if (!AUTH_ENDPOINT || !eventForm || !currentSessionId) {
       if (done) done();
       return;
     }
+    if (eventName === "video_progress" && eventWaitTimer) {
+      if (done) done();
+      return;
+    }
 
+    var stats = analyticsStats();
     var originField = eventForm.querySelector('input[name="origin"]');
     var sessionField = eventForm.querySelector('input[name="sessionId"]');
     var eventField = eventForm.querySelector('input[name="event"]');
+    var positionField = eventForm.querySelector('input[name="position"]');
+    var durationField = eventForm.querySelector('input[name="duration"]');
+    var startField = eventForm.querySelector('input[name="playStartCount"]');
+    var completeField = eventForm.querySelector('input[name="completedViewCount"]');
+    var replayField = eventForm.querySelector('input[name="replayCount"]');
     if (originField) originField.value = location.origin;
     if (sessionField) sessionField.value = currentSessionId;
     if (eventField) eventField.value = eventName;
+    if (positionField) positionField.value = String(stats.position);
+    if (durationField) durationField.value = String(stats.duration);
+    if (startField) startField.value = String(stats.playStartCount);
+    if (completeField) completeField.value = String(stats.completedViewCount);
+    if (replayField) replayField.value = String(stats.replayCount);
     eventForm.setAttribute("action", AUTH_ENDPOINT);
 
     if (eventWaitTimer) {
@@ -265,7 +419,7 @@
       eventWaitTimer = 0;
     }
     eventWaitDone = done;
-    eventWaitTimer = window.setTimeout(finishEventWait, done ? 1800 : 4000);
+    eventWaitTimer = window.setTimeout(finishEventWait, done ? 1800 : 2500);
 
     try {
       eventForm.submit();
@@ -363,7 +517,7 @@
     var session = readSession();
     if (session) {
       currentSessionId = String(session.sessionId || "");
-      filmCompleteLogged = !!session.filmComplete;
+      loadAnalyticsFromSession(session);
       showScreen(session.embedUrl, session.exp);
     }
   }
@@ -430,6 +584,7 @@
   var logout = document.getElementById("sunflowers-logout");
   if (logout) {
     logout.addEventListener("click", function () {
+      sendExitIfNeeded();
       clearSession();
       hideScreen();
       setStatus("", false);
@@ -450,4 +605,6 @@
       });
     });
   }
+
+  window.addEventListener("pagehide", sendExitIfNeeded);
 })();
