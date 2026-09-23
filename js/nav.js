@@ -1,5 +1,6 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
+const MOBILE_NAV_MAX = 1100;
 
 function menuLabel(isOpen) {
   if (window.NAF_I18N && typeof window.NAF_I18N.t === "function") {
@@ -8,21 +9,48 @@ function menuLabel(isOpen) {
   return isOpen ? "메뉴 닫기" : "메뉴 열기";
 }
 
+function isMobileNav() {
+  return window.matchMedia("(max-width: " + MOBILE_NAV_MAX + "px)").matches;
+}
+
+function setMobileMenuOpen(isOpen) {
+  if (!menuToggle || !nav) return;
+  isOpen = !!isOpen && isMobileNav();
+  nav.classList.toggle("open", isOpen);
+  menuToggle.classList.toggle("open", isOpen);
+  document.body.classList.toggle("nav-open", isOpen);
+  menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  menuToggle.setAttribute("aria-label", menuLabel(isOpen));
+}
+
+function closeMobileMenu() {
+  setMobileMenuOpen(false);
+}
+
 if (menuToggle && nav) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("open");
-    menuToggle.classList.toggle("open");
-    menuToggle.setAttribute("aria-expanded", isOpen);
-    menuToggle.setAttribute("aria-label", menuLabel(isOpen));
+  menuToggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    setMobileMenuOpen(!nav.classList.contains("open"));
   });
 
   document.querySelectorAll(".nav__list a").forEach((link) => {
     link.addEventListener("click", () => {
-      nav.classList.remove("open");
-      menuToggle.classList.remove("open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", menuLabel(false));
+      closeMobileMenu();
     });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!nav.classList.contains("open")) return;
+    if (nav.contains(event.target) || menuToggle.contains(event.target)) return;
+    closeMobileMenu();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMobileMenu();
+  });
+
+  window.addEventListener("resize", () => {
+    if (!isMobileNav()) closeMobileMenu();
   });
 }
 
