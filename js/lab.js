@@ -95,6 +95,18 @@
       );
     }
 
+    if (!link && !video) {
+      return (
+        '<div class="' +
+        classes +
+        '" data-lab-id="' +
+        escapeHtml(item.id) +
+        '">' +
+        inner +
+        "</div>"
+      );
+    }
+
     return (
       '<button type="button" class="' +
       classes +
@@ -190,6 +202,7 @@
     if (!card) return;
     var item = findItem(card.getAttribute("data-lab-id"));
     if (!item) return;
+    if (!itemLink(item) && !parseVideo(item.video)) return;
     playItem(item);
   });
 
