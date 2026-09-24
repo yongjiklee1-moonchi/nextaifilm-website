@@ -1,30 +1,31 @@
 {
   "items": [
     {
-      "id": "moongchi-dive",
-      "title": "Moongchi's Dive",
+      "id": "orc-warlord",
+      "title": "Orc Warlord",
       "date": "2026-09",
       "dateLabel": "2026",
-      "category": "Motion Study",
-      "description": "From Maya to AI — motion test with Moongchi.",
-      "thumb": "assets/lab/lab-01.jpg",
+      "category": "Character Test",
+      "description": "Creature close-up and battlefield scale study.",
+      "thumb": "assets/lab/lab-07.png",
       "video": "",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501265695607828480/",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7503433642807820288/",
       "sort": 1,
       "exploring": false
     },
     {
-      "id": "gyeongbokgung",
-      "title": "Gyeongbokgung",
+      "id": "blue-portrait",
+      "title": "AI Then vs. AI Now",
       "date": "2026-09",
       "dateLabel": "2026",
-      "category": "Drone Test",
-      "description": "AI drone cinematic study over Gyeongbokgung, Seoul.",
-      "thumb": "assets/lab/lab-02.jpg",
+      "category": "Look Dev",
+      "description": "Portrait lighting and skin-detail look development.",
+      "thumb": "assets/lab/lab-05.jpg",
       "video": "",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7498726209665552387/",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7489719017180393472/",
       "sort": 2,
-      "exploring": false
+      "exploring": true,
+      "exploringNote": "Creature portrait"
     },
     {
       "id": "linkedin-month",
@@ -40,6 +41,46 @@
       "exploring": false
     },
     {
+      "id": "moongchi-dive",
+      "title": "Moongchi's Dive",
+      "date": "2026-09",
+      "dateLabel": "2026",
+      "category": "Motion Study",
+      "description": "From Maya to AI — motion test with Moongchi.",
+      "thumb": "assets/lab/lab-01.jpg",
+      "video": "",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501265695607828480/",
+      "sort": 4,
+      "exploring": false
+    },
+    {
+      "id": "gyeongbokgung",
+      "title": "Gyeongbokgung",
+      "date": "2026-09",
+      "dateLabel": "2026",
+      "category": "Drone Test",
+      "description": "AI drone cinematic study over Gyeongbokgung, Seoul.",
+      "thumb": "assets/lab/lab-02.jpg",
+      "video": "",
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7498726209665552387/",
+      "sort": 5,
+      "exploring": false
+    },
+    {
+      "id": "heaven-hell",
+      "title": "Heaven & Hell",
+      "date": "2023-01",
+      "dateLabel": "2023",
+      "category": "AI Short Film",
+      "description": "Early AI short-film project, created in 2023.",
+      "thumb": "assets/lab/lab-06.jpg",
+      "video": "",
+      "link": "https://www.youtube.com/watch?v=2uZbnvK9CCQ&t=3s",
+      "sort": 6,
+      "exploring": true,
+      "exploringNote": "Early project, 2023"
+    },
+    {
       "id": "frog-performance",
       "title": "Character Performance Test",
       "date": "2026-09",
@@ -49,36 +90,9 @@
       "thumb": "assets/lab/lab-04.jpg",
       "video": "",
       "link": "https://www.linkedin.com/feed/update/urn:li:activity:7495826271986438144/",
-      "sort": 4,
+      "sort": 7,
       "exploring": true,
       "exploringNote": "Pose-to-character test"
-    },
-    {
-      "id": "blue-portrait",
-      "title": "AI Then vs. AI Now",
-      "date": "2026-09",
-      "dateLabel": "2026",
-      "category": "Look Dev",
-      "description": "Portrait lighting and skin-detail look development.",
-      "thumb": "assets/lab/lab-05.jpg",
-      "video": "",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7489719017180393472/",
-      "sort": 5,
-      "exploring": true,
-      "exploringNote": "Creature portrait"
-    },
-    {
-      "id": "orc-warlord",
-      "title": "Orc Warlord",
-      "date": "2026-09",
-      "dateLabel": "2026",
-      "category": "Character Test",
-      "description": "Creature close-up and battlefield scale study.",
-      "thumb": "assets/lab/lab-07.png",
-      "video": "",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7503433642807820288/",
-      "sort": 7,
-      "exploring": false
     },
     {
       "id": "night-drive",
@@ -102,23 +116,9 @@
       "description": "On-set LED volume study — live action against a generated castle plate.",
       "thumb": "assets/lab/lab-09.png",
       "video": "",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7506695534049583104/",
+      "link": "",
       "sort": 9,
       "exploring": false
-    },    
-    {
-      "id": "heaven-hell",
-      "title": "Heaven & Hell",
-      "date": "2023-01",
-      "dateLabel": "2023",
-      "category": "AI Short Film",
-      "description": "Early AI short-film project, created in 2023.",
-      "thumb": "assets/lab/lab-06.jpg",
-      "video": "",
-      "link": "https://www.youtube.com/watch?v=2uZbnvK9CCQ&t=3s",
-      "sort": 6,
-      "exploring": true,
-      "exploringNote": "Early project, 2023"
     }
   ]
 }
