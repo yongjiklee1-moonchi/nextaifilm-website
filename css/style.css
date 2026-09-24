@@ -3142,8 +3142,12 @@ a.contact-cell:hover .contact-icon {
   border-color: transparent transparent transparent #111;
 }
 
+.lab-card:not(.is-linked) {
+  cursor: default;
+}
+
 .lab-card:not(.is-linked) .lab-card__play {
-  opacity: 0.45;
+  display: none;
 }
 
 .lab-card__tag {
