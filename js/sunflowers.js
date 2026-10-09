@@ -6,6 +6,7 @@
   var STORAGE_KEY = "naf-sunflowers-gate";
   var SESSION_HOURS = 1;
   var FILM_END_SECONDS = 7 * 60 + 23;
+  var SCREENING_PASSWORD = "SUN2026";
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
@@ -513,6 +514,9 @@
     originInput.value = location.origin;
   }
 
+  var passwordInput = form.querySelector('input[name="password"]');
+  if (passwordInput) passwordInput.value = SCREENING_PASSWORD;
+
   if (!consumeAuthHash()) {
     var session = readSession();
     if (session) {
@@ -538,6 +542,8 @@
       return;
     }
     if (nameInput) nameInput.value = linkedinName;
+    var passwordInput = form.querySelector('input[name="password"]');
+    if (passwordInput) passwordInput.value = SCREENING_PASSWORD;
 
     if (originInput) originInput.value = location.origin;
     waiting = true;
