@@ -92,7 +92,7 @@
       <iframe id="sunflowers-login-frame" name="sunflowers-login-frame" title="Login" hidden></iframe>
       <iframe id="sunflowers-event-frame" name="sunflowers-event-frame" title="Screening event" hidden></iframe>
 
-      <form id="sunflowers-login" class="consult-form" method="POST" target="sunflowers-login-frame" autocomplete="on">
+      <form id="sunflowers-login" class="consult-form" method="POST" target="sunflowers-login-frame" autocomplete="off">
         <input type="hidden" name="action" value="sunflowersLogin" />
         <input type="hidden" name="origin" value="" />
         <label class="consult-form__hp" aria-hidden="true">
@@ -102,13 +102,14 @@
 
         <label class="consult-form__field">
           <span>LinkedIn Name</span>
-          <input type="text" name="linkedinName" required minlength="2" maxlength="80" autocomplete="name" />
+          <input type="text" name="linkedinName" required minlength="2" maxlength="80" autocomplete="off" />
         </label>
 
         <label class="consult-form__field">
           <span>Password</span>
-          <input type="password" name="password" required maxlength="80" value="SUN2026" autocomplete="off" />
+          <input type="password" value="SUN2026" readonly tabindex="-1" autocomplete="new-password" />
         </label>
+        <input type="hidden" name="password" value="SUN2026" />
 
         <button type="submit" class="contact-cta consult-form__submit">Enter</button>
         <p id="sunflowers-login-status" class="consult-form__status" hidden></p>
@@ -239,11 +240,6 @@
       </blockquote>
 
       <div class="footer__bar">
-        <p class="footer__legal">
-          <span>대표자:권명</span>
-          <span class="footer__legal-sep" aria-hidden="true">·</span>
-          <span>사업자번호 399-35-01648</span>
-        </p>
         <p class="footer__copy" data-cms="site.footer.copyright">
           &copy; 2026 Next AI Film. All Rights Reserved.
           <a class="footer__copy-link" href="/copyright">Copyright</a>
@@ -264,6 +260,6 @@
   <script src="js/protect.js?v=20260904p" defer></script>
   <script src="https://player.vimeo.com/api/player.js"></script>
   <script src="js/cms-config.js?v=20260920m"></script>
-  <script src="js/sunflowers.js?v=20261009a"></script>
+  <script src="js/sunflowers.js?v=20261009b"></script>
 </body>
 </html>
