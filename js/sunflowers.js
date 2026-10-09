@@ -350,6 +350,12 @@
     } catch (err) {}
   }
 
+  function fillScreeningPassword() {
+    if (!form) return;
+    var passwordInput = form.querySelector('input[name="password"]');
+    if (passwordInput) passwordInput.value = SCREENING_PASSWORD;
+  }
+
   function authErrorMessage(error) {
     if (error === "too_many") return "Too many attempts. Please wait a few minutes.";
     if (error === "name") return "Please enter your LinkedIn name.";
@@ -451,6 +457,7 @@
     sendGaScreeningEvent("screening_login");
     setStatus("", false);
     if (form) form.reset();
+    fillScreeningPassword();
     if (originInput) originInput.value = location.origin;
     showScreen(embedUrl, exp);
   }
@@ -514,8 +521,8 @@
     originInput.value = location.origin;
   }
 
-  var passwordInput = form.querySelector('input[name="password"]');
-  if (passwordInput) passwordInput.value = SCREENING_PASSWORD;
+  fillScreeningPassword();
+  window.addEventListener("pageshow", fillScreeningPassword);
 
   if (!consumeAuthHash()) {
     var session = readSession();
@@ -542,8 +549,7 @@
       return;
     }
     if (nameInput) nameInput.value = linkedinName;
-    var passwordInput = form.querySelector('input[name="password"]');
-    if (passwordInput) passwordInput.value = SCREENING_PASSWORD;
+    fillScreeningPassword();
 
     if (originInput) originInput.value = location.origin;
     waiting = true;
