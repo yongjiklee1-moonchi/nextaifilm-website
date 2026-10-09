@@ -521,19 +521,15 @@
 
   if (!form) return;
 
-  if (!AUTH_ENDPOINT) {
-    setStatus("Login server is not connected.", true);
-    return;
-  }
-
-  form.setAttribute("action", AUTH_ENDPOINT);
-  form.setAttribute("method", "POST");
-  form.setAttribute("target", "sunflowers-login-frame");
-
-  if (eventForm) {
-    eventForm.setAttribute("action", AUTH_ENDPOINT);
-    eventForm.setAttribute("method", "POST");
-    eventForm.setAttribute("target", "sunflowers-event-frame");
+  if (AUTH_ENDPOINT) {
+    form.setAttribute("action", AUTH_ENDPOINT);
+    form.setAttribute("method", "POST");
+    form.setAttribute("target", "sunflowers-login-frame");
+    if (eventForm) {
+      eventForm.setAttribute("action", AUTH_ENDPOINT);
+      eventForm.setAttribute("method", "POST");
+      eventForm.setAttribute("target", "sunflowers-event-frame");
+    }
   }
 
   if (originInput) {
@@ -566,6 +562,21 @@
     if (nameInput) nameInput.value = linkedinName;
     fillScreeningPassword();
 
+    var passwordInput = form.querySelector('input[name="password"]');
+    var typedPassword = passwordInput ? passwordInput.value : SCREENING_PASSWORD;
+    if (passwordLooksOpen(typedPassword)) {
+      event.preventDefault();
+      finishWait();
+      openWithLocalPass();
+      return;
+    }
+
+    if (!AUTH_ENDPOINT) {
+      event.preventDefault();
+      setStatus(authErrorMessage("invalid"), true);
+      return;
+    }
+
     if (originInput) originInput.value = location.origin;
     waiting = true;
     setStatus("Entering…", false);
@@ -574,10 +585,6 @@
     waitTimer = window.setTimeout(function () {
       if (!waiting) return;
       finishWait();
-      if (passwordLooksOpen(SCREENING_PASSWORD)) {
-        openWithLocalPass();
-        return;
-      }
       setStatus("Could not complete login. Please try again.", true);
     }, 12000);
   });
@@ -606,11 +613,6 @@
 
     if (data.ok && data.embedUrl) {
       openTheater(data.embedUrl, data.sessionHours, data.sessionId);
-      return;
-    }
-
-    if (passwordLooksOpen(SCREENING_PASSWORD) && data.error !== "name" && data.error !== "too_many") {
-      openWithLocalPass();
       return;
     }
 
