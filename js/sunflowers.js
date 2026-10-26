@@ -8,7 +8,7 @@
   var FILM_END_SECONDS = 7 * 60 + 23;
   var SCREENING_PASSWORD = "SUN2026";
   var SCREENING_EMBED =
-    "https://player.vimeo.com/video/1212021254?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0";
+    "https://player.vimeo.com/video/1212021254?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&autoplay=1";
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
@@ -262,7 +262,9 @@
     filmEnded = false;
     clearEndFadeTimer();
     screen.classList.remove("is-ended");
-    frame.src = embedUrl;
+    if (frame.getAttribute("src") !== embedUrl) {
+      frame.src = embedUrl;
+    }
     gate.hidden = true;
     screen.hidden = false;
     document.body.classList.add("is-screening");
