@@ -11,6 +11,7 @@
     "nav.contact": "Contact",
     "nav.open": "Open menu",
     "nav.close": "Close menu",
+    "awards.view_sunflowers": "View Sunflowers",
     "lang.label": "Language",
     "logo.text": "Next AI Film"
   },
@@ -26,6 +27,7 @@
     "nav.contact": "문의",
     "nav.open": "메뉴 열기",
     "nav.close": "메뉴 닫기",
+    "awards.view_sunflowers": "해바라기 자세히 보기",
     "lang.label": "언어",
     "logo.text": "넥스트 에이아이 필름"
   }
