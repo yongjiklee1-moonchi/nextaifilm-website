@@ -114,7 +114,7 @@
   }
 
   function load() {
-    fetch("data/translations.json?v=20260826a", { cache: "no-cache" })
+    fetch("data/translations.json?v=20261027a", { cache: "no-cache" })
       .then(function (res) {
         if (!res.ok) throw new Error("translations missing");
         return res.json();
@@ -126,13 +126,17 @@
             "nav.commercial": "Commercial",
             "nav.film": "Film",
             "nav.works": "Works",
+            "nav.cinema": "CINEMA",
             "nav.awards": "Awards",
+            "nav.sunflowers": "Sunflowers",
             "nav.lab": "Lab",
             "nav.journal": "Journal",
             "nav.about": "About",
             "nav.contact": "Contact",
             "nav.open": "Open menu",
             "nav.close": "Close menu",
+            "awards.view_sunflowers": "View Sunflowers",
+            "awards.view_details": "View details",
             "lang.label": "Language",
             "logo.text": "Next AI Film"
           },
@@ -140,13 +144,17 @@
             "nav.commercial": "광고제작",
             "nav.film": "영화",
             "nav.works": "작품",
+            "nav.cinema": "시네마",
             "nav.awards": "수상&성과",
+            "nav.sunflowers": "해바라기",
             "nav.lab": "랩",
             "nav.journal": "저널",
             "nav.about": "소개",
             "nav.contact": "문의",
             "nav.open": "메뉴 열기",
             "nav.close": "메뉴 닫기",
+            "awards.view_sunflowers": "해바라기 자세히 보기",
+            "awards.view_details": "상세보기",
             "lang.label": "언어",
             "logo.text": "넥스트 에이아이 필름"
           }
