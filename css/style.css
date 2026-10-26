@@ -163,6 +163,10 @@ html[lang="ko"] .logo__text {
   background: #ff8a00;
 }
 
+.nav__list a.nav__works-toggle.active::after {
+  display: none;
+}
+
 .nav__item--works {
   position: relative;
   align-self: stretch;
@@ -2003,6 +2007,7 @@ html[lang="ko"] .nav__works-toggle {
 .film-expand {
   background: #111;
   padding: clamp(1rem, 2.5vw, 1.75rem) clamp(0.5rem, 1.25vw, 1.25rem) clamp(2rem, 4vw, 3rem);
+  scroll-margin-top: var(--header-height);
 }
 
 .film-expand__inner {
@@ -2214,6 +2219,28 @@ html[lang="ko"] .nav__works-toggle {
   color: rgba(255, 255, 255, 0.88);
   margin: 0;
   max-width: 26rem;
+}
+
+.awards-hero__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.15rem;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--naf-yellow);
+}
+
+.awards-hero__link::after {
+  content: "\203A";
+  font-size: 1.05em;
+  line-height: 1;
+}
+
+.awards-hero__link:hover,
+.awards-hero__link:focus-visible {
+  text-decoration: underline;
 }
 
 .awards-hero__badges {
@@ -2576,11 +2603,6 @@ html[lang="ko"] .nav__works-toggle {
 
 .awards-page .footer__inner {
   max-width: var(--awards-content-max);
-}
-
-#sunflowers,
-#festivals-title {
-  scroll-margin-top: var(--header-height);
 }
 
 .awards-spotlight {
@@ -4242,11 +4264,7 @@ a.contact-cell:hover .contact-icon {
     border: none;
   }
 
-  .nav__item--works:hover .nav__sub,
-  .nav__item--works:focus-within .nav__sub {
-    display: none;
-  }
-
+  .nav.open .nav__item--works .nav__sub,
   .nav__item--works.is-open .nav__sub {
     display: flex;
     flex-direction: column;
