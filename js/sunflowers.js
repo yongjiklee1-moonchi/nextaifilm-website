@@ -280,7 +280,7 @@
     clearEndFadeTimer();
     unloadPlayer();
     if (screen) screen.hidden = true;
-    if (gate) gate.hidden = false;
+    if (gate) gate.hidden = true;
     document.body.classList.remove("is-screening");
   }
 
@@ -300,8 +300,7 @@
   function expireSession() {
     sendExitIfNeeded();
     clearSession();
-    hideScreen();
-    setStatus("Session expired. Please sign in again.", true);
+    openWithLocalPass();
   }
 
   function readSession() {
@@ -545,6 +544,8 @@
       currentSessionId = String(session.sessionId || "");
       loadAnalyticsFromSession(session);
       showScreen(session.embedUrl, session.exp);
+    } else {
+      openWithLocalPass();
     }
   }
 
@@ -624,8 +625,7 @@
     logout.addEventListener("click", function () {
       sendExitIfNeeded();
       clearSession();
-      hideScreen();
-      setStatus("", false);
+      openWithLocalPass();
     });
   }
 
