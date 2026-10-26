@@ -2091,8 +2091,36 @@ html[lang="ko"] .nav__works-toggle {
 }
 
 .awards-page .page-bar__inner {
+  position: relative;
   max-width: var(--awards-content-max);
   margin: 0 auto;
+}
+
+.awards-page .page-bar__aside {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--naf-yellow);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.awards-page .page-bar__aside:hover,
+.awards-page .page-bar__aside:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+  .awards-page .page-bar__aside {
+    position: static;
+    display: inline-block;
+    margin-top: 0.7rem;
+    transform: none;
+  }
 }
 
 .awards-hero {
