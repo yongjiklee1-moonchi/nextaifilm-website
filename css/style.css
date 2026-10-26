@@ -2578,6 +2578,11 @@ html[lang="ko"] .nav__works-toggle {
   max-width: var(--awards-content-max);
 }
 
+#sunflowers,
+#festivals-title {
+  scroll-margin-top: var(--header-height);
+}
+
 .awards-spotlight {
   background: var(--naf-black);
   padding: clamp(1.25rem, 3vw, 2rem) var(--awards-content-pad-x);
