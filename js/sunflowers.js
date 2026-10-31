@@ -9,6 +9,26 @@
   var SCREENING_PASSWORD = "SUN2026";
   var SCREENING_EMBED =
     "https://player.vimeo.com/video/1212021254?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&autoplay=1";
+  var CINEMA_FILMS = {
+    sunflowers: {
+      embed: SCREENING_EMBED,
+      title: "Sunflowers(2026)",
+      endSeconds: 7 * 60 + 23
+    },
+    beginning: {
+      embed:
+        "https://player.vimeo.com/video/1241583117?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&autoplay=1",
+      title: "BEGINNING | A One-Minute Short Film",
+      endSeconds: 0
+    },
+    automotive: {
+      embed:
+        "https://player.vimeo.com/video/1218494312?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&autoplay=1",
+      title: "Story-Driven Commercials — A Safe Journey Home | AI Video",
+      endSeconds: 0
+    }
+  };
+  var currentFilmId = "sunflowers";
 
   var form = document.getElementById("sunflowers-login");
   var gate = document.getElementById("sunflowers-gate");
@@ -229,7 +249,7 @@
       if (!data || filmEnded) return;
       notePlaybackTime(data.seconds, data.duration);
       if (data.seconds > START_NEAR_SECONDS) nearStartArmed = false;
-      if (data.seconds >= FILM_END_SECONDS) finishFilm();
+      if (FILM_END_SECONDS && data.seconds >= FILM_END_SECONDS) finishFilm();
     });
   }
 
@@ -634,6 +654,34 @@
   if (replayBtn) {
     replayBtn.addEventListener("click", replayFilm);
   }
+
+  function pickCinemaFilm(id) {
+    var film = CINEMA_FILMS[id];
+    if (!film || !frame) return;
+    currentFilmId = id;
+    FILM_END_SECONDS = Number(film.endSeconds || 0);
+    lastEmbedUrl = film.embed;
+    filmEnded = false;
+    nearStartArmed = true;
+    clearEndFadeTimer();
+    if (screen) screen.classList.remove("is-ended");
+    unloadPlayer();
+    frame.title = film.title;
+    frame.src = film.embed;
+    window.setTimeout(attachPlayer, 400);
+    document.querySelectorAll("[data-cinema-pick]").forEach(function (btn) {
+      btn.classList.toggle("is-active", btn.getAttribute("data-cinema-pick") === id);
+    });
+    if (screen && screen.scrollIntoView) {
+      screen.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  document.querySelectorAll("[data-cinema-pick]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      pickCinemaFilm(btn.getAttribute("data-cinema-pick"));
+    });
+  });
 
   if (linkedinBtn) {
     linkedinBtn.addEventListener("click", function (event) {
