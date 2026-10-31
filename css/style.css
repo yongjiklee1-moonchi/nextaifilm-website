@@ -4459,7 +4459,12 @@ a.contact-cell:hover .contact-icon {
 }
 
 .cinema-pick-slot .cinema-pick {
+  width: 100%;
   gap: 0;
+}
+
+.cinema-pick__visual {
+  position: relative;
 }
 
 .cinema-pick {
@@ -4530,16 +4535,13 @@ a.contact-cell:hover .contact-icon {
 
 .cinema-pick__title,
 .cinema-pick__name {
+  display: block;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 0.82rem;
+  line-height: 1.35;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
-}
-
-.cinema-pick__name {
-  display: inline-block;
-  width: fit-content;
 }
 
 .cinema-pick__name:hover,
@@ -4548,25 +4550,42 @@ a.contact-cell:hover .contact-icon {
 }
 
 .cinema-pick__details {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  align-self: flex-start;
-  padding: 0.38rem 0.85rem;
-  border: 1px solid var(--naf-yellow);
-  background: transparent;
-  color: var(--naf-yellow);
+  gap: 0.4rem;
+  padding: 0.42rem 0.7rem 0.42rem 0.78rem;
+  border: 1.5px solid #111;
+  background: var(--naf-yellow);
+  color: #111;
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  line-height: 1;
   text-transform: uppercase;
-  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+  box-shadow: 0 2px 0 #111, 0 6px 18px rgba(0, 0, 0, 0.55);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.cinema-pick__details-arrow {
+  display: block;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-right: 1.8px solid currentColor;
+  border-top: 1.8px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: 1px;
 }
 
 .cinema-pick__details:hover,
 .cinema-pick__details:focus-visible {
-  background: var(--naf-yellow);
-  color: #111;
+  filter: brightness(1.08);
+  transform: translateY(-1px);
 }
 
 .cinema-pick__sub {
