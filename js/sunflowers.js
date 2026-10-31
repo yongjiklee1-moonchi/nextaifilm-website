@@ -655,6 +655,14 @@
     replayBtn.addEventListener("click", replayFilm);
   }
 
+  function cinemaPickFromUrl() {
+    try {
+      var pick = new URLSearchParams(location.search).get("pick");
+      if (pick && CINEMA_FILMS[pick]) return pick;
+    } catch (err) {}
+    return "";
+  }
+
   function pickCinemaFilm(id) {
     var film = CINEMA_FILMS[id];
     if (!film || !frame) return;
@@ -682,6 +690,9 @@
       pickCinemaFilm(btn.getAttribute("data-cinema-pick"));
     });
   });
+
+  var startPick = cinemaPickFromUrl();
+  if (startPick) pickCinemaFilm(startPick);
 
   if (linkedinBtn) {
     linkedinBtn.addEventListener("click", function (event) {

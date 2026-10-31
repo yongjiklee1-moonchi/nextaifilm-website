@@ -55,7 +55,8 @@ if (menuToggle && nav) {
 }
 
 function pageKey(path) {
-  const end = (path || "").split("/").filter(Boolean).pop() || "";
+  const clean = (path || "").split("?")[0].split("#")[0];
+  const end = clean.split("/").filter(Boolean).pop() || "";
   if (!end || end === "index.html" || end === "index") return "home";
   return end.replace(/\.html$/i, "");
 }
@@ -81,6 +82,8 @@ document.querySelectorAll(".nav__item--works").forEach((item) => {
   if (!toggle) return;
 
   toggle.addEventListener("click", (event) => {
+    if (toggle.tagName === "A") return;
+
     event.preventDefault();
     event.stopPropagation();
     const isOpen = item.classList.toggle("is-open");
