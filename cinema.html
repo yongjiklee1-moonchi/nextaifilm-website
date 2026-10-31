@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261031c" />
+  <link rel="stylesheet" href="css/style.css?v=20261031d" />
   <link rel="stylesheet" href="css/protect.css?v=20260904p" />
 </head>
 <body class="subpage-body trailer-page sunflowers-page is-screening">
@@ -145,17 +145,22 @@
         </div>
         <div class="cinema-picks" aria-label="Now playing">
           <div class="cinema-pick-slot">
-            <button type="button" class="cinema-pick is-active" data-cinema-pick="sunflowers" aria-label="Play Sunflowers">
-              <span class="cinema-pick__image">
-                <img src="assets/sunflowers-poster.png" alt="" width="640" height="360" />
-                <span class="cinema-pick__play" aria-hidden="true"></span>
-              </span>
-            </button>
+            <div class="cinema-pick__visual">
+              <button type="button" class="cinema-pick is-active" data-cinema-pick="sunflowers" aria-label="Play Sunflowers">
+                <span class="cinema-pick__image">
+                  <img src="assets/sunflowers-poster.png" alt="" width="640" height="360" />
+                  <span class="cinema-pick__play" aria-hidden="true"></span>
+                </span>
+              </button>
+              <a class="cinema-pick__details" href="/sunflowers#film-notes">
+                <span data-i18n="cinema.view_details">View details</span>
+                <span class="cinema-pick__details-arrow" aria-hidden="true"></span>
+              </a>
+            </div>
             <div class="cinema-pick__meta">
               <a class="cinema-pick__name" href="/sunflowers" data-i18n="nav.sunflowers">Sunflowers</a>
               <span class="cinema-pick__sub">SF Drama · 7:38 · 4K</span>
             </div>
-            <a class="cinema-pick__details" href="/sunflowers#film-notes" data-i18n="cinema.view_details">View details</a>
           </div>
           <button type="button" class="cinema-pick" data-cinema-pick="beginning">
             <span class="cinema-pick__image">
