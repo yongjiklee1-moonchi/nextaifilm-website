@@ -4463,10 +4463,6 @@ a.contact-cell:hover .contact-icon {
   gap: 0;
 }
 
-.cinema-pick__visual {
-  position: relative;
-}
-
 .cinema-pick {
   appearance: none;
   display: flex;
@@ -4550,42 +4546,50 @@ a.contact-cell:hover .contact-icon {
 }
 
 .cinema-pick__details {
-  position: absolute;
-  right: 0.5rem;
-  bottom: 0.5rem;
-  z-index: 2;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.42rem 0.7rem 0.42rem 0.78rem;
-  border: 1.5px solid #111;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.95rem 0.75rem 0.85rem;
+  border: 0;
   background: var(--naf-yellow);
   color: #111;
-  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.07em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-  box-shadow: 0 2px 0 #111, 0 6px 18px rgba(0, 0, 0, 0.55);
-  transition: transform 0.2s ease, filter 0.2s ease;
+  text-align: center;
+  transition: filter 0.2s ease;
 }
 
-.cinema-pick__details-arrow {
-  display: block;
-  width: 0.38rem;
-  height: 0.38rem;
-  border-right: 1.8px solid currentColor;
-  border-top: 1.8px solid currentColor;
-  transform: rotate(45deg);
-  margin-top: 1px;
+.cinema-pick__details-label {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.78rem, 1.5vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  line-height: 1;
+  text-transform: uppercase;
+  padding-left: 0.38em;
+}
+
+.cinema-pick__details-topics {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: rgba(0, 0, 0, 0.58);
 }
 
 .cinema-pick__details:hover,
 .cinema-pick__details:focus-visible {
-  filter: brightness(1.08);
-  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+html[lang="ko"] .cinema-pick__details-label {
+  letter-spacing: 0.14em;
+  padding-left: 0.14em;
 }
 
 .cinema-pick__sub {
