@@ -4451,6 +4451,17 @@ a.contact-cell:hover .contact-icon {
   width: 100%;
 }
 
+.cinema-pick-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.cinema-pick-slot .cinema-pick {
+  gap: 0;
+}
+
 .cinema-pick {
   appearance: none;
   display: flex;
@@ -4517,12 +4528,45 @@ a.contact-cell:hover .contact-icon {
   min-width: 0;
 }
 
-.cinema-pick__title {
+.cinema-pick__title,
+.cinema-pick__name {
   font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
   font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
+}
+
+.cinema-pick__name {
+  display: inline-block;
+  width: fit-content;
+}
+
+.cinema-pick__name:hover,
+.cinema-pick__name:focus-visible {
+  text-decoration: underline;
+}
+
+.cinema-pick__details {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  padding: 0.38rem 0.85rem;
+  border: 1px solid var(--naf-yellow);
+  background: transparent;
+  color: var(--naf-yellow);
+  font-family: "Noto Serif KR", "Batang", "Times New Roman", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.25s, color 0.25s;
+}
+
+.cinema-pick__details:hover,
+.cinema-pick__details:focus-visible {
+  background: var(--naf-yellow);
+  color: #111;
 }
 
 .cinema-pick__sub {
@@ -4542,7 +4586,8 @@ a.contact-cell:hover .contact-icon {
   border-color: rgba(245, 224, 0, 0.7);
 }
 
-.cinema-pick.is-active .cinema-pick__title {
+.cinema-pick.is-active .cinema-pick__title,
+.cinema-pick-slot:has(.cinema-pick.is-active) .cinema-pick__name {
   color: var(--naf-yellow);
 }
 
