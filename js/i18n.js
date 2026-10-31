@@ -114,7 +114,7 @@
   }
 
   function load() {
-    fetch("data/translations.json?v=20261027a", { cache: "no-cache" })
+    fetch("data/translations.json?v=20261031c", { cache: "no-cache" })
       .then(function (res) {
         if (!res.ok) throw new Error("translations missing");
         return res.json();
@@ -137,6 +137,7 @@
             "nav.close": "Close menu",
             "awards.view_sunflowers": "View Sunflowers",
             "awards.view_details": "View details",
+            "cinema.view_details": "View details",
             "lang.label": "Language",
             "logo.text": "Next AI Film"
           },
@@ -155,6 +156,7 @@
             "nav.close": "메뉴 닫기",
             "awards.view_sunflowers": "해바라기 자세히 보기",
             "awards.view_details": "상세보기",
+            "cinema.view_details": "자세히 보기",
             "lang.label": "언어",
             "logo.text": "넥스트 에이아이 필름"
           }
